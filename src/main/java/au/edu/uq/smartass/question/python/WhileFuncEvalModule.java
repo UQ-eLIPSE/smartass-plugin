@@ -1,0 +1,89 @@
+package au.edu.uq.smartass.question.python;
+
+import au.edu.uq.smartass.python.PythonFunction;
+import au.edu.uq.smartass.python.PythonIf;
+import au.edu.uq.smartass.python.PythonLT;
+import au.edu.uq.smartass.python.PythonMathsVariable;
+import au.edu.uq.smartass.python.PythonNumber;
+import au.edu.uq.smartass.python.PythonWhileLoop;
+import au.edu.uq.smartass.python.RandomPythonGen;
+
+/**
+ * Describe class WhileFuncEvalModule here.
+ *
+ *
+ * Created: Fri Dec 19 14:17:30 2008
+ *
+ * @author <a href="mailto:ilm@morot.maths.uq.edu.au">Ivan Miljenovic</a>
+ * @version 1.0
+ */
+public class WhileFuncEvalModule extends AbstractPythonEvalModule {
+
+    private static final int MIN_PRINT = 7;
+    private static final int MAX_PRINT = 12;
+
+    private static final int MIN_START = 1;
+    private static final int MAX_START = 5;
+
+    /**
+     * Creates a new <code>WhileFuncEvalModule</code> instance.
+     *
+     */
+    public WhileFuncEvalModule() {
+        super();
+
+        generate();
+    }
+
+    private void generate() {
+        PythonMathsVariable x;
+        PythonFunction func;
+
+        PythonIf ifs;
+
+        PythonMathsVariable i;
+        PythonNumber starter;
+        int start;
+
+        //Ensure the two variables don't have similar names
+        do {
+            x = RandomPythonGen.randomVar();
+            i = RandomPythonGen.randomVar();
+        } while (sameName(x,i));
+
+        PythonMathsVariable iFunc = new PythonMathsVariable(i.name());
+
+        PythonWhileLoop loop;
+
+        do {
+            clearScript();
+
+            func = new PythonFunction("func", x);
+            func.add(assign(iFunc, x.succ()));
+
+            ifs = RandomPythonGen.randModIf(x);
+            ifs.addIf(RandomPythonGen.randomMsg(x));
+
+            func.add(ifs);
+            func.setReturn(iFunc);
+
+            add(func);
+
+            starter = RandomPythonGen.randomNum(MIN_START, MAX_START);
+            add(assign(i, starter));
+            start = (int)starter.intValue();
+            addBlank();
+
+            loop = new PythonWhileLoop(new PythonLT(i,
+                                                    RandomPythonGen.randomNum(start + MIN_PRINT,
+                                                                              start + MAX_PRINT)));
+            loop.add(assign(i, func.callFunction(i)));
+            loop.add(print(i));
+
+            add(loop);
+
+        } while (!isCalculable() || numPrinting() < MIN_PRINT || numPrinting() > MAX_PRINT);
+
+    }
+
+}

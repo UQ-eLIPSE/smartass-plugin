@@ -1,0 +1,29 @@
+#
+#       . Local .
+#
+make
+smartass-build.log
+tmp/
+
+#
+#       . Gradle .
+#
+gradlew
+gradlew.bat
+gradle/
+build/
+
+#
+#       . Generated .
+#
+**/services/*
+
+#
+#       . Vim .
+#
+*.swp
+
+#       . IntelliJ IDEA .
+#
+smartass-plugin.iml
+
