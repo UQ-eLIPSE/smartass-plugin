@@ -38,58 +38,50 @@ public class RadiansDegreesConvertModule implements QuestionModule{
 	MathsOp radians;
 	MathsOp degrees;  
  
-/**
-* Constructor RadiansDegreesConvertModule initialises the question.
-* 
-* @param engine
-*/
- public RadiansDegreesConvertModule() {
-				generate();				
-	} //constructor
+    /**
+     * Constructor RadiansDegreesConvertModule initialises the question.
+     */
+    public RadiansDegreesConvertModule() { generate();	}
 
- 
 
-/**
- * getSection method typesets a question and solution 
- * @return a String containing Latex code for the section
- */
- public String getSection(String name) {
+
+    /**
+     * getSection method typesets a question and solution
+     * @return a String containing Latex code for the section
+     */
+    public String getSection(String name) {
  									 	
- 		if(name.equals("radians")) 
-			return radians.toString();											 												
- 		if(name.equals("degrees")) 		
-			return degrees.toString();		
+ 		if(name.equals("radians")) return radians.toString();
+ 		if(name.equals("degrees")) return degrees.toString();
 		return "Section " + name + " NOT found!";
 	}
-		
-/*
- * Method generates numbers for degrees and corresponding
- * MathsOp for radians.
- *
- */
- 
- private void generate() {
-                int num=0, denom=0, deg=0;
-                for (int i=0; i<2; i++){ //bias
- 	            num=RandomChoice.randInt(-24,24);
- 	            denom=Integer.valueOf(RandomChoice.makeChoice("[1..6]/6;[9..10]/2;[12]/1;[15]/1;[18]/1;[20]/1")[0]);
- 	            //num/denom pi - value in radians
- 	            deg=num*180/denom;
- 	             if ((Math.abs(deg)<500) || ((num%denom)==0)) i=2;
-                }
-                degrees= new IntegerNumber(deg);
-                
- 	            if ((num%denom)==0)
- 	             radians=MathsUtils.multiplyVarToConst((num/denom), pi);
- 	            else {
- 	                
- 	            	    int resnum, resdenom, hcf1;
-						hcf1=HCFModule.hcf(num,denom);		
-	  					resnum=Math.abs(num)/hcf1;
-	  					resdenom=denom/hcf1;
-						radians=new FractionOp(MathsUtils.multiplyVarToConst(resnum, pi), new IntegerNumber(resdenom));
-						if (num<0)
-							radians=new UnaryMinus(radians);						
-				}		 
-	}//generate
+
+	/**
+     * Method generates numbers for degrees and corresponding
+     * MathsOp for radians.
+     */
+    private void generate() {
+        int num=0, denom=0, deg=0;
+
+        for (int i = 0; i < 2; i++){
+            num = RandomChoice.randInt(-24,24);
+            denom = Integer.valueOf(RandomChoice.makeChoice("[1..6]/6;[9..10]/2;[12]/1;[15]/1;[18]/1;[20]/1")[0]);
+            //num/denom pi - value in radians
+            deg = num * 180 / denom;
+            if ((Math.abs(deg)<500) || ((num%denom)==0)) i=2;
+        }
+        degrees= new IntegerNumber(deg);
+
+        if ((num%denom)==0)
+            radians=MathsUtils.multiplyVarToConst((num/denom), pi);
+        else {
+            int resnum, resdenom, hcf1;
+            hcf1=HCFModule.hcf(num,denom);
+            resnum=Math.abs(num)/hcf1;
+            resdenom=denom/hcf1;
+            radians=new FractionOp(MathsUtils.multiplyVarToConst(resnum, pi), new IntegerNumber(resdenom));
+            if (num<0) radians=new UnaryMinus(radians);
+        }
+	}
+
  } 

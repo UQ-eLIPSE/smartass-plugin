@@ -27,3 +27,5 @@ build/
 #
 smartass-plugin.iml
 
+.gradle/
+.idea/
