@@ -23,6 +23,9 @@ import au.edu.uq.smartass.engine.QuestionModule;
 
 import java.math.BigDecimal;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 
 /**
@@ -34,11 +37,15 @@ import java.math.BigDecimal;
  *
  */
 public final class AvogadrosLawModule implements QuestionModule {
- 
-        private static final String MIN_V="5.0";
-        private static final String MAX_V="20.0";
-        private static final String MIN_N="0.1";
-        private static final String MAX_N="10.0";
+
+    /** Class logger. */
+    private static final Logger LOG = LoggerFactory.getLogger( AvogadrosLawModule.class );
+
+
+    private static final String MIN_V="5.0";
+    private static final String MAX_V="20.0";
+    private static final String MIN_N="0.1";
+    private static final String MAX_N="10.0";
 
         /** Gas pressure in Atmospheres. */
         private String pressure;
@@ -70,23 +77,27 @@ public final class AvogadrosLawModule implements QuestionModule {
          *		params[1] - m2 - number of molecules in the formula for the second gas,
          *  i.e. for oxygen into ozone 3O2->2O3, m1==3, m2==2
          */
-         public AvogadrosLawModule(String[] params) {
-                try {
-                        switch (params.length) {
-                        case 5:
-                                initialise(params[0], params[1], params[2], params[3], params[4]);
-                                break;
-                        case 2: 
-                                initialise(params[0], params[1]);
-                                break;
-                        default:
-                                // @TODO: presumably an error?
-                        }
-                } catch (NumberFormatException ex) {
-                        System.out.println("IllegalArgumentException while processing parameters passed into AvogadrosLawModule");
-                        throw ex;
+        @Override
+        public QuestionModule initialise(String[] params) {
+            LOG.info( "::intialize( {} )[]", params.toString() );
+            try {
+                switch (params.length) {
+                case 5:
+                    initialise(params[0], params[1], params[2], params[3], params[4]);
+                    break;
+                case 2:
+                    initialise(params[0], params[1]);
+                    break;
+                default:
+                    // @TODO: presumably an error?
                 }
-        } //constructor
+                return this;
+
+            } catch (NumberFormatException ex) {
+                System.out.println("IllegalArgumentException while processing parameters passed into AvogadrosLawModule");
+                throw ex;
+            }
+        }
 
     /**
      * 
@@ -101,7 +112,7 @@ public final class AvogadrosLawModule implements QuestionModule {
      * @param molecules1
      * @param molecules2
      */
-    public void initialise(
+    private void initialise(
             final String pressure, 
             final String volume1, final String moles1, 
             final String molecules1, final String molecules2
@@ -113,7 +124,7 @@ public final class AvogadrosLawModule implements QuestionModule {
         this.m2=Integer.parseInt(molecules2);
     }
 	
-    public void initialise(
+    private void initialise(
             final String molecules1, final String molecules2
     ) {
         this.pressure = (
