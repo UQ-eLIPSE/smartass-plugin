@@ -21,6 +21,8 @@ dependencies {
 	//
 	// 	. compile .
 	//
+        
+        // @TODO: make dependency on 'QuestionModule' Interface Library.
 
 	//
 	// 	. testCompile . 
@@ -43,7 +45,10 @@ jar {
 //	version = '0.1.0'
         exclude('au/edu/uq/smartass/engine/**')
         //
-        // @TODO: Populate 'META-INF/services/*' with full 'classname(+package)'
+        // @TODO: 
+        //      * Populate 'META-INF/services/*' with full 'classname(+package)'
+        //      * Utility Script currently does this but needs to be called before packaging:
+        //      -       src/util/create_services_conf.sh
         //
         eachFile { fileCopyDetails -> 
                 if (fileCopyDetails.getName().contains('.class')) { println "* * * : " + fileCopyDetails.getSourcePath(); }
