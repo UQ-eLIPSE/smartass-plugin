@@ -10,12 +10,30 @@ set -o nounset
 echo $0
 
 #-------------------------------------------------------------------------------
+#       . setup .
+#-------------------------------------------------------------------------------
+
+moddir='./build/classes/main//au/edu/uq/smartass/question'
+output='./src/main/resources/META-INF/services/au.edu.uq.smartass.engine.QuestionModule'
+
+msg='SERVICES: au.edu.uq.smartass.engine.QuestionModule'
+
+
+#-------------------------------------------------------------------------------
+#       . initialise .
+#-------------------------------------------------------------------------------
+
+outdir="${output%/*}"
+if [[ ! -d "${outdir}" ]]; then mkdir -p "${outdir}"; fi
+
+
+#-------------------------------------------------------------------------------
 #       . main .
 #-------------------------------------------------------------------------------
 
-        printf '\n> > > > >  SERVICES: au.edu.uq.smartass.engine.QuestionModule\n\n'
+        printf '\n> > > > >  %s\n\n' "${msg}"
 
-        find ./build/classes/main//au/edu/uq/smartass/question -type f -name *.class | 
+        find ${moddir} -type f -name *.class | 
         sed -e '{
                 /\$/d
                 /Abstract/d
@@ -23,9 +41,9 @@ echo $0
                 s|\.class||
                 s|/|.|g
         }' | 
-        tee ./src/main/resources/META-INF/services/au.edu.uq.smartass.engine.QuestionModule
+        tee "${output}"
 
-        printf '\n< < < < <  SERVICES: au.edu.uq.smartass.engine.QuestionModule\n\n'
+        printf '\n< < < < <  %s\n\n' "${msg}"
 
 #-------------------------------------------------------------------------------
 #       . la fin .
