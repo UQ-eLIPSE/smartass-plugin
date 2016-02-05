@@ -173,7 +173,7 @@ public class ScalarProductModule implements QuestionModule {
     /**
      *
      */
-    ScalarProductModule() {
+    public ScalarProductModule() {
         this(new IntegerGenerator() {
                 private java.util.Random random = new java.util.Random();
                 @Override public int next(final int lower, final int upper) {
