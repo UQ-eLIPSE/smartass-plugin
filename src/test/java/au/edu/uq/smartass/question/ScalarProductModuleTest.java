@@ -4,6 +4,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.lang.reflect.Constructor;
+
 import static org.junit.Assert.*;
 
 /**
@@ -19,6 +21,23 @@ public class ScalarProductModuleTest {
     @After
     public void tearDown() throws Exception {
 
+    }
+
+    /**
+     * Check for 'public' default constructor.
+     * 
+     * @throws Exception
+     */
+    @Test
+    public void testScalarProductModule() throws Exception {
+        try {
+            Constructor<ScalarProductModule> constructor
+                    = ScalarProductModule.class.getConstructor();
+            assertTrue(true);
+
+        } catch (NoSuchMethodException ex) {
+            fail();
+        }
     }
 
     @Test
