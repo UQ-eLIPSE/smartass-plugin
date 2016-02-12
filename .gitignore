@@ -30,3 +30,4 @@ smartass-plugin.iml
 .gradle/
 .idea/
 src/main/java/au/edu/uq/smartass/engine/
+libs/

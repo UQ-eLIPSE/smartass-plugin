@@ -38,34 +38,58 @@ dependencies {
 	compile 'ch.qos.logback:logback-core:1.1.3'
 	compile 'ch.qos.logback:logback-classic:1.1.3'
 	compile 'org.codehaus.groovy:groovy:2.4.4'
+
+        //
+        //      . local libs .
+        //
+	compile fileTree('libs')
 }
+
 
 jar {
 	baseName = 'smartass-plugin'
-//	version = '0.1.0'
-        exclude('au/edu/uq/smartass/engine/**')
-        //
-        // @TODO: 
-        //      * Populate 'META-INF/services/*' with full 'classname(+package)'
-        //      * Utility Script currently does this but needs to be called before packaging:
-        //      -       src/util/create_services_conf.sh
-        //
-        eachFile { fileCopyDetails -> 
-                if (fileCopyDetails.getName().contains('.class')) { println "* * * : " + fileCopyDetails.getSourcePath(); }
-        }
+	version = '0.1.0'
 }
 
 
 allprojects {
 	gradle.projectsEvaluated {
 		tasks.withType(JavaCompile) {
-			options.compilerArgs << '-Xlint:unchecked' << '-Xlint:deprecation'
+			options.compilerArgs << '-Xlint'
 		}
 	}
 }
 
+task createService << {
+        def clsDir = "${buildDir}/classes/main"
+        def questionPack = "au/edu/uq/smartass/question"
+        def serviceDir = "${buildDir}/resources/main/META_INF/services"
 
-task printClasspath<< {
+        new File("$serviceDir").mkdirs()
+        def fos = new FileOutputStream(
+                "${serviceDir}/au.edu.uq.smartass.engine.QuestionModule"
+            )
+        new File("${clsDir}/${questionPack}").eachFileRecurse(groovy.io.FileType.FILES) {
+            file ->
+                if ( ! file.name =~ /\.class$/ ) return
+                if ( file.name =~ /^Abstract/ ) return
+                if ( file.name =~ /\$/ ) return
+
+                fos <<
+                        file.path.replaceAll( /($clsDir)\/($questionPack)\/(.*)\.class/ ) {
+                            _0, _1, smartass, question ->
+                                return "${smartass}/${question}".replaceAll( ~/\//, ".")
+                        }
+                fos << "\n"
+        }
+        fos.close()
+}
+
+/** Debug utility task. */
+task printClassPath << {
         configurations.runtime.each { println it }
 }
+
+defaultTasks 'clean', 'check', 'createService', /*'javadoc',*/ 'build'
+
 
