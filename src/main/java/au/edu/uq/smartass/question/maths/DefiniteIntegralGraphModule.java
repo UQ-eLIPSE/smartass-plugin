@@ -255,7 +255,7 @@ public class DefiniteIntegralGraphModule implements QuestionModule {
 			return "\\ensuremath{" + solution.toString() + "}";
 		else if(name.toUpperCase().equals("GRAPH")) { 
 			TexGraph graph = new TexGraph(graph_x, graph_y, 300, 150);
-			return  graph.encloseGraph(300, 100, graph.drawAxes() + "\n" + graph.drawGraph() +
+			return  TexGraph.encloseGraph(300, 100, graph.drawAxes() + "\n" + graph.drawGraph() +
 					graph.drawRegionUnderGraph(nx1, ny1, nx2, ny2));
 		}
                 return "Section "+name+" not found!";

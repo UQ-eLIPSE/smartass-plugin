@@ -17,8 +17,8 @@ public class UnaryOp extends MathsOp {
 
 	public Object clone() {
 		UnaryOp res = (UnaryOp) super.clone();
-		if(op!=null)
-			res.op = (MathsOp) ((MathsOp)op).clone();
+		if (op != null)
+			res.op = (MathsOp)op.clone();
 		return res;
 	} 
 }

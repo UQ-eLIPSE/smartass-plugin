@@ -318,7 +318,7 @@ public class SimultaneousSubstitutionLinearModule extends SimultaneousEquationsM
  			    for (int z=0; z<2; z++)
  			    for (int kk=0; kk<6; kk++) {
  			    	ic[z][0][kk]=terms[(z+order-1)%2][kk];
- 			    	ic[z][1][kk]=places[(z+order-1)%2*2+(int)(kk/3)][kk%3];
+ 			    	ic[z][1][kk] = places[(z + order - 1) % 2 * 2 + (kk / 3)][kk % 3];
  			    }
  			    for (int iss=0; iss<3; iss++){
  			      temp[0][0][iss]=ic[0][0][iss];

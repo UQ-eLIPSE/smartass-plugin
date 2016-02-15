@@ -76,6 +76,7 @@ public class QuadraticNoFormulaModule implements QuestionModule {
 	/**
 	 * @param eq_type	type of equation (1-4)
 	 */
+        @SuppressWarnings("fallthrough")
 	protected void generate(int eq_type) {
 		int[] coef = {0,0,0,0};
 		coef[0] = RandomChoice.randInt(1, MAX_NUMBER)*RandomChoice.randSign();

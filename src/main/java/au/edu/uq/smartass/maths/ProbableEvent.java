@@ -109,7 +109,7 @@ public class ProbableEvent extends MathsOp {
     public Object clone() {
 		ProbableEvent res = (ProbableEvent) super.clone();
 		if(probability!=null)
-			res.probability = (MathsOp) ((MathsOp)probability).clone();
+			res.probability = (MathsOp)probability.clone();
 		return res;
 	} 
  

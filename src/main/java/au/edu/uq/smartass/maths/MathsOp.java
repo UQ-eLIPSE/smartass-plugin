@@ -42,7 +42,7 @@ public abstract class MathsOp implements Cloneable {
 	 * @param cls		class 
 	 * @param tex		array of TeX strings 
 	 */
-	static public void setTex(Class cls, String[] tex) {
+	static public void setTex(Class<? extends MathsOp> cls, String[] tex) {
 		setTex(cls.getName(), tex);
 	}
 	
@@ -73,7 +73,7 @@ public abstract class MathsOp implements Cloneable {
 	 * 
 	 * @return 				array of TeX strings 
 	 */
-	static public String[] getTex(Class cls) {
+	static public String[] getTex(Class<? extends MathsOp> cls) {
 		return getTex(cls.getName());
 	}
 
