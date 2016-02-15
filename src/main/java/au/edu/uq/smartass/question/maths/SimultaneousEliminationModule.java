@@ -85,7 +85,7 @@ public class SimultaneousEliminationModule extends SimultaneousEquationsModule{
  			     	
  			    //forming initial equations
  				//3 non-zero terms only;
- 				coefs[0][0]=RandomChoice.randInt(2, (int)(MAX_ELEMENT/2))*RandomChoice.randSign();
+ 				coefs[0][0] = RandomChoice.randInt(2, (MAX_ELEMENT / 2)) * RandomChoice.randSign();
  				coefs[0][1]=RandomChoice.randInt(2, MAX_ELEMENT)*RandomChoice.randSign();			
  				coefs[0][2]=-coefs[0][0]*vs[0]-coefs[0][1]*vs[1];
  				   

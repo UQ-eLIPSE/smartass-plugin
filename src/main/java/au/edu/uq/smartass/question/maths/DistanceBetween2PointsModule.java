@@ -177,7 +177,7 @@ public class DistanceBetween2PointsModule implements QuestionModule{
                 	  dy=y1-2*(int)Math.round(Math.sqrt(y1*y2))+y2; 
                 	  if (y1>y2)	     
                 	   tempOps[1]=new Power(new Subtraction(new Sqrt( new Multiplication(
-                	  		new IntegerNumber((int)(y1/y2)), new IntegerNumber(y2))), opy2), new IntegerNumber(2));   
+                	  		new IntegerNumber(y1 / y2), new IntegerNumber(y2))), opy2), new IntegerNumber(2));   
                 	  else 
                 	  if (y2>y1)
                 	  	tempOps[1]=new Power(new Subtraction(opy1, new Sqrt( new Multiplication(

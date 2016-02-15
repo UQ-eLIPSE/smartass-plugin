@@ -112,6 +112,7 @@ public class PythonARange extends PythonArrays {
         throw new PythonException("not allowed");
     }
 
+    @SuppressWarnings("fallthrough")
     public String toPython() {
         StringBuffer sb = new StringBuffer(F_START);
 

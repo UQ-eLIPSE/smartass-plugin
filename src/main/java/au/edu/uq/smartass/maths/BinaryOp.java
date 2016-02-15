@@ -19,7 +19,7 @@ public class BinaryOp extends MathsOp {
 	
 	public Object clone() {
 		BinaryOp res = (BinaryOp) super.clone();
-		res.op = (MathsOp[])res.op.clone();
+		res.op = res.op.clone();
 		if(res.op[0]!=null)
 			res.op[0] = (MathsOp) res.op[0].clone();
 		if(res.op[1]!=null)

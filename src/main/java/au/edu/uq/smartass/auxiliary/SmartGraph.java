@@ -54,10 +54,15 @@ public class SmartGraph {
     	String rightStr, boolean rightInclusive ) {
     		
     		String interval;
-    		int llimit, rlimit, position, d, scale, width, height=300, lpos, rpos, delta;
+
+    		int llimit;
+                int d;
+
+                int rlimit, position, scale, width, height=300, lpos, rpos, delta;
     	//	double start, step;
     		BigDecimal left, right, start, step;
     		boolean markl=true, markr=true;
+
     		interval="{ \\sffamily \\setlength{\\unitlength}{0.08mm} \\begin{picture}(2000,380) \n "+ //draw a number line
     		    "\\put(0,50){ \\thicklines\\line(1,0){1800}} "+
                 "\\put(20,50){\\thicklines\\vector(-1,0){20}}  \n \\put(1800,50){\\thicklines\\vector(1,0){20}} \n"+
@@ -94,10 +99,7 @@ public class SmartGraph {
             	     if (Math.abs(rightInt)<5*d) //in the centre
             	   	 llimit=-5*d;
             	     else {              	      	  
-            	      if (rightInt<0)
-            	      	llimit=(int)(rightInt/(int)Math.pow(10,scale))*d-2*d;
-            	      else
-            	      	llimit=(int)(rightInt/(int)Math.pow(10,scale))*d-8*d;            	                 	   	  
+                        llimit = (rightInt / (int)Math.pow(10, scale) - (rightInt < 0 ? 2 : 8)) * d;
             	     }
 					 for (int i=0; i<11; i++)
                 	 {
@@ -105,7 +107,7 @@ public class SmartGraph {
                 	    rlimit=llimit+i*d;
                 		interval+="\\put("+position+",10){\\makebox(0,0){"+rlimit+"}}\n";                			
                 	 }  
-                	 position=50+(int)(rightInt-llimit)*170/d;	           	   
+                	 position = 50 + (rightInt - llimit) * 170 / d;	           	   
             	     interval+="\\put("+position+",50){\\circle";
             	     if (rightInclusive) interval+="*";
             	     interval+="{35}}\n";
@@ -127,10 +129,7 @@ public class SmartGraph {
             	     if (Math.abs(leftInt)<5*d) //in the centre
             	   	 llimit=-5*d;
             	     else {              	      	  
-            	      if (leftInt<0)
-            	      	llimit=(int)(leftInt/(int)Math.pow(10,scale))*d-2*d;
-            	      else
-            	      	llimit=(int)(leftInt/(int)Math.pow(10,scale))*d-8*d;            	                 	   	  
+                        llimit = (leftInt / (int)Math.pow(10, scale) - (leftInt < 0 ? 2 : 8)) * d;
             	     }
 					 for (int i=0; i<11; i++)
                 	 {
@@ -138,7 +137,7 @@ public class SmartGraph {
                 	    rlimit=llimit+i*d;
                 		interval+="\\put("+position+",10){\\makebox(0,0){"+rlimit+"}}\n";                			
                 	 }  
-                	 position=50+(int)(leftInt-llimit)*170/d;	           	   
+                	 position=50+(leftInt-llimit)*170/d;	           	   
             	     interval+="\\put("+position+",50){\\circle";
             	     if (leftInclusive) interval+="*";
             	     interval+="{35}}\n";           	                 	    
@@ -161,7 +160,7 @@ public class SmartGraph {
             	   if  ((rightInt<5*d)&&(leftInt>-5*d)) 
             	   	 llimit=-5*d;  // in the centre
             	     else {              	      	            	      
-            	      	llimit=(int)(leftInt/(int)Math.pow(10,scale))*d-2*d;            	      
+            	      	llimit = (leftInt / (int)Math.pow(10,scale) - 2) * d;            	      
             	        if((rightInt)>(llimit+10*d))            	        	
             	      	llimit+=d;            	                 	   	  
             	     }
@@ -171,14 +170,14 @@ public class SmartGraph {
                 	    rlimit=llimit+i*d;
                 		interval+="\\put("+position+",10){\\makebox(0,0){"+rlimit+"}}\n";                			
                 	 }  
-                	position=50+(int)(leftInt-llimit)*170/d;	    
+                	position=50+(leftInt-llimit)*170/d;	    
                 	lpos=position;	       	   
             	    interval+="\\put("+position+",50){\\circle";
             	    if (leftInclusive) interval+="*";
             	    interval+="{35}}\n";           	                 	    
             	    if ((leftInt%Math.pow(10,scale))!=0)            	     	
             	     	interval+="\\put("+position+",100){\\makebox(0,0){"+leftInt+"}}\n";            	      
-            	    position=50+(int)(rightInt-llimit)*170/d;   
+            	    position=50+(rightInt-llimit)*170/d;   
             	    rpos=position;         	    	           	   
             	    interval+="\\put("+position+",50){\\circle";
             	    if (rightInclusive) interval+="*";
@@ -346,17 +345,17 @@ public class SmartGraph {
 	 */
 	@SuppressWarnings("unchecked")
 	public static String[][] break2Sets (HashSet[] sets, int[] shares){
-		Vector vs;
+		List vs;
 		int sum=0;
 		int []totals=new int[shares.length-1];
 		int cum, index;
 		String[][] output= new String[3][shares.length];
-		Iterator itr;
+
 		for (int i=0; i<shares.length; i++) sum+=shares[i];
 		totals[0]=shares[0];
 		for (int i=1; i<totals.length; i++) totals[i]=totals[i-1]+shares[i];
 		for (int i=0; i<3; i++) {
-			vs=new Vector(sets[i]); 		
+			vs=new ArrayList(sets[i]); 		
 			index=0;
 			for (int k=1; k<shares.length; k++) {
 				cum=(int)((double)totals[k-1]/sum*vs.size());

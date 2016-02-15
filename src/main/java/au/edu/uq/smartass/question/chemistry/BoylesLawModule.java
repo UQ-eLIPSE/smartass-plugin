@@ -121,21 +121,22 @@ public class BoylesLawModule implements QuestionModule{
 // Generates the following :
 // p1, p2, v1, v2
  public void generate() {
- 	            int mind=(int)((maxVolume-minVolume)/10); //minimum difference - 10 percent, unless specified differently
- 	            if (mind==0) mind=1;
-					p1=RandomChoice.randInt(minPressurePa,maxPressurePa);
-				v1=RandomChoice.randInt(minVolume,maxVolume);		 
-				if ((v1-mind)<minVolume)
-					v2=RandomChoice.randInt(v1+mind,maxVolume);
-				else 
-				if ((v1+mind)>maxVolume)
-					v2=RandomChoice.randInt(minVolume,v1-mind);
-				else 			
-				if (RandomChoice.randSign()==1)	
-					v2=RandomChoice.randInt(v1+mind, maxVolume);
-				else
-					v2=RandomChoice.randInt(minVolume, v1-mind);
-				p2=(double)p1*v1/v2;		
+        int mind = (maxVolume - minVolume) / 10; //minimum difference - 10 percent, unless specified differently
+        if (mind == 0) mind = 1;
+
+        p1=RandomChoice.randInt(minPressurePa,maxPressurePa);
+        v1=RandomChoice.randInt(minVolume,maxVolume);		 
+        if ((v1-mind)<minVolume)
+                v2=RandomChoice.randInt(v1+mind,maxVolume);
+        else 
+        if ((v1+mind)>maxVolume)
+                v2=RandomChoice.randInt(minVolume,v1-mind);
+        else 			
+        if (RandomChoice.randSign()==1)	
+                v2=RandomChoice.randInt(v1+mind, maxVolume);
+        else
+                v2=RandomChoice.randInt(minVolume, v1-mind);
+        p2=(double)p1*v1/v2;		
 						
 	}//generate 
 } 

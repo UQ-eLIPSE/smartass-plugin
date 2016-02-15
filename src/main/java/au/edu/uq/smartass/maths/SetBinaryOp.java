@@ -19,7 +19,7 @@ abstract public class SetBinaryOp extends SetOp {
 	
 	public Object clone() {
 		SetBinaryOp res = (SetBinaryOp) super.clone();
-		res.op = (SetOp[])res.op.clone();
+		res.op = res.op.clone();
 		if(res.op[0]!=null)
 			res.op[0] = (SetOp) res.op[0].clone();
 		if(res.op[1]!=null)
