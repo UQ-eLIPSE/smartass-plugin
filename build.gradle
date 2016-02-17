@@ -45,6 +45,11 @@ dependencies {
 	compile fileTree('libs')
 }
 
+test { 
+        testLogging {
+                events 'passed'
+        }
+}
 
 jar {
 	baseName = 'smartass-plugin'
