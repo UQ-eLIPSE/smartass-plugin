@@ -4,9 +4,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-
-import java.lang.reflect.Constructor;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -91,5 +88,15 @@ public class CrossProductModuleTest {
                 "-2&5 \\end{array} \\right|\n" +
                 "=-53\\textbf{i} + 31\\textbf{j} + 29\\textbf{k}$";
         assertEquals(crossProduct.getSection("solution"), expected);
+    }
+
+    @Test
+    public void testGetSectionFail() throws Exception {
+        try {
+            crossProduct.getSection("NonExistantSectionName");
+            fail();
+        } catch (IllegalArgumentException ex) {
+            assertTrue(true);
+        }
     }
 }
