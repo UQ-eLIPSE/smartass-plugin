@@ -26,91 +26,13 @@ public class ScalarProductModule implements QuestionModule {
     /** Lookup TeX string. */
     private Map<Section,String> sectionTeX = new EnumMap<>(Section.class);
 
-    /** */
-    interface IntegerGenerator { int next(int lower, int uppper); }
+    private IntegerGenerator integers;
 
-    /**
-     * Utility class representing 'mathematical' vector.
-     */
-    class Vector {
-        private String name;
-        private int dimension;
+    int dim;
+    Vector u;
+    Vector v;
+    DotProduct uv;
 
-        private int[] vector;
-
-        private String formatName;
-        private String formatDefinition;
-
-        private String normalName;
-        private String normalExpand;
-        private String normalGroup;
-        private int normalSqr;
-
-        Vector(final String name, final int dimension) {
-            this.name = name;
-            this.dimension = dimension;
-
-            initialiseVector();
-            initializeName();
-            initializeNormal();
-        }
-
-        /** Init vector with random numbers (-9 <= x <= 9). */
-        private void initialiseVector() {
-            vector = new int[dimension];
-            for (int i = 0; i < dimension; ++i) vector[i] = integers.next(-9, 9);
-        }
-
-        /** */
-        private void initializeName() {
-            // Init TeX formatted vector name.
-            formatName = new StringBuilder()
-                    .append("\\mathbf{").append(name).append("}")
-                    .toString()
-                ;
-
-            // Init Tex formatted vector definition (ie u = (x))
-            StringBuilder sb = new StringBuilder();
-            sb.append(formatName());
-            sb.append("=");
-            sb.append("\\begin{pmatrix}");
-            for (int x : vector) {
-                sb.append(x).append("\\\\");
-            }
-            sb.append("\\end{pmatrix}");
-            formatDefinition = sb.toString();
-        }
-
-        /** */
-        private void initializeNormal() {
-            normalName = new StringBuilder()
-                    .append("\\lVert").append(formatName()).append("\\rVert")
-                    .toString()
-                ;
-
-            List<String> elsqr = new ArrayList<>();
-            for (int element : vector) {
-                elsqr.add(String.format(element < 0 ? "(%d)^2" : "%d^2", element));
-                normalSqr += element * element;
-            }
-            normalExpand = String.format("\\sqrt{%s}", String.join("+", elsqr));
-            normalGroup = String.format("\\sqrt{%d}", normalSqr);
-        }
-
-        int dimension() { return dimension; }
-        double normal() { return Math.sqrt(normalSqr); }
-
-        String formatName() { return formatName; }
-        String formatDefinition() { return formatDefinition; }
-
-        int get(final int index) { return vector[index]; }
-
-        String normalName() { return normalName; }
-        String normalExpand() { return normalExpand; }
-        String normalGroup() { return normalGroup; }
-
-        int normalSqr() { return normalSqr; }
-    }
 
     class DotProduct {
         private Vector u;
@@ -153,6 +75,7 @@ public class ScalarProductModule implements QuestionModule {
                     "\\approx\\ang{%d}",
                     Math.round(Math.toDegrees(Math.acos(result / (u.normal() * v.normal()))))
                 );
+            
         }
 
         String formatName() { return formatName; }
@@ -161,14 +84,6 @@ public class ScalarProductModule implements QuestionModule {
         String formatResult() { return formatResult; }
         String formatAngle() { return formatAngle; }
     }
-
-    private IntegerGenerator integers;
-
-    int dim;
-    Vector u;
-    Vector v;
-    DotProduct uv;
-
 
     /**
      *
@@ -193,8 +108,8 @@ public class ScalarProductModule implements QuestionModule {
 
     private void initialise() {
         dim = integers.next(2, 3);
-        u = new Vector("u", dim);
-        v = new Vector("v", dim);
+        u = new Vector("u", dim, integers);
+        v = new Vector("v", dim, integers);
         uv = new DotProduct(u, v);
     }
 
