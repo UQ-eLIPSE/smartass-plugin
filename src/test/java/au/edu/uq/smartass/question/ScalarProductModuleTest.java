@@ -42,7 +42,7 @@ public class ScalarProductModuleTest {
 
     @Test
     public void testGetSectionPackage() throws Exception {
-        ScalarProductModule dot = new ScalarProductModule(new ScalarProductModule.IntegerGenerator() {
+        ScalarProductModule dot = new ScalarProductModule(new IntegerGenerator() {
             private int[] ints = {3, 9, -9, 3, 2, 1, 4};
             private int idx = 0;
             @Override public int next(int lower, int uppper) {
@@ -87,7 +87,7 @@ public class ScalarProductModuleTest {
 
     @Test
     public void testGetSection() throws Exception {
-        ScalarProductModule dot = new ScalarProductModule(new ScalarProductModule.IntegerGenerator() {
+        ScalarProductModule dot = new ScalarProductModule(new IntegerGenerator() {
             private int[] ints = {3, 3, -4, 4, -2, 1, 7};
             private int idx = 0;
             @Override public int next(int lower, int uppper) {
