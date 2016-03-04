@@ -17,7 +17,7 @@ public class VectorTest {
     Vector vector;
 
     private List<Integer> numbers = Arrays.asList(1, 2, 3);
-    private PredictableGenerator generator;
+    PredictableGenerator generator;
 
     /**
      * Creates a predictable generator
@@ -27,10 +27,10 @@ public class VectorTest {
         LinkedList<Integer> randNumbers;
 
         public PredictableGenerator() {
-            randNumbers = new LinkedList<>();
+            randNumbers = new LinkedList<Integer>();
         }
 
-        public void setRandomNumbers(List vec1) {
+        public void setRandomNumbers(List<Integer> vec1) {
             randNumbers.addAll(vec1);
         }
 

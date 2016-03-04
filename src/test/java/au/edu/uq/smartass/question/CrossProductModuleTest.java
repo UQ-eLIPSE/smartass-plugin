@@ -32,7 +32,7 @@ public class CrossProductModuleTest {
             randNumbers = new LinkedList<>();
         }
 
-        public void setRandomNumbers(List vec1, List vec2) {
+        public void setRandomNumbers(List<Integer> vec1, List<Integer> vec2) {
             randNumbers.addAll(vec1);
             randNumbers.addAll(vec2);
         }
