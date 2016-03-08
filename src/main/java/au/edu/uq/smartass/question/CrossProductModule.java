@@ -18,12 +18,12 @@ public class CrossProductModule implements QuestionModule{
     private Map<Section, String> sectionTex = new EnumMap<>(Section.class);
 
     // Store the math objects
-    // @review Should be static ?
-    // @review Accesibility?
-    final int dimension = 3;
-    Vector u;
-    Vector v;
-    CrossProduct crossProduct;
+    // @review Should be static ? done
+    // @review Accesibility? done
+    static private final int dimension = 3;
+    private Vector u;
+    private Vector v;
+    private CrossProduct crossProduct;
 
     // Create an instance of the random number generator
     IntegerGenerator integers;
@@ -39,7 +39,8 @@ public class CrossProductModule implements QuestionModule{
             random = new Random();
         }
 
-        // @review Use attributes, they indicate intent (@Override)
+        // @review Use attributes, they indicate intent (@Override) done
+        @Override
         public int next(int lower, int upper) {
             return random.nextInt(upper + 1 - lower) + lower;
         }
@@ -61,7 +62,7 @@ public class CrossProductModule implements QuestionModule{
             this.u = u;
             this.v = v;
 
-            assert(u.dimension() == v.dimension());
+            assert (u.dimension() == v.dimension());
 
             formatName = u.formatName() + "\\times" + v.formatName();
 
@@ -80,53 +81,66 @@ public class CrossProductModule implements QuestionModule{
 
             // @review Use Map?
             // @review Use of 'Magic' Numbers!
-            int[] vectors = new int[3];
-            // @review Use generic type List<>
-            ArrayList<String> vecNames = new ArrayList<String>();
-            vecNames.add("i");
-            vecNames.add("j");
-            vecNames.add("k");
 
-            vectors[0] = (u.get(1) * v.get(2)) - (u.get(2) * v.get(1));
-            vectors[1] = ((u.get(0) * v.get(2)) - (u.get(2) * v.get(0))) * -1;
-            vectors[2] = ((u.get(0) * v.get(1)) - u.get(1) * v.get(0));
+            // The array is needed, cause we need to maintain the order within the map
+            // As far as I can tell, there is no ordered maps
+            String[] vecNames = {"i", "j", "k"};
+
+            Map<String, Integer> vectors = new HashMap<String, Integer>();
+
+
+            vectors.put("i", (u.get(1) * v.get(2)) - (u.get(2) * v.get(1)));
+            vectors.put("j", ((u.get(0) * v.get(2)) - (u.get(2) * v.get(0))) * -1);
+            vectors.put("k", ((u.get(0) * v.get(1)) - u.get(1) * v.get(0)));
+
+            // Add the first element
+            result += String.valueOf(vectors.get(vecNames[0]));
+            result += "\\textbf{" + vecNames[0] + "}";
 
             // @review for loop with coditional test based on index?
-            for (int i = 0; i < 3; i++) {
-                if (i != 0) {
-                    // @review Eliminate conditional with formating?
-                    if (vectors[i] < 0) {
-                        result += " - ";
-                        // Make it positive
-                        result += String.valueOf(vectors[i] * -1);
-                    } else {
-                        result += " + ";
-                        result += String.valueOf(vectors[i]);
-                    }
-                    result += "\\textbf{" + vecNames.get(i) + "}";
+            for (int i = 1; i < dimension; i++) {
+                String key = vecNames[i];
+                if (vectors.get(key) < 0) {
+                    result += " - ";
+                    // Make it positive
+                    result += String.valueOf(vectors.get(key) * -1);
                 } else {
-                    result += String.valueOf(vectors[i]);
-                    result += "\\textbf{" + vecNames.get(i) + "}";
+                    result += " + ";
+                    result += String.valueOf(vectors.get(key));
                 }
+                result += "\\textbf{" + key + "}";
             }
 
             return result;
         }
     }
 
-    // @review accesibility? should be package as provided for testing only
-    public CrossProductModule(IntegerGenerator generator) {
+    // @review accesibility? should be package as provided for testing only [done]
+    CrossProductModule(IntegerGenerator generator) {
         initialise(generator);
     }
 
-    public CrossProductModule() {
+    CrossProductModule() {
         initialise(new RandomNumberGenerator());
     }
 
     private void initialise(IntegerGenerator integers) {
         // @review aim for strong cohesion but low coupling!
-        u = new Vector("u", dimension, integers);
-        v = new Vector("v", dimension, integers);
+
+
+        List<Integer> numbers = new ArrayList<Integer>();
+        for (int i = 0; i < dimension; i++) {
+            numbers.add(integers.next(-9, 9));
+        }
+
+        u = new Vector("u", numbers);
+
+        numbers.clear();
+        for (int i = 0; i < dimension; i++) {
+            numbers.add(integers.next(-9, 9));
+        }
+
+        v = new Vector("v", numbers);
         crossProduct = new CrossProduct(u, v);
 
         createQuestionTex();
@@ -176,7 +190,7 @@ public class CrossProductModule implements QuestionModule{
         sectionTex.put(Section.ANSWER, crossProduct.generateResult());
     }
 
-    // @review Attribute!
+    @Override
     public String getSection(final String name) throws IllegalArgumentException {
         return sectionTex.get(Enum.valueOf(Section.class, name.toUpperCase()));
     }

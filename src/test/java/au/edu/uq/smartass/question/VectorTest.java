@@ -17,34 +17,10 @@ public class VectorTest {
     Vector vector;
 
     private List<Integer> numbers = Arrays.asList(1, 2, 3);
-    PredictableGenerator generator;
-
-    /**
-     * Creates a predictable generator
-     * Internally uses a queue for keeping track of numbers
-     */
-    // @review Haven't I already seen this class?? code duplication!
-    class PredictableGenerator implements IntegerGenerator {
-        LinkedList<Integer> randNumbers;
-
-        public PredictableGenerator() {
-            randNumbers = new LinkedList<Integer>();
-        }
-
-        public void setRandomNumbers(List<Integer> vec1) {
-            randNumbers.addAll(vec1);
-        }
-
-        public int next(int a, int b) {
-            return randNumbers.pop();
-        }
-    }
 
     @Before
     public void setUp() {
-        generator = new PredictableGenerator();
-        generator.setRandomNumbers(numbers);
-        vector = new Vector("vector", 3, generator);
+        vector = new Vector("vector", Arrays.asList(1, 2, 3));
     }
 
     @After
