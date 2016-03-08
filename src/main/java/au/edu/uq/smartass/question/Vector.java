@@ -2,6 +2,7 @@ package au.edu.uq.smartass.question;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.LinkedList;
 
 /**
  * Represents a mathematical vector
@@ -15,8 +16,6 @@ public class Vector {
     private String formatName;
     private String formatDefinition;
 
-    // @review Don't store, only used in intialisation
-    private IntegerGenerator integers;
     private String normalName;
     private String normalExpand;
     private String normalGroup;
@@ -28,12 +27,17 @@ public class Vector {
      * @param dimension The dimension of the vector
      * @param integers The random number generator to use
      */
-    Vector(final String name, final int dimension, IntegerGenerator integers) {
+    Vector(final String name, List<Integer> integers) {
         this.name = name;
-        this.dimension = dimension;
-        this.integers = integers;
+        this.dimension = integers.size();
 
-        initialiseVector();
+        LinkedList<Integer> numbers = new LinkedList<Integer>();
+        // This is the cleanest way to convert a list into a linked list
+        for (int i : integers) {
+            numbers.add(i);
+        }
+
+        initialiseVector(numbers);
         initializeName();
         initializeNormal();
     }
@@ -59,9 +63,9 @@ public class Vector {
     }
 
     /** Init vector with random numbers (-9 <= x <= 9). */
-    private void initialiseVector() {
+    private void initialiseVector(LinkedList<Integer> numbers) {
         vector = new int[dimension];
-        for (int i = 0; i < dimension; ++i) vector[i] = integers.next(-9, 9);
+        for (int i = 0; i < dimension; ++i) vector[i] = numbers.pop();
     }
 
     /** */

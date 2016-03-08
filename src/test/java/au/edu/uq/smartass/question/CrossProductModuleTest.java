@@ -21,33 +21,11 @@ public class CrossProductModuleTest {
 
     PredictableGenerator generator;
 
-    /**
-     * Creates a predictable generator
-     * Internally uses a queue for keeping track of numbers
-     */
-    class PredictableGenerator implements IntegerGenerator {
-        // @review use List<>
-        LinkedList<Integer> randNumbers;
-
-        public PredictableGenerator() {
-            randNumbers = new LinkedList<>();
-        }
-
-        // @review addRandomNumbers(list)?
-        public void setRandomNumbers(List<Integer> vec1, List<Integer> vec2) {
-            randNumbers.addAll(vec1);
-            randNumbers.addAll(vec2);
-        }
-
-        public int next(int a, int b) {
-            return randNumbers.pop();
-        }
-    }
-
     @Before
     public void setUp() throws Exception {
         generator = new PredictableGenerator();
-        generator.setRandomNumbers(vector1, vector2);
+        generator.setRandomNumbers(vector1);
+        generator.setRandomNumbers(vector2);
         crossProduct = new CrossProductModule(generator);
     }
 

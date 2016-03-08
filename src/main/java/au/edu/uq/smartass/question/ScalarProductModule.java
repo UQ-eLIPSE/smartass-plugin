@@ -75,7 +75,7 @@ public class ScalarProductModule implements QuestionModule {
                     "\\approx\\ang{%d}",
                     Math.round(Math.toDegrees(Math.acos(result / (u.normal() * v.normal()))))
                 );
-            
+
         }
 
         String formatName() { return formatName; }
@@ -108,8 +108,17 @@ public class ScalarProductModule implements QuestionModule {
 
     private void initialise() {
         dim = integers.next(2, 3);
-        u = new Vector("u", dim, integers);
-        v = new Vector("v", dim, integers);
+        List<Integer> numbers = new ArrayList<Integer>();
+        for (int i = 0; i < dim; i++) {
+            numbers.add(integers.next(-9, 9));
+        }
+        u = new Vector("u", numbers);
+
+        numbers.clear();
+        for (int i = 0; i < dim; i++) {
+            numbers.add(integers.next(-9, 9));
+        }
+        v = new Vector("v", numbers);
         uv = new DotProduct(u, v);
     }
 
