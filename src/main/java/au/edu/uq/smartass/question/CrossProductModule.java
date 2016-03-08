@@ -3,7 +3,12 @@ package au.edu.uq.smartass.question;
 import au.edu.uq.smartass.engine.QuestionModule;
 
 // @review Do not import whole package.
-import java.util.*;
+import java.util.List;
+import java.util.Random;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.EnumMap;
+import java.util.HashMap;
 
 /**
  * Cross Product Module
@@ -18,15 +23,13 @@ public class CrossProductModule implements QuestionModule{
     private Map<Section, String> sectionTex = new EnumMap<>(Section.class);
 
     // Store the math objects
-    // @review Should be static ? done
-    // @review Accesibility? done
     static private final int dimension = 3;
     private Vector u;
     private Vector v;
     private CrossProduct crossProduct;
 
     // Create an instance of the random number generator
-    IntegerGenerator integers;
+    private IntegerGenerator integers;
 
     /**
      * A class that implements the IntegerGenerator
@@ -39,7 +42,6 @@ public class CrossProductModule implements QuestionModule{
             random = new Random();
         }
 
-        // @review Use attributes, they indicate intent (@Override) done
         @Override
         public int next(int lower, int upper) {
             return random.nextInt(upper + 1 - lower) + lower;
@@ -115,7 +117,6 @@ public class CrossProductModule implements QuestionModule{
         }
     }
 
-    // @review accesibility? should be package as provided for testing only [done]
     CrossProductModule(IntegerGenerator generator) {
         initialise(generator);
     }
@@ -125,8 +126,8 @@ public class CrossProductModule implements QuestionModule{
     }
 
     private void initialise(IntegerGenerator integers) {
-        // @review aim for strong cohesion but low coupling!
 
+        // Create a list of numbers from the random generator then pass it to the Vector
 
         List<Integer> numbers = new ArrayList<Integer>();
         for (int i = 0; i < dimension; i++) {
@@ -149,7 +150,6 @@ public class CrossProductModule implements QuestionModule{
     }
 
     private void createQuestionTex() {
-        // @review String question = ""; ??
         String question = new String();
         question += "Let $ \\mathbf{u}= \\left(\\begin{array}{c} " + u.get(0) + " \\\\ " +
                 u.get(1) + "\\\\" + u.get(2) + "\\end{array} \\right)$ and $ \\mathbf{ v} =\\left(\\begin{array}{c} " + v.get(0) +

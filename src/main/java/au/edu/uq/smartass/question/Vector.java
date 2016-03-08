@@ -50,7 +50,7 @@ public class Vector {
     public String toString() {
         String output = new String();
         output = "[";
-        // @review Java8 has String.join(conjunction, list)
+        // vector is of type int[], not List, so we can't use String.join
         for (int i = 0; i < dimension; i++) {
             output += vector[i];
             if (i != dimension - 1) {
