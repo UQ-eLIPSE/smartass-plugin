@@ -26,12 +26,14 @@ public class CrossProductModuleTest {
      * Internally uses a queue for keeping track of numbers
      */
     class PredictableGenerator implements IntegerGenerator {
+        // @review use List<>
         LinkedList<Integer> randNumbers;
 
         public PredictableGenerator() {
             randNumbers = new LinkedList<>();
         }
 
+        // @review addRandomNumbers(list)?
         public void setRandomNumbers(List<Integer> vec1, List<Integer> vec2) {
             randNumbers.addAll(vec1);
             randNumbers.addAll(vec2);
