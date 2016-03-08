@@ -2,6 +2,7 @@ package au.edu.uq.smartass.question;
 
 import au.edu.uq.smartass.engine.QuestionModule;
 
+// @review Do not import whole package.
 import java.util.*;
 
 /**
@@ -17,6 +18,8 @@ public class CrossProductModule implements QuestionModule{
     private Map<Section, String> sectionTex = new EnumMap<>(Section.class);
 
     // Store the math objects
+    // @review Should be static ?
+    // @review Accesibility?
     final int dimension = 3;
     Vector u;
     Vector v;
@@ -36,6 +39,7 @@ public class CrossProductModule implements QuestionModule{
             random = new Random();
         }
 
+        // @review Use attributes, they indicate intent (@Override)
         public int next(int lower, int upper) {
             return random.nextInt(upper + 1 - lower) + lower;
         }
@@ -74,7 +78,10 @@ public class CrossProductModule implements QuestionModule{
         public String generateResult() {
             String result = new String();
 
+            // @review Use Map?
+            // @review Use of 'Magic' Numbers!
             int[] vectors = new int[3];
+            // @review Use generic type List<>
             ArrayList<String> vecNames = new ArrayList<String>();
             vecNames.add("i");
             vecNames.add("j");
@@ -84,8 +91,10 @@ public class CrossProductModule implements QuestionModule{
             vectors[1] = ((u.get(0) * v.get(2)) - (u.get(2) * v.get(0))) * -1;
             vectors[2] = ((u.get(0) * v.get(1)) - u.get(1) * v.get(0));
 
+            // @review for loop with coditional test based on index?
             for (int i = 0; i < 3; i++) {
                 if (i != 0) {
+                    // @review Eliminate conditional with formating?
                     if (vectors[i] < 0) {
                         result += " - ";
                         // Make it positive
@@ -105,6 +114,7 @@ public class CrossProductModule implements QuestionModule{
         }
     }
 
+    // @review accesibility? should be package as provided for testing only
     public CrossProductModule(IntegerGenerator generator) {
         initialise(generator);
     }
@@ -114,6 +124,7 @@ public class CrossProductModule implements QuestionModule{
     }
 
     private void initialise(IntegerGenerator integers) {
+        // @review aim for strong cohesion but low coupling!
         u = new Vector("u", dimension, integers);
         v = new Vector("v", dimension, integers);
         crossProduct = new CrossProduct(u, v);
@@ -124,6 +135,7 @@ public class CrossProductModule implements QuestionModule{
     }
 
     private void createQuestionTex() {
+        // @review String question = ""; ??
         String question = new String();
         question += "Let $ \\mathbf{u}= \\left(\\begin{array}{c} " + u.get(0) + " \\\\ " +
                 u.get(1) + "\\\\" + u.get(2) + "\\end{array} \\right)$ and $ \\mathbf{ v} =\\left(\\begin{array}{c} " + v.get(0) +
@@ -164,6 +176,7 @@ public class CrossProductModule implements QuestionModule{
         sectionTex.put(Section.ANSWER, crossProduct.generateResult());
     }
 
+    // @review Attribute!
     public String getSection(final String name) throws IllegalArgumentException {
         return sectionTex.get(Enum.valueOf(Section.class, name.toUpperCase()));
     }

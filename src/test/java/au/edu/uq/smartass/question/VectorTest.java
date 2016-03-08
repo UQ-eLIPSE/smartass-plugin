@@ -23,6 +23,7 @@ public class VectorTest {
      * Creates a predictable generator
      * Internally uses a queue for keeping track of numbers
      */
+    // @review Haven't I already seen this class?? code duplication!
     class PredictableGenerator implements IntegerGenerator {
         LinkedList<Integer> randNumbers;
 

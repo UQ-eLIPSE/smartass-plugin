@@ -15,6 +15,7 @@ public class Vector {
     private String formatName;
     private String formatDefinition;
 
+    // @review Don't store, only used in intialisation
     private IntegerGenerator integers;
     private String normalName;
     private String normalExpand;
@@ -45,6 +46,7 @@ public class Vector {
     public String toString() {
         String output = new String();
         output = "[";
+        // @review Java8 has String.join(conjunction, list)
         for (int i = 0; i < dimension; i++) {
             output += vector[i];
             if (i != dimension - 1) {
