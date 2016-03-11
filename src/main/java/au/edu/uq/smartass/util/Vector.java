@@ -1,4 +1,4 @@
-package au.edu.uq.smartass.question;
+package au.edu.uq.smartass.util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,7 @@ public class Vector {
      * @param dimension The dimension of the vector
      * @param integers The random number generator to use
      */
-    Vector(final String name, List<Integer> integers) {
+    public Vector(final String name, List<Integer> integers) {
         this.name = name;
         this.dimension = integers.size();
 
@@ -40,6 +40,28 @@ public class Vector {
         initialiseVector(numbers);
         initializeName();
         initializeNormal();
+    }
+
+    /**
+     * Gets the dimension of the vector
+     * @return the dimension of the vector
+     */
+    public int getDimension() {
+        return dimension;
+    }
+
+    /**
+     * Returns the formatted name of the vector
+     */
+    public String getFormatName() {
+        return formatName;
+    }
+
+    /**
+     * Returns the formatted definition of the vector
+     */
+    public String getFormatDefinition() {
+       return formatDefinition;
     }
 
     /**
@@ -78,7 +100,7 @@ public class Vector {
 
         // Init Tex formatted vector definition (ie u = (x))
         StringBuilder sb = new StringBuilder();
-        sb.append(formatName());
+        sb.append(formatName);
         sb.append("=");
         sb.append("\\begin{pmatrix}");
         for (int x : vector) {
@@ -91,7 +113,7 @@ public class Vector {
     /** */
     private void initializeNormal() {
         normalName = new StringBuilder()
-                .append("\\lVert").append(formatName()).append("\\rVert")
+                .append("\\lVert").append(formatName).append("\\rVert")
                 .toString()
         ;
 
@@ -105,16 +127,37 @@ public class Vector {
     }
 
     int dimension() { return dimension; }
-    double normal() { return Math.sqrt(normalSqr); }
 
-    String formatName() { return formatName; }
-    String formatDefinition() { return formatDefinition; }
+    /**
+     * Returns the normal of the vector
+     * @return the normal
+     */
+    public double normal() { return Math.sqrt(normalSqr); }
 
-    int get(final int index) { return vector[index]; }
+    /**
+     * Returns the value at the desired index
+     * @param index The index of the item
+     * @return the item at the index
+     */
+    public int get(final int index) { return vector[index]; }
 
-    String normalName() { return normalName; }
-    String normalExpand() { return normalExpand; }
-    String normalGroup() { return normalGroup; }
+    /**
+     * Returns the name of the normal
+     */
+    public String normalName() { return normalName; }
 
-    int normalSqr() { return normalSqr; }
+    /**
+     * Returns the normal expanded
+     */
+    public String normalExpand() { return normalExpand; }
+
+    /**
+     * Returns the normal group
+     */
+    public String normalGroup() { return normalGroup; }
+
+    /**
+     * Returns the normal sqr
+     */
+    public int normalSqr() { return normalSqr; }
 }

@@ -1,4 +1,4 @@
-package au.edu.uq.smartass.question;
+package au.edu.uq.smartass.util;
 
 /**
  * An integer generator. This interface allows the user to create a random number generator

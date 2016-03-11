@@ -1,6 +1,8 @@
 package au.edu.uq.smartass.question;
 
 import au.edu.uq.smartass.engine.QuestionModule;
+import au.edu.uq.smartass.util.IntegerGenerator;
+import au.edu.uq.smartass.util.Vector;
 
 import java.util.ArrayList;
 import java.util.EnumMap;
@@ -48,10 +50,10 @@ public class ScalarProductModule implements QuestionModule {
             this.u = u;
             this.v = v;
 
-            assert(u.dimension() == v.dimension());
+            assert(u.getDimension() == v.getDimension());
 
             formatName = new StringBuilder()
-                    .append(u.formatName()).append("\\cdot").append(v.formatName())
+                    .append(u.getFormatName()).append("\\cdot").append(v.getFormatName())
                     .toString()
                 ;
 
@@ -59,7 +61,7 @@ public class ScalarProductModule implements QuestionModule {
             List<String> groupdTokens = new ArrayList<>();
             int result = 0;
 
-            for (int i = 0; i < u.dimension(); ++i) {
+            for (int i = 0; i < u.getDimension(); ++i) {
                 int ui = u.get(i);
                 int vi = v.get(i);
 
@@ -125,17 +127,17 @@ public class ScalarProductModule implements QuestionModule {
     private void createQuestionTeX() {
         StringBuilder sb = new StringBuilder();
         sb
-                .append("\\[\\text{Let }").append(u.formatDefinition())
-                .append("\\text{and }").append(v.formatDefinition())
+                .append("\\[\\text{Let }").append(u.getFormatDefinition())
+                .append("\\text{and }").append(v.getFormatDefinition())
                 .append("\\text{.}\\]")
             ;
         sb.append("\\begin{enumerate}[(a)]");
         sb.append("\\item Determine $").append(uv.formatName()).append("$.");
         sb
                 .append("\\item Determine the angle in degrees (to the nearest degree) between $")
-                .append(u.formatName())
+                .append(u.getFormatName())
                 .append("$ and $")
-                .append(v.formatName())
+                .append(v.getFormatName())
                 .append("$.")
             ;
         sb.append("\\end{enumerate}");

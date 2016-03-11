@@ -1,8 +1,9 @@
 package au.edu.uq.smartass.question;
 
 import au.edu.uq.smartass.engine.QuestionModule;
+import au.edu.uq.smartass.util.IntegerGenerator;
+import au.edu.uq.smartass.util.Vector;
 
-// @review Do not import whole package.
 import java.util.List;
 import java.util.Random;
 import java.util.ArrayList;
@@ -64,9 +65,9 @@ public class CrossProductModule implements QuestionModule{
             this.u = u;
             this.v = v;
 
-            assert (u.dimension() == v.dimension());
+            assert (u.getDimension() == v.getDimension());
 
-            formatName = u.formatName() + "\\times" + v.formatName();
+            formatName = u.getFormatName() + "\\times" + v.getFormatName();
 
             List<String> expandTokens = new ArrayList<>();
             List<String> groupedTokens = new ArrayList<>();

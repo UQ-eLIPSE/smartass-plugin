@@ -1,11 +1,11 @@
 package au.edu.uq.smartass.question;
 
+import au.edu.uq.smartass.util.Vector;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -30,18 +30,18 @@ public class VectorTest {
 
     @Test
     public void testDimension() {
-        assertEquals(vector.dimension(), 3);
+        assertEquals(vector.getDimension(), 3);
     }
 
     @Test
     public void testFormatName() {
-        assertEquals(vector.formatName(), "\\mathbf{vector}");
+        assertEquals(vector.getFormatName(), "\\mathbf{vector}");
     }
 
     @Test
     public void testFormatDefinition() {
         String expected = "\\mathbf{vector}=\\begin{pmatrix}1\\\\2\\\\3\\\\\\end{pmatrix}";
-        assertEquals(vector.formatDefinition(), expected);
+        assertEquals(vector.getFormatDefinition(), expected);
     }
 
     @Test

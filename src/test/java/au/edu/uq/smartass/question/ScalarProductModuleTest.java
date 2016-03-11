@@ -1,5 +1,6 @@
 package au.edu.uq.smartass.question;
 
+import au.edu.uq.smartass.util.IntegerGenerator;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -51,15 +52,15 @@ public class ScalarProductModuleTest {
             });
 
         assertEquals(3, dot.dim);
-        assertEquals(3, dot.u.dimension());
-        assertEquals(3, dot.v.dimension());
+        assertEquals(3, dot.u.getDimension());
+        assertEquals(3, dot.v.getDimension());
 
         assertEquals(9, dot.u.get(0));
         assertEquals(-9, dot.u.get(1));
         assertEquals(3, dot.u.get(2));
 
-        assertEquals("\\mathbf{u}", dot.u.formatName());
-        assertEquals("\\mathbf{u}=\\begin{pmatrix}9\\\\-9\\\\3\\\\\\end{pmatrix}", dot.u.formatDefinition());
+        assertEquals("\\mathbf{u}", dot.u.getFormatName());
+        assertEquals("\\mathbf{u}=\\begin{pmatrix}9\\\\-9\\\\3\\\\\\end{pmatrix}", dot.u.getFormatDefinition());
         assertEquals("\\lVert\\mathbf{u}\\rVert", dot.u.normalName());
         assertEquals("\\sqrt{9^2+(-9)^2+3^2}", dot.u.normalExpand());
         assertEquals("\\sqrt{171}", dot.u.normalGroup());
@@ -70,8 +71,8 @@ public class ScalarProductModuleTest {
         assertEquals(1, dot.v.get(1));
         assertEquals(4, dot.v.get(2));
 
-        assertEquals("\\mathbf{v}", dot.v.formatName());
-        assertEquals("\\mathbf{v}=\\begin{pmatrix}2\\\\1\\\\4\\\\\\end{pmatrix}", dot.v.formatDefinition());
+        assertEquals("\\mathbf{v}", dot.v.getFormatName());
+        assertEquals("\\mathbf{v}=\\begin{pmatrix}2\\\\1\\\\4\\\\\\end{pmatrix}", dot.v.getFormatDefinition());
         assertEquals("\\lVert\\mathbf{v}\\rVert", dot.v.normalName());
         assertEquals("\\sqrt{2^2+1^2+4^2}", dot.v.normalExpand());
         assertEquals("\\sqrt{21}", dot.v.normalGroup());
