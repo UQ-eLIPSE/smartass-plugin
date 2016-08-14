@@ -310,7 +310,7 @@ public class AreaOfTriangleModule implements QuestionModule {
     private void createQuestionTeX() {
         StringBuilder sb = new StringBuilder();
         
-        sb.append("Let " + vertA.formatString() + ", " + vertB.formatString() + " and " + vertC.formatString() + " be the three vertices of a triangle. Determine the area of the triangle ABC.");
+        sb.append("Let " + vertA.formatString() + ", " + vertB.formatString() + " and " + vertC.formatString() + " be the three vertices of a triangle. Determine the area of the triangle ABC.\\\\");
 
         sectionTeX.put(Section.QUESTION, sb.toString());
     }

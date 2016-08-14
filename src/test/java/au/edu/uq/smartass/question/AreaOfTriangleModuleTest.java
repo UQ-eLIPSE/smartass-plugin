@@ -109,15 +109,31 @@ public class AreaOfTriangleModuleTest {
             }
         });
 
-        String expected = "Let A(1, 1, 1), B(4, 5, 6) and C(2, 1, 3) be the three vertices of a triangle. Determine the area of the triangle ABC.";
+        // Test the question string
+        String expected = "Let A(1, 1, 1), B(4, 5, 6) and C(2, 1, 3) be the three vertices of a triangle. Determine the area of the triangle ABC.\\\\";
         String actual = aot.getSection("question");
+        assertEquals(expected, actual);
 
+        // Test the answer string
         String actualAnswer = aot.getSection("answer");
         String expectedAnswer = "$\\frac{\\sqrt{81.0}}{2} units^2$";
         assertEquals(actualAnswer, expectedAnswer);
 
-        assertEquals(expected, actual);
-        
+        // Test the solution string
+        String expectedSolution = "\\begin{align*}Area & = \\frac{1}{2}\\|\\vec{AB} \\times \\vec{AC}|\\\\\\vec{AB} & = (3, 4, 5)\\\\\\vec{AC} & = (1, 0, 2)\\\\\\\\\\vec{AB}\\times\\vec{AC}& = \\left| \\begin{array}{crc}" +
+            "\\textbf{i} & \\textbf{j} & \\textbf{k} \\\\" +
+            "3&4&5 \\\\" +
+            "1&0&2\\end{array} \\right|=\\textbf{i} \\left| \\begin{array}{rc}" +
+            "4&5 \\\\" +
+            "0&2 \\end{array} \\right|" +
+            "-\\textbf{j} \\left| \\begin{array}{cc}" +
+            "3&5 \\\\" +
+            "1&2 \\end{array} \\right|" +
+            "+\\textbf{k} \\left| \\begin{array}{cr}" +
+            "3&4 \\\\" +
+            "1&0 \\end{array} \\right|" +
+            "=8\\textbf{i} - 1\\textbf{j} - 4\\textbf{k}\\\\|\\vec{AB} \\times \\vec{AC}| & = \\sqrt{8^2 + 1^2 + 4^2}\\\\&= \\sqrt{81.0}\\\\Therefore\\ area & = \\frac{1}{2} \\times \\sqrt{81.0}\\\\ & = \\frac{\\sqrt{81.0}}{2} units^2\\\\\\end{align*}";
+        String actualSolution = aot.getSection("solution");
 
     }
 
