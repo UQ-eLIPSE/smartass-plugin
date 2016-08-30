@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Random;
 
 /**
- * P Series Product Module.
+ * Geometric Sequence Module.
  *
  * Required LaTeX packages (should be inculed in 'global' smartass.tex):
  *      \\usepackage{amsmath}
@@ -22,7 +22,7 @@ public class GeomSeqSumModule implements QuestionModule {
     /** Lookup TeX string. */
     private Map<Section,String> sectionTeX = new EnumMap<>(Section.class);
 
-    private int term;
+    private int n;
     private int a;
     private int r;
 
@@ -60,22 +60,31 @@ public class GeomSeqSumModule implements QuestionModule {
     }
 
     private void createQuestionTeX() {
-        StringBuilder sb = new StringBuilder();
-        sectionTeX.put(Section.QUESTION, sb.toString());
+        String sb = "";
+        sb += "Let $" + this.seq[0] + ", " + this.seq[1] + ", " + this.seq[2] + "$ be a geometric sequence. What is the sume of the first " + this.n + " terms?";
+
+        sectionTeX.put(Section.QUESTION, sb);
     }
 
     private void createSolutionTeX() {
-        StringBuilder sb = new StringBuilder();
+        String sb = "";
         
+        sb += "$S_n=\\dfrac{a(r^n-1)}{r-1}$, where $r=" + this.seq[1] + 
+            "\\div" + this.seq[0] + "=" + this.r + "$ and $a=" + this.a + "$.\\\\" +
+            "$S_{" + this.n + "}=\\dfrac{" + this.a + "(" + this.r + "^{" + this.n + "-1})}{" + this.n + "-1}$\\\\" +
+            "$=\\dfrac{" + this.a + "\\cdot" + this.r + "^{" + (this.n-1) + "}}{" + (this.n-1) + "}$\\\\" +
+            "$\\approx " + (this.a * Math.pow(this.r, this.n-1) / this.n-1) + "$";
 
-        sectionTeX.put(Section.SOLUTION, sb.toString());
+
+        sectionTeX.put(Section.SOLUTION, sb);
     }
 
     private void createAnswerTeX() {
-        StringBuilder sb = new StringBuilder();
-        
+        String sb = "";
 
-        sectionTeX.put(Section.ANSWER, sb.toString());
+        sb += "$\\approx " + (this.a * Math.pow(this.r, this.n-1) / this.n-1) + "$";
+
+        sectionTeX.put(Section.ANSWER, sb);
     }
 
     /**

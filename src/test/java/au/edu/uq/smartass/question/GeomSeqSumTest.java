@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 /**
  *
  */
-public class PSeriesModuleTest {
+public class GeomSeqSumTest {
 
     @Before
     public void setUp() throws Exception {
@@ -42,16 +42,10 @@ public class PSeriesModuleTest {
 
     @Test
     public void testGetSection() throws Exception {
-        PSeriesModule p = new PSeriesModule(1);
+        GeomSeqSumModule geom = new GeomSeqSumModule(2, 3, 20);
 
-        String expected = "Does $\\sum_{n=1}^{\\infty} \\frac{1}{n^{\\frac{1}{4}}}$ converge? Explain.\\\\";
-        String actual = p.getSection("question");
-        assertEquals(expected, actual);
-
-
-        String expectedSolution = "No, it doesn't, by the p-series test. Since p $<$ 1, the series will diverge";
-        String actualSolution = p.getSection("solution");
-        assertEquals(expectedSolution, actualSolution);
+        System.out.println(geom.getSection("solution"));
+        //assertTrue(false);
     }
 
     @Test
