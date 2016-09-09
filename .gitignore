@@ -31,3 +31,4 @@ smartass-plugin.iml
 .idea/
 src/main/java/au/edu/uq/smartass/engine/
 libs/
+.DS_Store
