@@ -21,26 +21,27 @@ public class ArithmeticSequenceSumOfNTermsModule implements QuestionModule {
 
     public int numA, numB, numC, diff, term, result;
 
+    /** Constructor used for testing only */
     public ArithmeticSequenceSumOfNTermsModule(int numA, int numB, int term) {
         this.numA = numA;
         this.numB = numB;
         this.term = term;
         this.diff = this.numB - this.numA;
-        setNumC();
+        this.setNumC();
         this.setSolution();
-        createQuestionTex();
-        createSolutionTex();
+        this.createQuestionTex();
+        this.createSolutionTex();
     }
 
     public ArithmeticSequenceSumOfNTermsModule() {
-        setNumA(2, 5);
-        setDiff();
-        setNumB();
-        setNumC();
-        setTerm(this.numB, 50);
-        setSolution();
-        createQuestionTex();
-        createSolutionTex();
+        this.setNumA(2, 5);
+        this.setDiff();
+        this.setNumB();
+        this.setNumC();
+        this.setTerm(this.numB, 50);
+        this.setSolution();
+        this.createQuestionTex();
+        this.createSolutionTex();
     }
 
     private void setNumA(int min, int max) {

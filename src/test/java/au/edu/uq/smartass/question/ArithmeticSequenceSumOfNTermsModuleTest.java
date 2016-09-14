@@ -47,7 +47,7 @@ public class ArithmeticSequenceSumOfNTermsModuleTest {
     @Test
     public void testGetSectionQuestion() {
         ArithmeticSequenceSumOfNTermsModule a = new ArithmeticSequenceSumOfNTermsModule(2, 6, 40);
-        String expected = "Let $2,6,10$ be an arithmetic sequence. Determine the sum of the first 40 terms in the sequence.\\\\";
+        String expected = "Let $2,6,10$ be an arithmetic sequence. Determine the sum of the first $40$ terms in the sequence.\\\\";
         String actual = a.getSection("question");
         assertEquals(expected, actual);
     }

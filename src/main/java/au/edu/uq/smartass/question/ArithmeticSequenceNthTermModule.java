@@ -23,7 +23,7 @@ public class ArithmeticSequenceNthTermModule implements QuestionModule {
 
     public int numA, numB, numC, diff, term, result;
 
-    // Constructor used for testing only
+    /** Constructor used for testing only */
     public ArithmeticSequenceNthTermModule(int numA, int numB, int term) {
         this.numA = numA;
         this.numB = numB;
