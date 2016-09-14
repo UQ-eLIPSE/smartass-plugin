@@ -40,7 +40,7 @@ public class ArithmeticSequenceNthTermModule implements QuestionModule {
         setDiff();
         setNumB();
         setNumC();
-        setTerm(this.numB, 50);
+        setTerm(this.numC, 50);
         setSolution();
         createQuestionTeX();
         createSolutionTeX();

@@ -38,7 +38,7 @@ public class ArithmeticSequenceSumOfNTermsModule implements QuestionModule {
         this.setDiff();
         this.setNumB();
         this.setNumC();
-        this.setTerm(this.numB, 50);
+        this.setTerm(this.numC, 50);
         this.setSolution();
         this.createQuestionTex();
         this.createSolutionTex();
