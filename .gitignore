@@ -32,3 +32,5 @@ smartass-plugin.iml
 src/main/java/au/edu/uq/smartass/engine/
 libs/
 .DS_Store
+question_output.tex
+solution_output.tex

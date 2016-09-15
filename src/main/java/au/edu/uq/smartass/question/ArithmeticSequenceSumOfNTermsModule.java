@@ -27,50 +27,50 @@ public class ArithmeticSequenceSumOfNTermsModule implements QuestionModule {
         this.numB = numB;
         this.term = term;
         this.diff = this.numB - this.numA;
-        this.setNumC();
-        this.setSolution();
-        this.createQuestionTex();
-        this.createSolutionTex();
+        this.numC = setNumC(this.numB, this.diff);
+        this.result = setSolution(this.term, this.numA, this.diff);
+        createQuestionTex(this.numA, this.numB, this.numC, this.term);
+        createSolutionTex(this.numA, this.numB, this.diff, this.term, this.result);
     }
 
     public ArithmeticSequenceSumOfNTermsModule() {
-        this.setNumA(2, 5);
-        this.setDiff();
-        this.setNumB();
-        this.setNumC();
-        this.setTerm(this.numC, 50);
-        this.setSolution();
-        this.createQuestionTex();
-        this.createSolutionTex();
+        this.numA = setNumA(2, 5);
+        this.diff = setDiff();
+        this.numB = setNumB(this.numA, this.diff);
+        this.numC = setNumC(this.numB, this.diff);
+        this.term = setTerm(this.numC, 50);
+        this.result = setSolution(this.term, this.numA, this.diff);
+        createQuestionTex(this.numA, this.numB, this.numC, this.term);
+        createSolutionTex(this.numA, this.numB, this.diff, this.term, this.result);
     }
 
-    private void setNumA(int min, int max) {
-        this.numA = random.nextInt(max + 1 - min) + min;
+    private int setNumA(int min, int max) {
+        return random.nextInt(max + 1 - min) + min;
     }
 
-    private void setNumB() {
-        this.numB = this.numA + this.diff;
+    private int setNumB(int numA, int diff) {
+        return numA + diff;
     }
 
-    private void setNumC() {
-        this.numC = this.numB + this.diff;
+    private int setNumC(int numB, int diff) {
+        return numB + diff;
     }
 
-    private void setDiff() {
-        this.diff = random.nextInt(10 + 1 + 10) - 10;
+    private int setDiff() {
+        return random.nextInt(10 + 1 + 10) - 10;
     }
 
-    private void setTerm(int min, int max) {
-        this.term = random.nextInt(max +1 - min) + min;
+    private int setTerm(int min, int max) {
+        return random.nextInt(max +1 - min) + min;
     }
 
-    private void setSolution() {
-        this.result = this.term / 2 * (2 * this.numA + (this.term - 1) * this.diff);
+    private int setSolution(int term, int numA, int diff) {
+        return this.term / 2 * (2 * this.numA + (this.term - 1) * this.diff);
     }
 
-    private void createQuestionTex() {
+    private void createQuestionTex(int numA, int numB, int numC, int term) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Let $" + this.numA + "," + this.numB + "," + this.numC + "$ be an arithmetic sequence. Determine the sum of the first $" + this.term + "$ terms in the sequence.\\\\");
+        sb.append("Let $" + numA + "," + numB + "," + numC + "$ be an arithmetic sequence. Determine the sum of the first $" + term + "$ terms in the sequence.\\\\");
         sectionTeX.put(Section.QUESTION, sb.toString());
         try {
             writeTexFile("question_output.tex", sb.toString());
@@ -79,12 +79,12 @@ public class ArithmeticSequenceSumOfNTermsModule implements QuestionModule {
         }
     }
 
-    private void createSolutionTex() {
+    private void createSolutionTex(int numA, int numB, int diff, int term, int result) {
         StringBuilder sb = new StringBuilder();
-        sb.append("$S_n=\\dfrac{n}{2}(2a+(n-1)d)$, where $d=" + this.numB + "-" + this.numA + "=" + this.diff + "$ and $a=" + this.numA + "$.\\\\" )
-                .append("Therefore $S_{" + this.term + "}=\\dfrac{" + this.term + "}{2}(2\\cdot " + this.numA + " +(" + this.term + "-1)\\cdot " + this.diff + ")$\\\\" )
-                .append("$=" + (this.term / 2) + "(" + (2 * this.numA) + "+" + (this.term - 1) + " \\cdot" + this.diff + ")$\\\\")
-                .append("$=" + this.result + "$");
+        sb.append("$S_n=\\dfrac{n}{2}(2a+(n-1)d)$, where $d=" + numB + "-" + numA + "=" + diff + "$ and $a=" + numA + "$.\\\\" )
+                .append("Therefore $S_{" + term + "}=\\dfrac{" + term + "}{2}(2\\cdot " + numA + " +(" + term + "-1)\\cdot " + diff + ")$\\\\" )
+                .append("$=" + (term / 2) + "(" + (2 * numA) + "+" + (term - 1) + " \\cdot" + diff + ")$\\\\")
+                .append("$=" + result + "$");
         sectionTeX.put(Section.SOLUTION, sb.toString());
         try {
             writeTexFile("solution_output.tex", sb.toString());
