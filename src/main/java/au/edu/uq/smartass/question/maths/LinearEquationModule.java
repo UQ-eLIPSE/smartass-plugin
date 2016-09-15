@@ -49,7 +49,7 @@ public class LinearEquationModule implements QuestionModule {
          * @param       nums    integer array of upto '3' values.
          * @return
          */
-        @SuppressWarnings("unchecked")
+        @SuppressWarnings({"rawtypes","unchecked"})
 	public ArrayList<MathsOp>[] compose(int[] nums) {
 
                 ArrayList[] ops = new ArrayList[2];
