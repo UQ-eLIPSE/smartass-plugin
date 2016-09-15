@@ -29,54 +29,56 @@ public class ArithmeticSequenceNthTermModule implements QuestionModule {
         this.numB = numB;
         this.term = term;
         this.diff = this.numB - this.numA;
-        setNumC();
-        setSolution();
-        createQuestionTeX();
-        createSolutionTeX();
+        this.numC = setNumC(this.numB, this.diff);
+        this.result = setSolution(this.numA, this.term, this.diff);
+
+        createQuestionTeX(this.term, this.numA, this.numB, this.numC);
+        createSolutionTeX(this.numA, this.numB, this.diff, this.term, this.result);
     }
 
     public ArithmeticSequenceNthTermModule() {
-        setNumA(2, 2);
-        setDiff();
-        setNumB();
-        setNumC();
-        setTerm(this.numC, 50);
-        setSolution();
-        createQuestionTeX();
-        createSolutionTeX();
+        this.numA =setNumA(2, 2);
+        this.diff = setDiff();
+        this.numB = setNumB(this.numA, this.diff);
+        this.numC = setNumC(this.numB, this.diff);
+        this.term = setTerm(this.numC, 50);
+        this.result = setSolution(this.numA, this.term, this.diff);
+
+        createQuestionTeX(this.term, this.numA, this.numB, this.numC);
+        createSolutionTeX(this.numA, this.numB, this.diff, this.term, this.result);
     }
 
-    private void setNumA(int min, int max) {
-        this.numA = random.nextInt(max + 1 - min) + min;
+    private int setNumA(int min, int max) {
+        return random.nextInt(max + 1 - min) + min;
     }
 
-    private void setNumB() {
-        this.numB = this.numA + this.diff;
+    private int setNumB(int numA, int diff) {
+        return numA + diff;
     }
 
-    private void setNumC() {
-        this.numC = this.numB + this.diff;
+    private int setNumC(int numB, int diff) {
+        return numB + diff;
     }
 
-    private void setDiff() {
-        this.diff = random.nextInt(10 + 1 + 10) - 10;
+    private int setDiff() {
+        return random.nextInt(10 + 1 + 10) - 10;
     }
 
-    private void setTerm(int min, int max) {
-        this.term = random.nextInt(max +1 - min) + min;
+    private int setTerm(int min, int max) {
+        return random.nextInt(max +1 - min) + min;
     }
 
-    private void setSolution() {
-        this.result = this.numA + (this.term -1) * this.diff;
+    private int setSolution(int numA, int term, int diff) {
+        return numA + (term -1) * diff;
     }
 
-    private void createQuestionTeX() {
-        String ord = getOrdinal(this.term);
+    private void createQuestionTeX(int term, int numA, int numB, int numC) {
+        String ord = getOrdinal(term);
         StringBuilder sb = new StringBuilder();
         sb.append("Let ");
-        sb.append("$" + this.numA + "," + this.numB + "," + this.numC + "$");
+        sb.append("$" + numA + "," + numB + "," + numC + "$");
         sb.append(" be an arithmetic sequence. Determine the ");
-        sb.append("$" + this.term + "$");
+        sb.append("$" + term + "$");
         sb.append(ord + " term in the sequence.\\\\");
         sectionTeX.put(Section.QUESTION, sb.toString());
         try {
@@ -86,14 +88,14 @@ public class ArithmeticSequenceNthTermModule implements QuestionModule {
         }
     }
 
-    private void createSolutionTeX() {
+    private void createSolutionTeX(int numA, int numB, int diff, int term, int result) {
         StringBuilder sb = new StringBuilder();
         sb.append("$a_n=a+(n-1)d$, where $d=");
-        sb.append(this.numB + "-" + this.numA + "=" + this.diff + "$ and $a=" + this.numA + "$.\\\\");
-        sb.append("Therefore $a_{" + this.term + "}=" + this.numA);
-        sb.append("+(" + this.term + "-1)\\cdot " + this.diff + "$\\\\");
-        sb.append("$=" + this.numA + "+" + (this.term - 1) + " \\cdot" + this.diff + "$\\\\");
-        sb.append("$=" + this.result + "$");
+        sb.append(numB + "-" + numA + "=" + diff + "$ and $a=" + numA + "$.\\\\");
+        sb.append("Therefore $a_{" + term + "}=" + numA);
+        sb.append("+(" + term + "-1)\\cdot " + diff + "$\\\\");
+        sb.append("$=" + numA + "+" + (term - 1) + " \\cdot" + diff + "$\\\\");
+        sb.append("$=" + result + "$");
         sectionTeX.put(Section.SOLUTION, sb.toString());
         try {
             writeTexFile("solution_output.tex", sb.toString());
