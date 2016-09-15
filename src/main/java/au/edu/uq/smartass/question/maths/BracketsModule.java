@@ -125,7 +125,7 @@ public class BracketsModule implements QuestionModule {
 	private String composeSolution(LinkedList <MathsOp>solution) {
 		String res = solution.getFirst().toString();
 		System.out.println("cs111");
-		ListIterator it = solution.listIterator(0);
+		ListIterator<MathsOp> it = solution.listIterator(0);
 		it.next();
 		while(it.hasNext()) 
 			res = res + " = " + it.next().toString();

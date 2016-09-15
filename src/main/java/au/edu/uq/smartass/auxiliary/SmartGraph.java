@@ -340,8 +340,8 @@ public class SmartGraph {
      *                  array of strings
      * @return String[3][]        lines for outputting parts of 2 sets
      */
-    @SuppressWarnings("unchecked")
-    public static String[][] break2Sets(HashSet[] sets, int[] shares) {
+    @SuppressWarnings({"rawtypes","unchecked"})
+    public static String[][] break2Sets(Set[] sets, int[] shares) {
         List vs;
         int sum = 0;
         int[] totals = new int[shares.length - 1];

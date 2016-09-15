@@ -21,5 +21,7 @@ package au.edu.uq.smartass.maths;
 import java.util.AbstractSet; 
 
 public interface SetCalculable {
+
+        @SuppressWarnings({"rawtypes"})
 	public AbstractSet calculate();    
 }
