@@ -1,81 +1,86 @@
 package au.edu.uq.smartass.question;
 
 import au.edu.uq.smartass.engine.QuestionModule;
-
 import java.util.EnumMap;
 import java.util.Map;
-import java.util.Random;
+
+import static java.lang.String.format;
 
 /**
- * Created by uqamoon1 on 15/09/2016.
+ * Creates a randomised question, solution and answer
+ * Determine the nth term in a Geometric Sequence.
  */
 public class GeometricSequenceTermsToNModule implements QuestionModule {
 
     /** Define supported TeX Sections. */
-    public enum Section { QUESTION, SOLUTION, ANSWER }
+    enum Section { QUESTION, SOLUTION, ANSWER }
 
     /** Lookup TeX string. */
-    private Map<ArithmeticSequenceSumOfNTermsModule.Section,String> sectionTeX = new EnumMap<>(ArithmeticSequenceSumOfNTermsModule.Section.class);
-    private Random random = new Random();
+    private Map<GeometricSequenceTermsToNModule.Section,String> sectionTeX = new EnumMap<>(GeometricSequenceTermsToNModule.Section.class);
 
-    public int numA, numB, numC, term, ratio, result;
+    int numA, numB, numC, term, ratio, result;
 
-    public GeometricSequenceTermsToNModule( int numA, int numB, int term) {
+    /**
+     * Constructor for GeometricSequenceTermsToNModule takes three parameters.
+     * @param numA
+     * @param ratio
+     * @param term
+     */
+    GeometricSequenceTermsToNModule( int numA, int ratio, int term) {
+        this.ratio = ratio;
         this.numA = numA;
-        this.numB = numB;
-        this.term = term;
-        this.ratio = this.numB / this.numA;
+        this.numB = numA * ratio;
         this.numC = this.numB * this.ratio;
-        this.result = setSolution();
+        this.term = term;
+        this.result = (int)(this.numA * Math.pow(this.numB / this.numA, this.term - 1));
+
+        createQuestionTeX(this.term, this.numA, this.numB, this.numC);
+        createSolutionTeX(this.numA, this.numB, this.ratio, this.term, this.result);
     }
 
+    /**
+     * Publicly accessible constructor takes no parameters.
+     * Generates random values for numA, ratio and term.
+     * Passes random values to secondary constructor.
+     */
     public GeometricSequenceTermsToNModule() {
-        this.numA = setNumA(2, 2);
-        this.ratio = setRatio();
-        this.numB = setNumB();
-        this.numC = setNumC();
-        this.term = setTerm(this.numC, 50);
-        this.result = setSolution();
-
+        this(
+                new QUtil().generatePosInt(2,2),
+                new QUtil().generateNegToPosInt(-5, 5),
+                new QUtil().generatePosInt(5, 50)
+        );
     }
 
-    private int setNumA(int min, int max) {
-        return random.nextInt(max + 1 - min) + min;
+    /**
+     * Creates the LaTex string for the Question Section.
+     * @param term
+     * @param numA
+     * @param numB
+     * @param numC
+     */
+    private void createQuestionTeX(int term, int numA, int numB, int numC) {
+        String ord = new QUtil().getOrdinal(term);
+        String sb = "Let ";
+        sb += format("$%d,%d,%d$", numA, numB, numC);
+        sb += format(" be a geometric sequence. Determine the ");
+        sb += format("$%d$", term);
+        sb += format("%s term in the sequence.\\\\", ord);
+        sectionTeX.put(Section.QUESTION, sb.toString());
     }
 
-    private int setNumB() {
-        return this.numA + this.ratio;
-    }
-
-    private int setNumC() {
-        return this.numB + this.ratio;
-    }
-
-    private int setRatio() {
-        return random.nextInt(5 + 1 + 5) - 5;
-    }
-
-    private int setTerm(int min, int max) {
-        return random.nextInt(max +1 - min) + min;
-    }
-
-    private int setSolution() {
-        // (a, b, n) => a * Math.pow(b / a, n - 1);
-       return (int)(this.numA * Math.pow(this.numB / this.numA, this.term - 1));
-    }
-
-    public String getOrdinal(int t) {
-        String ord = String.valueOf(t);
-        if (ord.endsWith("1") && !ord.endsWith("11")) {
-            return "st";
-        }
-        if (ord.endsWith("2") && !ord.endsWith("12")) {
-            return "nd";
-        }
-        if (ord.endsWith("3") && !ord.endsWith("13")) {
-            return "rd";
-        }
-        return "th";
+    /**
+     * Creates the LaTeX string for the Solution Section.
+     * @param numA
+     * @param numB
+     * @param ratio
+     * @param term
+     * @param result
+     */
+    private void createSolutionTeX(int numA, int numB, int ratio, int term, int result) {
+        String sb = format("$a_n=ar^{n-1}$, where $r=%2$d\\div%1$d=%3$d$ and $a=%1$d$.\\\\", numA, numB, ratio);
+        sb += format("so $a_{%3$d}=%1$d\\cdot %2$d^{%4$d}$\\\\", numA, ratio, term, term - 1);
+        sb += format("$=%d$", result);
+        sectionTeX.put(Section.SOLUTION, sb.toString());
     }
 
     /**
@@ -86,7 +91,7 @@ public class GeometricSequenceTermsToNModule implements QuestionModule {
      * @throws IllegalArgumentException if the given name does not translate to a valid section.
      */
     @Override public String getSection(final String name) throws IllegalArgumentException {
-        return sectionTeX.get(Enum.valueOf(ArithmeticSequenceSumOfNTermsModule.Section.class, name.toUpperCase()));
+        return sectionTeX.get(Enum.valueOf(GeometricSequenceTermsToNModule.Section.class, name.toUpperCase()));
     }
 
 }
