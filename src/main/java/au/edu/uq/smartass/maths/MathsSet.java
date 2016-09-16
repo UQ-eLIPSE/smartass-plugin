@@ -24,6 +24,7 @@ import java.util.*;
 *
 * @version 1.0 10.01.2007
 */
+@SuppressWarnings({"rawtypes"}) 
 public class MathsSet extends SetOp implements SetCalculable {
 	protected HashSet set;
 	protected String name;

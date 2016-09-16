@@ -164,11 +164,11 @@ protected int[][] simplifyPolynom(int[] coefs, int[] powers){
 	for (int i=0; i<powers.length; i++)
 		setOfPowers.add(new Integer(powers[i]));
 	int[][] res=new int[2][setOfPowers.size()];
-	Iterator itr = setOfPowers.iterator();
+	Iterator<Integer> itr = setOfPowers.iterator();
 	int k=res[0].length;
     while(itr.hasNext()){
     	k--;
-    	res[0][k]=((Integer)itr.next()).intValue();
+    	res[0][k]=(itr.next()).intValue();
     }
     for (int i=0; i<res[0].length; i++)
     	for (int j=0; j<coefs.length; j++)

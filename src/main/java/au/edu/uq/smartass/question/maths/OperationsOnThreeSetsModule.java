@@ -217,14 +217,14 @@ public class OperationsOnThreeSetsModule implements QuestionModule{
          *                       name1, name2, name3, {el, el, el ... el},{el, el, el ... el},{el, el, el ... el}
          *		     quotation marks are not allowed 
          */	
-        @SuppressWarnings("unchecked")
+        @SuppressWarnings({"rawtypes","unchecked"})
         protected void generate(String[] sets) {
                 if (sets.length<6) {
                         generate();
                         return;
                 }
-                ListIterator iter;
-                Vector[] stringSets = new Vector[3];	      
+                ListIterator<String> iter;
+                Vector<String>[] stringSets = new Vector[3];
                 String tempStr;
 
                 int l=0;

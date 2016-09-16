@@ -134,6 +134,7 @@ public class IntersectionOfTwoSetsModule implements QuestionModule{
  */
  
 // Generates sets
+@SuppressWarnings({"rawtypes"})
  protected void generate() {
  	            int size;
  	            String name1, name2;
@@ -164,12 +165,13 @@ public class IntersectionOfTwoSetsModule implements QuestionModule{
  * @param      sets   Sets to intersect in format name1, name2, {el, el, el ... el},{el, el, el ... el}
  *					  quotation marks are not allowed 
  */	
+@SuppressWarnings({"rawtypes"})
 protected void generate(String[] sets) {
 	            if (sets.length<4) {
 	            	generate();
 	            	return;
 	            }
-	            ListIterator iter;
+	            ListIterator<String> iter;
 	            Vector <String> firstSet=new Vector<String>();
 	            Vector <String> secondSet=new Vector<String>();
 	            boolean first=true;

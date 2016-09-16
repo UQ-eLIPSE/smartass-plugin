@@ -76,7 +76,7 @@ public SqrtModule(String[] param) {
 	
 	private String composeSolution() {  
 		String res = solution.getFirst().toString();
-		ListIterator it = solution.listIterator(0);
+		ListIterator<MathsOp> it = solution.listIterator(0);
 		it.next();
 		int endLineFlag=0;
 		while(it.hasNext()) 
