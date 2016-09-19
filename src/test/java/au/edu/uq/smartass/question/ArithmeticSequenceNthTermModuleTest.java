@@ -15,7 +15,15 @@ import static org.junit.Assert.*;
  */
 public class ArithmeticSequenceNthTermModuleTest {
 
+    /**
+     * Create a global instance of ArithmeticSequenceNTermsModule using known values,
+     * provides a known output to test against.
+     */
     ArithmeticSequenceNthTermModule a = new ArithmeticSequenceNthTermModule(2, 4, 40);
+
+    /**
+     * Create a global instance of ArithmeticSequenceSumOfNTermsModule using random values.
+     */
     ArithmeticSequenceNthTermModule b = new ArithmeticSequenceNthTermModule();  // Create an instance of ArithmeticSequenceNthModule to get random values.
 
     int numA = b.numA,
@@ -32,7 +40,10 @@ public class ArithmeticSequenceNthTermModuleTest {
 
     }
 
-
+    /**
+     * Test to ensure a constructor exists and is accessible.
+     * @throws Exception
+     */
     @Test
     public void testArithmeticSequenceNthTermModule() throws Exception {
         try {
@@ -44,6 +55,9 @@ public class ArithmeticSequenceNthTermModuleTest {
         }
     }
 
+    /**
+     * Test the generated properties against known values.
+     */
     @Test
     public void testGeneratedProperties() {
         assertEquals(6, a.numB);
@@ -51,6 +65,9 @@ public class ArithmeticSequenceNthTermModuleTest {
         assertEquals(158, a.result);
     }
 
+    /**
+     * Test to compare the expected "Question" LaTeX output against a known string using known values.
+     */
     @Test
     public void testGetSectionQuestion() {
         String expected = "Let $2,6,10$ be an arithmetic sequence. Determine the $40$th term in the sequence.\\\\";
@@ -58,6 +75,9 @@ public class ArithmeticSequenceNthTermModuleTest {
         assertEquals(expected, actual);
     }
 
+    /**
+     * Test to compare the expected "Solution" LaTeX output against a known string using known values.
+     */
     @Test
     public void testGetSectionSolution() {
         String expected = "$a_n=a+(n-1)d$, where $d=6-2=4$ and $a=2$.\\\\Therefore $a_{40}=2+(40-1)\\cdot 4$\\\\$=2+39 \\cdot4$\\\\$=158$";
@@ -65,6 +85,9 @@ public class ArithmeticSequenceNthTermModuleTest {
         assertEquals(expected, actual);
     }
 
+    /**
+     * Test to compare the expected "Answer" LaTeX output against a known string using known values.
+     */
     @Test
     public void testGetSectionAnswer() {
         String expected = "$=158$";
@@ -72,6 +95,9 @@ public class ArithmeticSequenceNthTermModuleTest {
         assertEquals(expected, actual);
     }
 
+    /**
+     * Test to compare the expected "Question" LaTeX output against an expected string using random values.
+     */
     @Test
     public void testRandomIntsQuestion() {
         ArithmeticSequenceNthTermModule c = new ArithmeticSequenceNthTermModule(numA, diff, term);
@@ -84,6 +110,9 @@ public class ArithmeticSequenceNthTermModuleTest {
         }
     }
 
+    /**
+     * Test to compare the expected "Solution" LaTeX output against an expected string using random values.
+     */
     @Test
     public void testRandomIntsSolution() {
         ArithmeticSequenceNthTermModule c = new ArithmeticSequenceNthTermModule(numA, diff, term);
@@ -96,6 +125,9 @@ public class ArithmeticSequenceNthTermModuleTest {
         }
     }
 
+    /**
+     * Test to compare the expected "Answer" LaTeX output against an expected string using random values.
+     */
     @Test
     public void testRandomIntAnswer() {
         ArithmeticSequenceNthTermModule c = new ArithmeticSequenceNthTermModule(numA, diff, term);
