@@ -6,7 +6,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.EnumMap;
 import java.util.Map;
-import java.util.Random;
+
+import static java.lang.String.format;
 
 /**
  * Created by uqamoon1 on 13/09/2016.
@@ -17,60 +18,32 @@ public class ArithmeticSequenceSumOfNTermsModule implements QuestionModule {
 
     /** Lookup TeX string. */
     private Map<Section,String> sectionTeX = new EnumMap<>(Section.class);
-    private Random random = new Random();
 
     public int numA, numB, numC, diff, term, result;
 
     /** Constructor used for testing only */
-    public ArithmeticSequenceSumOfNTermsModule(int numA, int numB, int term) {
+    ArithmeticSequenceSumOfNTermsModule(int numA, int diff, int term) {
         this.numA = numA;
-        this.numB = numB;
+        this.diff = diff;
         this.term = term;
-        this.diff = this.numB - this.numA;
-        this.numC = setNumC(this.numB, this.diff);
-        this.result = setSolution(this.term, this.numA, this.diff);
+        this.numB = numA + diff;
+        this.numC = this.numB + diff;
+        this.result = term / 2 * (2 * numA + (term - 1) * diff);
+
         createQuestionTex(this.numA, this.numB, this.numC, this.term);
         createSolutionTex(this.numA, this.numB, this.diff, this.term, this.result);
     }
 
     public ArithmeticSequenceSumOfNTermsModule() {
-        this.numA = setNumA(2, 5);
-        this.diff = setDiff();
-        this.numB = setNumB(this.numA, this.diff);
-        this.numC = setNumC(this.numB, this.diff);
-        this.term = setTerm(this.numC, 50);
-        this.result = setSolution(this.term, this.numA, this.diff);
-        createQuestionTex(this.numA, this.numB, this.numC, this.term);
-        createSolutionTex(this.numA, this.numB, this.diff, this.term, this.result);
-    }
-
-    private int setNumA(int min, int max) {
-        return random.nextInt(max + 1 - min) + min;
-    }
-
-    private int setNumB(int numA, int diff) {
-        return numA + diff;
-    }
-
-    private int setNumC(int numB, int diff) {
-        return numB + diff;
-    }
-
-    private int setDiff() {
-        return random.nextInt(10 + 1 + 10) - 10;
-    }
-
-    private int setTerm(int min, int max) {
-        return random.nextInt(max +1 - min) + min;
-    }
-
-    private int setSolution(int term, int numA, int diff) {
-        return this.term / 2 * (2 * this.numA + (this.term - 1) * this.diff);
+        this(
+                new QUtil().generatePosInt(2,2),
+                new QUtil().generateNegToPosInt(-10, 10),
+                new QUtil().generatePosInt(5, 50)
+        );
     }
 
     private void createQuestionTex(int numA, int numB, int numC, int term) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Let $" + numA + "," + numB + "," + numC + "$ be an arithmetic sequence. Determine the sum of the first $" + term + "$ terms in the sequence.\\\\");
+        String sb = format("Let $%1$d,%2$d,%3$d$ be an arithmetic sequence. Determine the sum of the first $%4$d$ terms in the sequence.\\\\", numA, numB, numC, term);
         sectionTeX.put(Section.QUESTION, sb.toString());
         try {
             writeTexFile("question_output.tex", sb.toString());
@@ -80,11 +53,10 @@ public class ArithmeticSequenceSumOfNTermsModule implements QuestionModule {
     }
 
     private void createSolutionTex(int numA, int numB, int diff, int term, int result) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("$S_n=\\dfrac{n}{2}(2a+(n-1)d)$, where $d=" + numB + "-" + numA + "=" + diff + "$ and $a=" + numA + "$.\\\\" )
-                .append("Therefore $S_{" + term + "}=\\dfrac{" + term + "}{2}(2\\cdot " + numA + " +(" + term + "-1)\\cdot " + diff + ")$\\\\" )
-                .append("$=" + (term / 2) + "(" + (2 * numA) + "+" + (term - 1) + " \\cdot" + diff + ")$\\\\")
-                .append("$=" + result + "$");
+        String sb = format("$S_n=\\dfrac{n}{2}(2a+(n-1)d)$, where $d=%2$d-%1$d=%3$d$ and $a=%1$d$.\\\\", numA, numB, diff );
+                sb += format("Therefore $S_{%2$d}=\\dfrac{%2$d}{2}(2\\cdot %1$d +(%2$d-1)\\cdot %3$d)$\\\\", numA, term, diff );
+                sb += format("$=%2$d(%1$d+%3$d \\cdot%4$d)$\\\\", 2 * numA, term / 2, term - 1, diff);
+                sb += format("$=%d$", result);
         sectionTeX.put(Section.SOLUTION, sb.toString());
         try {
             writeTexFile("solution_output.tex", sb.toString());
