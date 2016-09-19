@@ -34,3 +34,4 @@ libs/
 .DS_Store
 question_output.tex
 solution_output.tex
+answer_output.text
