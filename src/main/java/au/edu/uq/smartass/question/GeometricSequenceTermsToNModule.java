@@ -22,9 +22,9 @@ public class GeometricSequenceTermsToNModule implements QuestionModule {
 
     /**
      * Constructor for GeometricSequenceTermsToNModule takes three parameters.
-     * @param numA
-     * @param ratio
-     * @param term
+     * @param numA The first number in the sequence.
+     * @param ratio The ratio between each number within the sequence.
+     * @param term The term for which to find the value.
      */
     GeometricSequenceTermsToNModule( int numA, int ratio, int term) {
         this.ratio = ratio;
@@ -34,8 +34,9 @@ public class GeometricSequenceTermsToNModule implements QuestionModule {
         this.term = term;
         this.result = (int)(this.numA * Math.pow(this.numB / this.numA, this.term - 1));
 
-        createQuestionTeX(this.term, this.numA, this.numB, this.numC);
-        createSolutionTeX(this.numA, this.numB, this.ratio, this.term, this.result);
+        sectionTeX.put(Section.QUESTION, createQuestionTeX(this.term, this.numA, this.numB, this.numC));
+        sectionTeX.put(Section.SOLUTION, createSolutionTeX(this.numA, this.numB, this.ratio, this.term, this.result));
+        sectionTeX.put(Section.ANSWER, createAnswerTeX(this.result));
     }
 
     /**
@@ -53,34 +54,45 @@ public class GeometricSequenceTermsToNModule implements QuestionModule {
 
     /**
      * Creates the LaTex string for the Question Section.
-     * @param term
-     * @param numA
-     * @param numB
-     * @param numC
+     * @param term The term for which to find the value.
+     * @param numA The first number in the sequence.
+     * @param numB The second number in the sequence.
+     * @param numC The third number in the sequence.
+     * @return Returns a LaTeX formatted String for the Question Section.
      */
-    private void createQuestionTeX(int term, int numA, int numB, int numC) {
+    private String createQuestionTeX(int term, int numA, int numB, int numC) {
         String ord = new QUtil().getOrdinal(term);
         String sb = "Let ";
         sb += format("$%d,%d,%d$", numA, numB, numC);
         sb += format(" be a geometric sequence. Determine the ");
         sb += format("$%d$", term);
         sb += format("%s term in the sequence.\\\\", ord);
-        sectionTeX.put(Section.QUESTION, sb.toString());
+        return sb;
     }
 
     /**
      * Creates the LaTeX string for the Solution Section.
-     * @param numA
-     * @param numB
-     * @param ratio
-     * @param term
-     * @param result
+     * @param numA The first number in the sequence.
+     * @param numB The second number in the sequence.
+     * @param ratio The ratio between each number in the sequence.
+     * @param term The term for which to find the value.
+     * @param result The final result.
+     * @return Returns a LaTeX formatted String for the Solution Section.
      */
-    private void createSolutionTeX(int numA, int numB, int ratio, int term, int result) {
+    private String createSolutionTeX(int numA, int numB, int ratio, int term, int result) {
         String sb = format("$a_n=ar^{n-1}$, where $r=%2$d\\div%1$d=%3$d$ and $a=%1$d$.\\\\", numA, numB, ratio);
         sb += format("so $a_{%3$d}=%1$d\\cdot %2$d^{%4$d}$\\\\", numA, ratio, term, term - 1);
         sb += format("$=%d$", result);
-        sectionTeX.put(Section.SOLUTION, sb.toString());
+        return sb;
+    }
+
+    /**
+     * Creates the LaTeX string for the Answer Section.
+     * @param result The final result.
+     * @return Returns a LaTeX String for the Answer.
+     */
+    private String createAnswerTeX(int result) {
+        return format("$=%d$", result);
     }
 
     /**

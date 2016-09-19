@@ -27,6 +27,10 @@ public class GeometricSequenceTermsToNModuleTest {
      */
     private GeometricSequenceTermsToNModule b = new GeometricSequenceTermsToNModule();
 
+    int numA = b.numA,
+        ratio = b.ratio,
+        term = b.term;
+
     @Before
     public void setUp() throws Exception {
     }
@@ -83,15 +87,19 @@ public class GeometricSequenceTermsToNModuleTest {
     }
 
     /**
+     * Test to compare the expected "Answer" LaTeX output against a know string using known values.
+     */
+    @Test
+    public void testGetSectionAnswer() {
+        String expected = "$=9565938$";
+        assertEquals(expected, a.getSection("answer"));
+    }
+
+    /**
      * Test to compare the expected "Question" LaTeX output against an expected string using random values.
      */
     @Test
     public void testRandomIntsQuestion() {
-        int numA = b.numA,
-            ratio = b.ratio,
-            term = b.term;
-
-        String ord = new QUtil().getOrdinal(term);
         GeometricSequenceTermsToNModule c = new GeometricSequenceTermsToNModule(numA, ratio, term);
         assertEquals(b.getSection("question"), c.getSection("question"));
 
@@ -107,15 +115,24 @@ public class GeometricSequenceTermsToNModuleTest {
      */
     @Test
     public void testRandomIntsSolution() {
-        int numA = b.numA,
-            ratio = b.ratio,
-            term = b.term;
-
-        String ord = new QUtil().getOrdinal(term);
         GeometricSequenceTermsToNModule c = new GeometricSequenceTermsToNModule(numA, ratio, term);
         assertEquals(b.getSection("solution"), c.getSection("solution"));
         try {
             writeTexFile("solution_output.tex", c.getSection("solution"));
+        } catch (Exception ex) {
+
+        }
+    }
+
+    /**
+     * Test to compare the expected "Answer" LaTeX output against an expected string using random values.
+     */
+    @Test
+    public void testRandomIntsAnswer() {
+        GeometricSequenceTermsToNModule c = new GeometricSequenceTermsToNModule(numA, ratio, term);
+        assertEquals(b.getSection("answer"), c.getSection("answer"));
+        try {
+            writeTexFile("answer_output.tex", c.getSection("answer"));
         } catch (Exception ex) {
 
         }
