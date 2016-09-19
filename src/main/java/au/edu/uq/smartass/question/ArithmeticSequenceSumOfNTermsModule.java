@@ -41,7 +41,7 @@ public class ArithmeticSequenceSumOfNTermsModule implements QuestionModule {
 
     /**
      * Publicly accessible constructor takes no parameters.
-     * Generates random values for numA, ratio and term.
+     * Generates random values for numA, diff and term.
      * Passes random values to package private constructor.
      */
     public ArithmeticSequenceSumOfNTermsModule() {
