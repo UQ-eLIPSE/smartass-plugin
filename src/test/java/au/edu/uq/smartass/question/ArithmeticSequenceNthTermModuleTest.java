@@ -4,6 +4,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import java.lang.reflect.Constructor;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 import static org.junit.Assert.*;
 
 /**
@@ -11,6 +14,13 @@ import static org.junit.Assert.*;
  * Tests for ArithmeticSequenceNthTermModule.
  */
 public class ArithmeticSequenceNthTermModuleTest {
+
+    ArithmeticSequenceNthTermModule a = new ArithmeticSequenceNthTermModule(2, 4, 40);
+    ArithmeticSequenceNthTermModule b = new ArithmeticSequenceNthTermModule();  // Create an instance of ArithmeticSequenceNthModule to get random values.
+
+    int numA = b.numA,
+        term = b.term,
+        diff = b.diff;
 
     @Before
     public void setUp() throws Exception {
@@ -36,15 +46,13 @@ public class ArithmeticSequenceNthTermModuleTest {
 
     @Test
     public void testGeneratedProperties() {
-        ArithmeticSequenceNthTermModule a = new ArithmeticSequenceNthTermModule(2, 6, 40);
+        assertEquals(6, a.numB);
         assertEquals(10, a.numC);
-        assertEquals(4, a.diff);
         assertEquals(158, a.result);
     }
 
     @Test
     public void testGetSectionQuestion() {
-        ArithmeticSequenceNthTermModule a = new ArithmeticSequenceNthTermModule(2, 6, 40);
         String expected = "Let $2,6,10$ be an arithmetic sequence. Determine the $40$th term in the sequence.\\\\";
         String actual = a.getSection("question");
         assertEquals(expected, actual);
@@ -52,31 +60,55 @@ public class ArithmeticSequenceNthTermModuleTest {
 
     @Test
     public void testGetSectionSolution() {
-        ArithmeticSequenceNthTermModule a = new ArithmeticSequenceNthTermModule(2, 6, 40);
         String expected = "$a_n=a+(n-1)d$, where $d=6-2=4$ and $a=2$.\\\\Therefore $a_{40}=2+(40-1)\\cdot 4$\\\\$=2+39 \\cdot4$\\\\$=158$";
         String actual = a.getSection("solution");
         assertEquals(expected, actual);
     }
 
     @Test
-    public void testRandomIntsQuestion() {
-        ArithmeticSequenceNthTermModule a = new ArithmeticSequenceNthTermModule();  // Create an instance of ArithmeticSequenceNthModule to get random values.
-        int numA = a.numA, numB = a.numB, numC = a.numC, term = a.term, diff = a.diff, result = a.result;
-        String ord = a.getOrdinal(term);
-        ArithmeticSequenceNthTermModule b = new ArithmeticSequenceNthTermModule(numA, numB, term);
-        String expected = "Let $" + numA + "," + numB + "," + numC + "$ be an arithmetic sequence. Determine the $" + term + "$" + ord + " term in the sequence.\\\\";
-        String actual = b.getSection("question");
+    public void testGetSectionAnswer() {
+        String expected = "$=158$";
+        String actual = a.getSection("answer");
         assertEquals(expected, actual);
     }
 
     @Test
-    public void testRandomIntsSolution() {
-        ArithmeticSequenceNthTermModule a = new ArithmeticSequenceNthTermModule();  // Create an instance of ArithmeticSequenceNthModule to get random values.
-        int numA = a.numA, numB = a.numB, numC = a.numC, term = a.term, diff = a.diff, result = a.result;
-        ArithmeticSequenceNthTermModule b = new ArithmeticSequenceNthTermModule(numA, numB, term);
-        String expected = "$a_n=a+(n-1)d$, where $d=" + numB + "-" + numA + "=" + diff + "$ and $a=" + numA + "$.\\\\Therefore $a_{" + term + "}=" + numA + "+(" + term + "-1)\\cdot " + diff + "$\\\\$=" + numA + "+"  + (term -1) + " \\cdot" + diff + "$\\\\$=" + result + "$";
-        String actual = b.getSection("solution");
-        assertEquals(expected, actual);
+    public void testRandomIntsQuestion() {
+        ArithmeticSequenceNthTermModule c = new ArithmeticSequenceNthTermModule(numA, diff, term);
+        assertEquals(b.getSection("question"), c.getSection("question"));
+
+        try {
+            writeTexFile("question_output.tex", c.getSection("question"));
+        } catch (Exception ex) {
+
+        }
     }
 
+    @Test
+    public void testRandomIntsSolution() {
+        ArithmeticSequenceNthTermModule c = new ArithmeticSequenceNthTermModule(numA, diff, term);
+        assertEquals(b.getSection("solution"), c.getSection("solution"));
+
+        try {
+            writeTexFile("solution_output.tex", c.getSection("solution"));
+        } catch (Exception ex) {
+
+        }
+    }
+
+    @Test
+    public void testRandomIntAnswer() {
+        ArithmeticSequenceNthTermModule c = new ArithmeticSequenceNthTermModule(numA, diff, term);
+        assertEquals(b.getSection("answer"), c.getSection("answer"));
+
+        try {
+            writeTexFile("answer_output.tex", c.getSection("answer"));
+        } catch (Exception ex) {
+
+        }
+    }
+
+    private void writeTexFile(String filename, String str) throws Exception {
+        Files.write(Paths.get("./" + filename), str.getBytes());
+    }
 }

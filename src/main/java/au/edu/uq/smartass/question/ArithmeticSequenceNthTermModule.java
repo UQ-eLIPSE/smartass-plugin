@@ -2,128 +2,102 @@ package au.edu.uq.smartass.question;
 
 import au.edu.uq.smartass.engine.QuestionModule;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Random;
 
-/**
- * Created by uqamoon1 on 12/09/2016.
- * Find the nth term in an Arithmetic Sequence.
- */
+import static java.lang.String.format;
 
+/**
+ * Creates a randomised question, solution and answer
+ * Find the nth term within a given sequence.
+ */
 public class ArithmeticSequenceNthTermModule implements QuestionModule {
     /** Define supported TeX Sections. */
     public enum Section { QUESTION, SOLUTION, ANSWER }
 
     /** Lookup TeX string. */
     private Map<Section,String> sectionTeX = new EnumMap<>(Section.class);
-    private Random random = new Random();
 
     public int numA, numB, numC, diff, term, result;
 
-    /** Constructor used for testing only */
-    public ArithmeticSequenceNthTermModule(int numA, int numB, int term) {
+    /**
+     * Constructor for ArithmeticSequenceSumOfNTermsModule takes 3 parameters
+     * @param numA First number in the sequence.
+     * @param diff Difference between each number in the sequence.
+     * @param term The nth term.
+     */
+    public ArithmeticSequenceNthTermModule(int numA, int diff, int term) {
         this.numA = numA;
-        this.numB = numB;
         this.term = term;
-        this.diff = this.numB - this.numA;
-        this.numC = setNumC(this.numB, this.diff);
-        this.result = setSolution(this.numA, this.term, this.diff);
+        this.diff = diff;
+        this.numB = numA + diff;
+        this.numC = this.numB + diff;
+        this.result = numA + (term -1) * diff;
 
-        createQuestionTeX(this.term, this.numA, this.numB, this.numC);
-        createSolutionTeX(this.numA, this.numB, this.diff, this.term, this.result);
+        sectionTeX.put(Section.QUESTION, createQuestionTeX(this.numA, this.numB, this.numC, this.term));
+        sectionTeX.put(Section.SOLUTION, createSolutionTeX(this.numA, this.numB, this.diff, this.term, this.result));
+        sectionTeX.put(Section.ANSWER, createAnswerTeX(this.result));
     }
 
+    /**
+     * Publicly accessible constructor takes no parameters.
+     * Generates random values for numA, diff and term.
+     * Passes random values to package private constructor.
+     */
     public ArithmeticSequenceNthTermModule() {
-        this.numA =setNumA(2, 2);
-        this.diff = setDiff();
-        this.numB = setNumB(this.numA, this.diff);
-        this.numC = setNumC(this.numB, this.diff);
-        this.term = setTerm(this.numC, 50);
-        this.result = setSolution(this.numA, this.term, this.diff);
-
-        createQuestionTeX(this.term, this.numA, this.numB, this.numC);
-        createSolutionTeX(this.numA, this.numB, this.diff, this.term, this.result);
+        this(
+                new QUtil().generatePosInt(2,2),
+                new QUtil().generateNegToPosInt(-10, 10),
+                new QUtil().generatePosInt(10, 50)
+        );
+    }
+    /**
+     * Creates the LaTeX string for the Question Section.
+     * @param numA First number in the sequence.
+     * @param numB Second number in the sequence.
+     * @param numC Third number in the sequence.
+     * @param term The nth term.
+     * @return LaTeX formatted string for Question.
+     */
+    private String createQuestionTeX(int numA, int numB, int numC, int term) {
+        String ord = new QUtil().getOrdinal(term);
+        String sb = ("Let ");
+        sb += format("$%1$d,%2$d,%3$d$", numA, numB, numC);
+        sb += format(" be an arithmetic sequence. Determine the $%d$", term);
+        sb += format("%s term in the sequence.\\\\", ord);
+        return sb;
     }
 
-    private int setNumA(int min, int max) {
-        return random.nextInt(max + 1 - min) + min;
+    /**
+     * Creates the LaTeX string for the Solution Section.
+     * @param numA First number int the sequence.
+     * @param numB Second number in the sequence.
+     * @param diff Difference between each number in the sequence.
+     * @param term The nth term.
+     * @param result The final result of the sum of all numbers in sequence up to the nth term.
+     * @return LaTeX formatted string for Solution.
+     */
+    private String createSolutionTeX(int numA, int numB, int diff, int term, int result) {
+        String sb = ("$a_n=a+(n-1)d$, where $d=");
+        sb += format("%2$d-%1$d=%3$d$ and $a=%1$d$.\\\\", numA, numB, diff);
+        sb += format("Therefore $a_{%2$d}=%1$d", numA, term);
+        sb += format("+(%1$d-1)\\cdot %2$d$\\\\", term, diff);
+        sb += format("$=%1$d+%2$d \\cdot%3$d$\\\\", numA, term - 1, diff);
+        sb += format("$=%d$", result);
+        return sb;
     }
 
-    private int setNumB(int numA, int diff) {
-        return numA + diff;
+
+    /**
+     * Creates the LaTeX string for the Answer Section.
+     * @param result The final result of the sum of all numbers in sequence up to the nth term
+     * @return LaTeX formatted string for Answer.
+     */
+    private String createAnswerTeX(int result) {
+        return format("$=%d$", result);
     }
 
-    private int setNumC(int numB, int diff) {
-        return numB + diff;
-    }
-
-    private int setDiff() {
-        return random.nextInt(10 + 1 + 10) - 10;
-    }
-
-    private int setTerm(int min, int max) {
-        return random.nextInt(max +1 - min) + min;
-    }
-
-    private int setSolution(int numA, int term, int diff) {
-        return numA + (term -1) * diff;
-    }
-
-    private void createQuestionTeX(int term, int numA, int numB, int numC) {
-        String ord = getOrdinal(term);
-        StringBuilder sb = new StringBuilder();
-        sb.append("Let ");
-        sb.append("$" + numA + "," + numB + "," + numC + "$");
-        sb.append(" be an arithmetic sequence. Determine the ");
-        sb.append("$" + term + "$");
-        sb.append(ord + " term in the sequence.\\\\");
-        sectionTeX.put(Section.QUESTION, sb.toString());
-        try {
-            writeTexFile("question_output.tex", sb.toString());
-        } catch (Exception ex) {
-
-        }
-    }
-
-    private void createSolutionTeX(int numA, int numB, int diff, int term, int result) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("$a_n=a+(n-1)d$, where $d=");
-        sb.append(numB + "-" + numA + "=" + diff + "$ and $a=" + numA + "$.\\\\");
-        sb.append("Therefore $a_{" + term + "}=" + numA);
-        sb.append("+(" + term + "-1)\\cdot " + diff + "$\\\\");
-        sb.append("$=" + numA + "+" + (term - 1) + " \\cdot" + diff + "$\\\\");
-        sb.append("$=" + result + "$");
-        sectionTeX.put(Section.SOLUTION, sb.toString());
-        try {
-            writeTexFile("solution_output.tex", sb.toString());
-        } catch (Exception ex) {
-
-        }
-    }
-
-    private void createAnswerTeX() {
-    }
-
-    public String getOrdinal(int t) {
-        String ord = String.valueOf(t);
-        if (ord.endsWith("1") && !ord.endsWith("11")) {
-            return "st";
-        }
-        if (ord.endsWith("2") && !ord.endsWith("12")) {
-            return "nd";
-        }
-        if (ord.endsWith("3") && !ord.endsWith("13")) {
-            return "rd";
-        }
-        return "th";
-    }
-
-    private void writeTexFile(String filename, String str) throws Exception {
-            Files.write(Paths.get("./" + filename), str.getBytes());
-    }
     /**
      * Accessor for LaTeX associated with a section name.
      *
