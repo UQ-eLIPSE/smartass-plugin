@@ -44,8 +44,15 @@ public class GeomSeqSumTest {
     public void testGetSection() throws Exception {
         GeomSeqSumModule geom = new GeomSeqSumModule(2, 3, 20);
 
-        System.out.println(geom.getSection("solution"));
-        //assertTrue(false);
+        String expectedQuestion = "Let $2, 6, 18$ be a geometric sequence. What is the sum of the first 20 terms?\\\\";
+        assertEquals(geom.getSection("question"), expectedQuestion);
+
+        String expectedSolution = "$S_n=\\dfrac{a(r^n-1)}{r-1}$, where $r=6\\div2=3$ and $a=2$.\\\\$S_{20}=\\dfrac{2(3^{20-1})}{20-1}$\\\\$=\\dfrac{2\\cdot3^{19}}{19}$\\\\$\\approx 122343312.32$\\\\";
+        assertEquals(geom.getSection("solution"), expectedSolution);
+
+
+        String expectedAnswer = "$\\approx 122343312.32$";
+        assertEquals(geom.getSection("answer"), expectedAnswer);
     }
 
     @Test

@@ -5,6 +5,8 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  * Geometric Sequence Module.
@@ -43,6 +45,15 @@ public class GeomSeqSumModule implements QuestionModule {
         createAnswerTeX();
     }
 
+    /**
+     * Formats the double so it is displayed corrected by latex
+     */
+    private String formatDouble(double number) {
+        BigDecimal bg = new BigDecimal(number);
+        bg = bg.setScale(2, RoundingMode.CEILING);
+        return bg.toPlainString(); 
+    }
+
     public GeomSeqSumModule(int a, int r, int n) {
         createQuestion(a, r, n);
     }
@@ -61,7 +72,7 @@ public class GeomSeqSumModule implements QuestionModule {
 
     private void createQuestionTeX() {
         String sb = "";
-        sb += "Let $" + this.seq[0] + ", " + this.seq[1] + ", " + this.seq[2] + "$ be a geometric sequence. What is the sume of the first " + this.n + " terms?";
+        sb += "Let $" + this.seq[0] + ", " + this.seq[1] + ", " + this.seq[2] + "$ be a geometric sequence. What is the sum of the first " + this.n + " terms?\\\\";
 
         sectionTeX.put(Section.QUESTION, sb);
     }
@@ -73,7 +84,7 @@ public class GeomSeqSumModule implements QuestionModule {
             "\\div" + this.seq[0] + "=" + this.r + "$ and $a=" + this.a + "$.\\\\" +
             "$S_{" + this.n + "}=\\dfrac{" + this.a + "(" + this.r + "^{" + this.n + "-1})}{" + this.n + "-1}$\\\\" +
             "$=\\dfrac{" + this.a + "\\cdot" + this.r + "^{" + (this.n-1) + "}}{" + (this.n-1) + "}$\\\\" +
-            "$\\approx " + (this.a * Math.pow(this.r, this.n-1) / this.n-1) + "$";
+            "$\\approx " + formatDouble(this.a * Math.pow(this.r, this.n-1) / (this.n-1)) + "$\\\\";
 
 
         sectionTeX.put(Section.SOLUTION, sb);
@@ -82,7 +93,7 @@ public class GeomSeqSumModule implements QuestionModule {
     private void createAnswerTeX() {
         String sb = "";
 
-        sb += "$\\approx " + (this.a * Math.pow(this.r, this.n-1) / this.n-1) + "$";
+        sb += "$\\approx " + formatDouble(this.a * Math.pow(this.r, this.n-1) / (this.n-1)) + "$";
 
         sectionTeX.put(Section.ANSWER, sb);
     }
