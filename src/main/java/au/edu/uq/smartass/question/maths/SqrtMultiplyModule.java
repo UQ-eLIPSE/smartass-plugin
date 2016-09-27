@@ -271,7 +271,7 @@ public class SqrtMultiplyModule implements QuestionModule {
 
 	private String composeSolution() {
 		String res = "\\begin{align*}"+solution.getFirst().toString();
-		ListIterator it = solution.listIterator(0);
+		ListIterator<MathsOp> it = solution.listIterator(0);
 		it.next();
 		while(it.hasNext()) 
 			res = res + "&=" + it.next().toString()+"\\\\";

@@ -9,6 +9,7 @@ package au.edu.uq.smartass.python;
  * @author <a href="mailto:ilm@bart.maths.uq.edu.au">Ivan Miljenovic</a>
  * @version 1.0
  */
+@SuppressWarnings({"serial"})
 public class PythonException extends RuntimeException {
 
     /**

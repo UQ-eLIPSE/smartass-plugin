@@ -28,7 +28,7 @@ public class SetDifference extends SetBinaryOp implements SetCalculable {
         /**
          * @TODO: this exact function is repeated through multiple subclasses of SetBinaryOp!
          */
-        @SuppressWarnings("unchecked")
+        @SuppressWarnings({"rawtypes","unchecked"})
 	public AbstractSet calculate() {
 		HashSet res=(HashSet)(((SetCalculable)op[0]).calculate());
 		res.removeAll(((SetCalculable)op[1]).calculate());
