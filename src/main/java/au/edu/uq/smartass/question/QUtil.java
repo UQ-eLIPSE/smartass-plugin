@@ -5,29 +5,24 @@ import java.util.Random;
 /**
  * Helper functions for Question Generation
  */
-public class QUtil {
+public final class QUtil {
 
-    public QUtil() {
-
-    }
+    /**
+     * Private default constructor
+     */
+    private QUtil() {};
 
     /**
      * Gets the ordinal (st, nd, rd) based on int passed
      * @param t
      * @return
      */
-    public String getOrdinal(int t) {
-        String ord = String.valueOf(t);
-        if (ord.endsWith("1") && !ord.endsWith("11")) {
-            return "st";
-        }
-        if (ord.endsWith("2") && !ord.endsWith("12")) {
-            return "nd";
-        }
-        if (ord.endsWith("3") && !ord.endsWith("13")) {
-            return "rd";
-        }
-        return "th";
+    public static String getOrdinal(int t) {
+        return
+                (t % 10 == 1 && t % 100 != 11) ?    "st" :
+                (t % 10 == 2 && t % 100 != 12) ?    "nd" :
+                (t % 10 == 3 && t % 100 != 13) ?    "rd" :
+                                                    "th" ;
     }
 
     /**
@@ -36,7 +31,7 @@ public class QUtil {
      * @param max
      * @return
      */
-    public int generatePosInt(int min, int max) {
+    public static int generatePosInt(int min, int max) {
         return new Random().nextInt(max + 1 - min) + min;
     }
 
@@ -46,8 +41,12 @@ public class QUtil {
      * @param max
      * @return
      */
-    public int generateNegToPosInt(int min, int max) {
-        return  new Random().nextInt(max + 1 + max) - min;
+    public static int generateNegToPosInt(int min, int max) {
+        int val = 0;
+        while ( -1 <= val && val <=1) {
+            val =generatePosInt(min, max);
+        }
+        return val;
     }
 
 }
