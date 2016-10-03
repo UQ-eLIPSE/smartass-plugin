@@ -44,24 +44,15 @@ public class PSeriesModuleTest {
     public void testGetSection() throws Exception {
         PSeriesModule p = new PSeriesModule(1);
 
-        String expected = "Does $\\sum_{n=1}^{\\infty} \\frac{1}{n^{\\frac{1}{4}}}$ converge? Explain.\\\\";
+        String expected = "Does $\\sum\\limits_{n=1}^{\\infty} \\frac{1}{n^{\\frac{1}{4}}}$ converge? Explain.";
+        System.out.println(expected);
         String actual = p.getSection("question");
         assertEquals(expected, actual);
 
 
-        String expectedSolution = "No, it doesn't, by the p-series test. Since p $<$ 1, the series will diverge";
+        String expectedSolution = "No, it doesn't, by the $p$-series test. Since $p<1$, the series will diverge.";
+        System.out.println(expectedSolution);
         String actualSolution = p.getSection("solution");
         assertEquals(expectedSolution, actualSolution);
-    }
-
-    @Test
-    public void testGetSectionFail() throws Exception {
-        ScalarProductModule dot = new ScalarProductModule();
-        try {
-            dot.getSection("NonExistantSectionName");
-            fail();
-        } catch (IllegalArgumentException ex) {
-            assertTrue(true);
-        }
     }
 }

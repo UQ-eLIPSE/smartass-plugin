@@ -95,10 +95,6 @@ public class ScalarProductModuleTest {
             }
         });
 
-        assertEquals(dot.getSection("question"), dot.getSection("QUESTION"));
-        assertEquals(dot.getSection("SolUTion"), dot.getSection("sOlUtION"));
-        assertEquals(dot.getSection("ansWER"), dot.getSection("ANSwer"));
-
         assertEquals(
                 "\\[\\text{Let }\\mathbf{u}=\\begin{pmatrix}3\\\\-4\\\\4\\\\\\end{pmatrix}" +
                 "\\text{and }\\mathbf{v}=\\begin{pmatrix}-2\\\\1\\\\7\\\\\\end{pmatrix}\\text{.}\\]" +
@@ -133,16 +129,5 @@ public class ScalarProductModuleTest {
                 ,
                 dot.getSection("answer")
             );
-    }
-
-    @Test
-    public void testGetSectionFail() throws Exception {
-        ScalarProductModule dot = new ScalarProductModule();
-        try {
-            dot.getSection("NonExistantSectionName");
-            fail();
-        } catch (IllegalArgumentException ex) {
-            assertTrue(true);
-        }
     }
 }
