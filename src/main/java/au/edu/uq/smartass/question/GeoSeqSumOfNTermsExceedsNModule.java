@@ -1,6 +1,6 @@
 package au.edu.uq.smartass.question;
 
-import au.edu.uq.smartass.engine.QuestionModule;
+import au.edu.uq.smartass.engine.SimpleQuestionModule;
 
 import java.util.EnumMap;
 import java.util.Map;
@@ -11,18 +11,12 @@ import static java.lang.String.format;
  * Creates a randomised question, solution and answer
  * Find how many sums are needed for the sum to first exceed a given number. 
  */
-public class GeoSeqSumOfNTermsExceedsNModule implements QuestionModule{
-    /** Define supported TeX Sections. */
-    public enum Section { QUESTION, SOLUTION, ANSWER }
+public class GeoSeqSumOfNTermsExceedsNModule extends SimpleQuestionModule{
 
-    /** Lookup TeX string. */
-    private Map<Section,String> sectionTeX = new EnumMap<>(Section.class);
-    int numA,
-        numB,
-        numC,
-        sum,
-        ratio,
-        result;
+    int numA, numB, numC;
+    int sum;
+    int ratio;
+    int result;
 
     double resultD;
 
@@ -41,9 +35,9 @@ public class GeoSeqSumOfNTermsExceedsNModule implements QuestionModule{
         this.resultD = Math.log(this.sum) / Math.log(this.numB / this.numA) + 1;
         this.result = (int)Math.ceil(Math.log(this.sum) / Math.log(this.numB / this.numA) + 1);
 
-        sectionTeX.put(Section.QUESTION, createQuestion(this.numA, this.numB, this.numC, this.sum));
-        sectionTeX.put(Section.SOLUTION, createSolution(this.numA, this.numB, this.ratio, this.sum, this.resultD, this.result));
-        sectionTeX.put(Section.ANSWER, createAnswer(this.result));
+        setQuestion(createQuestion(this.numA, this.numB, this.numC, this.sum));
+        setSolution(createSolution(this.numA, this.numB, this.ratio, this.sum, this.resultD, this.result));
+        setAnswer(createAnswer(this.result));
     }
 
     /**
@@ -53,9 +47,9 @@ public class GeoSeqSumOfNTermsExceedsNModule implements QuestionModule{
      */
     public GeoSeqSumOfNTermsExceedsNModule() {
         this(
-                new QUtil().generatePosInt(2, 10),
-                new QUtil().generateNegToPosInt(-5, 5),
-                new QUtil().generateNegToPosInt(10, 10000)
+                QUtil.generatePosInt(2, 10),
+                QUtil.generateNegToPosInt(-5, 5),
+                QUtil.generateNegToPosInt(10, 10000)
         );
     }
 
@@ -111,16 +105,5 @@ public class GeoSeqSumOfNTermsExceedsNModule implements QuestionModule{
      */
     private String createAnswer(int result) {
         return format("%d", result);
-    }
-
-    /**
-     * Accessor for LaTeX associated with a section name.
-     *
-     * @param name The section name for which the LaTeX is required.
-     * @return The LaTeX associated with the given section name, or NULL.
-     * @throws IllegalArgumentException if the given name does not translate to a valid section.
-     */
-    @Override public String getSection(final String name) throws IllegalArgumentException {
-        return sectionTeX.get(Enum.valueOf(GeoSeqSumOfNTermsExceedsNModule.Section.class, name.toUpperCase()));
     }
 }
