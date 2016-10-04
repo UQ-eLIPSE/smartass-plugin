@@ -67,7 +67,10 @@ public class GeoSeqSumOfNTermsExceedsNModuleTest {
      */
     @Test
     public void testGetSectionQuestion() {
-        String expected = "Let $2,6,18$ be a geometric sequence. How many sums are needed for the sum to first exceed $1000$?";
+        String expected =
+                "Let $2,6,18$ be the first three terms of a geometric sequence. " +
+                "How many terms are needed for the sum to first exceed $1000$?";
+        System.out.println(expected);
         assertEquals(expected, a.getSection("question"));
     }
 
@@ -76,18 +79,22 @@ public class GeoSeqSumOfNTermsExceedsNModuleTest {
      */
     @Test
     public void testGetSectionSolution() {
-        String expected = "Let's solve this as an equation then round appropriately. \\\\";
-               expected += "$S_n=\\dfrac{a(r^{n-1})}{r-1}$, where $r=6\\div2=3$ and $a=2$.\\\\";
-               expected += "$1000=\\dfrac{2(3^{n-1})}{3-1}$\\\\";
-               expected += "$1000\\times 2 =2(3^{n-1})$\\\\";
-               expected += "$2000=2(3^{n-1})$\\\\";
-               expected += "$1000=3^{n-1}$\\\\";
-               expected += "$\\ln 1000 = \\ln(3^{n-1})$\\\\";
-               expected += "$\\ln 1000 = (n-1)\\ln3$\\\\";
-               expected += "$n-1=\\dfrac{\\ln 1000}{\\ln 3}$\\\\";
-               expected += "$n=\\dfrac{\\ln 1000}{\\ln 3}+1$\\\\";
-               expected += "$= 7.29...$\\\\";                                   // Example sheet reads 7.28
-               expected += "Therefore $8$ sums are needed.";
+        String expected =
+				"Let's solve this as an equation then round appropriately.\n" +
+				"\\begin{align*}\n" +
+				"S_n&=\\dfrac{a(r^{n-1})}{r-1}\\text{, where }r=6\\div2=3\\text{ and }a=2.\\\\\n" +
+				"1000&=\\dfrac{2(3^{n-1})}{3-1}\\\\\n" +
+				"1000\\times2&=2(3^{n-1})\\\\\n" +
+				"2000&=2(3^{n-1})\\\\\n" +
+				"1000&=3^{n-1}\\\\\n" +
+				"\\ln1000&=\\ln(3^{n-1})\\\\\n" +
+				"\\ln1000&=(n-1)\\ln3\\\\\n" +
+				"n-1&=\\dfrac{\\ln1000}{\\ln3}\\\\\n" +
+				"n&=\\dfrac{\\ln1000}{\\ln3}+1\\\\\n" +
+				"&=7.29...\n" +
+				"\\end{align*}\n" +
+				"Therefore $8$ terms are needed.";
+        System.out.println(expected);
         assertEquals(expected, a.getSection("solution"));
     }
 
@@ -96,7 +103,9 @@ public class GeoSeqSumOfNTermsExceedsNModuleTest {
      */
     @Test
     public void testGetSectionAnswer() {
-        assertEquals("=8", a.getSection("answer"));
+        String expected = "8";
+        System.out.println(expected);
+        assertEquals("8", a.getSection("answer"));
     }
 
     /**
