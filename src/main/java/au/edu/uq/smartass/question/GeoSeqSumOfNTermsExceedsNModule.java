@@ -68,7 +68,11 @@ public class GeoSeqSumOfNTermsExceedsNModule implements QuestionModule{
      * @return Returns a LaTeX formatted String for the Question Section.
      */
     private String createQuestion(int numA, int numB, int numC, int sum) {
-        return format("Let $%1$d,%2$d,%3$d$ be a geometric sequence. How many sums are needed for the sum to first exceed $%4$d$?", numA, numB, numC, sum);
+        return format(
+                "Let $%1$d,%2$d,%3$d$ be the first three terms of a geometric sequence. " +
+                "How many terms are needed for the sum to first exceed $%4$d$?",
+                numA, numB, numC, sum
+            );
     }
 
     /**
@@ -81,19 +85,23 @@ public class GeoSeqSumOfNTermsExceedsNModule implements QuestionModule{
      * @return Returns a LaTeX formatted String for the Solution Section.
      */
     private String createSolution(int numA, int numB, int ratio, int sum, double resultD, int result) {
-       String sb = "Let's solve this as an equation then round appropriately. \\\\";
-              sb +=  format("$S_n=\\dfrac{a(r^{n-1})}{r-1}$, where $r=%2$d\\div%1$d=%3$d$ and $a=%1$d$.\\\\", numA, numB, ratio);
-              sb += format("$%3$d=\\dfrac{%1$d(%2$d^{n-1})}{%2$d-1}$\\\\", numA, ratio, sum);
-              sb += format("$%3$d\\times %4$d =%1$d(%2$d^{n-1})$\\\\", numA, ratio, sum, ratio - 1);
-              sb += format("$%3$d=%1$d(%2$d^{n-1})$\\\\", numA, ratio, sum * (ratio - 1));
-              sb += format("$%1$d=%2$d^{n-1}$\\\\", sum, ratio);
-              sb += format("$\\ln %1$d = \\ln(%2$d^{n-1})$\\\\", sum, ratio);
-              sb += format("$\\ln %1$d = (n-1)\\ln%2$d$\\\\", sum, ratio);
-              sb += format("$n-1=\\dfrac{\\ln %1$d}{\\ln %2$d}$\\\\", sum, ratio);
-              sb += format("$n=\\dfrac{\\ln %1$d}{\\ln %2$d}+1$\\\\", sum, ratio);
-              sb += format("$= %1$,.2f...$\\\\", resultD);
-              sb += format("Therefore $%d$ sums are needed.", result);
-        return sb;
+        String tex =
+                "Let's solve this as an equation then round appropriately.\n" +
+                "\\begin{align*}\n" +
+                "S_n&=\\dfrac{a(r^{n-1})}{r-1}" +
+                format("\\text{, where }r=%2$d\\div%1$d=%3$d\\text{ and }a=%1$d.\\\\\n", numA, numB, ratio) +
+                format("%3$d&=\\dfrac{%1$d(%2$d^{n-1})}{%2$d-1}\\\\\n", numA, ratio, sum) +
+                format("%3$d\\times%4$d&=%1$d(%2$d^{n-1})\\\\\n", numA, ratio, sum, ratio - 1) +
+                format("%3$d&=%1$d(%2$d^{n-1})\\\\\n", numA, ratio, sum * (ratio - 1)) +
+                format("%1$d&=%2$d^{n-1}\\\\\n", sum, ratio) +
+                format("\\ln%1$d&=\\ln(%2$d^{n-1})\\\\\n", sum, ratio) +
+                format("\\ln%1$d&=(n-1)\\ln%2$d\\\\\n", sum, ratio) +
+                format("n-1&=\\dfrac{\\ln%1$d}{\\ln%2$d}\\\\\n", sum, ratio) +
+                format("n&=\\dfrac{\\ln%1$d}{\\ln%2$d}+1\\\\\n", sum, ratio) +
+                format("&=%.2f...\n", resultD) +
+                "\\end{align*}\n" +
+                format("Therefore $%d$ terms are needed.", result);
+        return tex;
     }
 
     /**
@@ -102,7 +110,7 @@ public class GeoSeqSumOfNTermsExceedsNModule implements QuestionModule{
      * @return Returns a LaTeX String for the Answer.
      */
     private String createAnswer(int result) {
-        return format("=%d", result);
+        return format("%d", result);
     }
 
     /**
