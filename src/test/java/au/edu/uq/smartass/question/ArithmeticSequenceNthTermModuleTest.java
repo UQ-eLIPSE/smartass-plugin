@@ -19,16 +19,8 @@ public class ArithmeticSequenceNthTermModuleTest {
      * Create a global instance of ArithmeticSequenceNTermsModule using known values,
      * provides a known output to test against.
      */
-    ArithmeticSequenceNthTermModule a = new ArithmeticSequenceNthTermModule(2, 4, 40);
+    private ArithmeticSequenceNthTermModule seq = new ArithmeticSequenceNthTermModule(2, 4, 40);
 
-    /**
-     * Create a global instance of ArithmeticSequenceSumOfNTermsModule using random values.
-     */
-    ArithmeticSequenceNthTermModule b = new ArithmeticSequenceNthTermModule();  // Create an instance of ArithmeticSequenceNthModule to get random values.
-
-    int numA = b.numA,
-        term = b.term,
-        diff = b.diff;
 
     @Before
     public void setUp() throws Exception {
@@ -56,23 +48,15 @@ public class ArithmeticSequenceNthTermModuleTest {
     }
 
     /**
-     * Test the generated properties against known values.
-     */
-    @Test
-    public void testGeneratedProperties() {
-        assertEquals(6, a.numB);
-        assertEquals(10, a.numC);
-        assertEquals(158, a.result);
-    }
-
-    /**
      * Test to compare the expected "Question" LaTeX output against a known string using known values.
      */
     @Test
     public void testGetSectionQuestion() {
-        String expected = "Let $2,6,10$ be an arithmetic sequence. Determine the $40$th term in the sequence.\\\\";
-        String actual = a.getSection("question");
-        assertEquals(expected, actual);
+        String expected =
+                "Let $2,6,10$ be the first three terms of a finite sequence. " +
+                "Determine the $40$th term in the sequence.";
+        System.out.println(expected);
+        assertEquals(expected, seq.getSection("question"));
     }
 
     /**
@@ -80,9 +64,15 @@ public class ArithmeticSequenceNthTermModuleTest {
      */
     @Test
     public void testGetSectionSolution() {
-        String expected = "$a_n=a+(n-1)d$, where $d=6-2=4$ and $a=2$.\\\\Therefore $a_{40}=2+(40-1)\\cdot 4$\\\\$=2+39 \\cdot4$\\\\$=158$";
-        String actual = a.getSection("solution");
-        assertEquals(expected, actual);
+        String expected =
+                "\\begin{align*}" +
+                "a_n&=a+(n-1)d,\\text{ where }d=6-2=4\\text{ and }a=2\\\\" +
+                "\\text{Therefore }a_{40}&=2+(40-1)\\cdot4\\\\" +
+                "&=2+39\\cdot4\\\\" +
+                "&=158" +
+                "\\end{align*}";
+        System.out.println(expected);
+        assertEquals(expected, seq.getSection("solution"));
     }
 
     /**
@@ -90,57 +80,8 @@ public class ArithmeticSequenceNthTermModuleTest {
      */
     @Test
     public void testGetSectionAnswer() {
-        String expected = "$=158$";
-        String actual = a.getSection("answer");
-        assertEquals(expected, actual);
-    }
-
-    /**
-     * Test to compare the expected "Question" LaTeX output against an expected string using random values.
-     */
-    @Test
-    public void testRandomIntsQuestion() {
-        ArithmeticSequenceNthTermModule c = new ArithmeticSequenceNthTermModule(numA, diff, term);
-        assertEquals(b.getSection("question"), c.getSection("question"));
-
-        try {
-            writeTexFile("question_output.tex", c.getSection("question"));
-        } catch (Exception ex) {
-
-        }
-    }
-
-    /**
-     * Test to compare the expected "Solution" LaTeX output against an expected string using random values.
-     */
-    @Test
-    public void testRandomIntsSolution() {
-        ArithmeticSequenceNthTermModule c = new ArithmeticSequenceNthTermModule(numA, diff, term);
-        assertEquals(b.getSection("solution"), c.getSection("solution"));
-
-        try {
-            writeTexFile("solution_output.tex", c.getSection("solution"));
-        } catch (Exception ex) {
-
-        }
-    }
-
-    /**
-     * Test to compare the expected "Answer" LaTeX output against an expected string using random values.
-     */
-    @Test
-    public void testRandomIntAnswer() {
-        ArithmeticSequenceNthTermModule c = new ArithmeticSequenceNthTermModule(numA, diff, term);
-        assertEquals(b.getSection("answer"), c.getSection("answer"));
-
-        try {
-            writeTexFile("answer_output.tex", c.getSection("answer"));
-        } catch (Exception ex) {
-
-        }
-    }
-
-    private void writeTexFile(String filename, String str) throws Exception {
-        Files.write(Paths.get("./" + filename), str.getBytes());
+        String expected = "$158$";
+        System.out.println(expected);
+        assertEquals(expected, seq.getSection("answer"));
     }
 }

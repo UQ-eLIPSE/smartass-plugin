@@ -22,14 +22,6 @@ public class GeometricSequenceTermsToNModuleTest {
      */
     private GeometricSequenceTermsToNModule a = new GeometricSequenceTermsToNModule(2, 3, 15);
 
-    /**
-     * Create a global instance of GeometricSequenceTermsToNModule using random values.
-     */
-    private GeometricSequenceTermsToNModule b = new GeometricSequenceTermsToNModule();
-
-    int numA = b.numA,
-        ratio = b.ratio,
-        term = b.term;
 
     @Before
     public void setUp() throws Exception {
@@ -54,26 +46,15 @@ public class GeometricSequenceTermsToNModuleTest {
     }
 
     /**
-     * Test the generated properties against known values.
-     */
-    @Test
-    public void testGeneratedProperties() {
-        assertEquals(2, a.numA);
-        assertEquals(6, a.numB);
-        assertEquals(18, a.numC);
-        assertEquals(3, a.ratio);
-        assertEquals(15, a.term);
-        assertEquals(9565938, a.result);
-    }
-
-    /**
      * Test to compare the expected "Question" LaTeX output against a known string using known values.
      */
     @Test
     public void testGetSectionQuestion() {
-        String expected = "Let $2,6,18$ be a geometric sequence. Determine the $15$th term in the sequence.\\\\";
-        String actual = a.getSection("question");
-        assertEquals(actual, expected);
+        String expected =
+                "Let $2,6,18$ be the first three terms of a geometric sequence. " +
+                "Determine the $15$th term in the sequence.";
+        System.out.println(expected);
+        assertEquals(expected, a.getSection("question"));
     }
 
     /**
@@ -81,9 +62,14 @@ public class GeometricSequenceTermsToNModuleTest {
      */
     @Test
     public void testGetSectionSolution() {
-        String expected = "$a_n=ar^{n-1}$, where $r=6\\div2=3$ and $a=2$.\\\\so $a_{15}=2\\cdot 3^{14}$\\\\$=9565938$";
-        String actual = a.getSection("solution");
-        assertEquals(expected, actual);
+        String expected =
+				"\\begin{align*}" +
+				"a_n&=ar^{n-1}\\text{, where }r=6\\div2=3\\text{ and }a=2.\\\\" +
+				"\\text{So }a_{15}&=2\\cdot3^{14}\\\\" +
+				"&=9565938" +
+				"\\end{align*}";
+        System.out.println(expected);
+        assertEquals(expected, a.getSection("solution"));
     }
 
     /**
@@ -91,55 +77,8 @@ public class GeometricSequenceTermsToNModuleTest {
      */
     @Test
     public void testGetSectionAnswer() {
-        String expected = "$=9565938$";
+        String expected = "$9565938$";
+        System.out.println(expected);
         assertEquals(expected, a.getSection("answer"));
     }
-
-    /**
-     * Test to compare the expected "Question" LaTeX output against an expected string using random values.
-     */
-    @Test
-    public void testRandomIntsQuestion() {
-        GeometricSequenceTermsToNModule c = new GeometricSequenceTermsToNModule(numA, ratio, term);
-        assertEquals(b.getSection("question"), c.getSection("question"));
-
-        try {
-            writeTexFile("question_output.tex", c.getSection("question"));
-        } catch (Exception ex) {
-            fail();
-        }
-    }
-
-    /**
-     * Test to compare the expected "Solution" LaTeX output against an expected string using random values.
-     */
-    @Test
-    public void testRandomIntsSolution() {
-        GeometricSequenceTermsToNModule c = new GeometricSequenceTermsToNModule(numA, ratio, term);
-        assertEquals(b.getSection("solution"), c.getSection("solution"));
-        try {
-            writeTexFile("solution_output.tex", c.getSection("solution"));
-        } catch (Exception ex) {
-
-        }
-    }
-
-    /**
-     * Test to compare the expected "Answer" LaTeX output against an expected string using random values.
-     */
-    @Test
-    public void testRandomIntsAnswer() {
-        GeometricSequenceTermsToNModule c = new GeometricSequenceTermsToNModule(numA, ratio, term);
-        assertEquals(b.getSection("answer"), c.getSection("answer"));
-        try {
-            writeTexFile("answer_output.tex", c.getSection("answer"));
-        } catch (Exception ex) {
-
-        }
-    }
-
-    private void writeTexFile(String filename, String str) throws Exception {
-        Files.write(Paths.get("./" + filename), str.getBytes());
-    }
-
 }

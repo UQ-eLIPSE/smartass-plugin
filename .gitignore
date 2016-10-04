@@ -1,13 +1,16 @@
 #
 #       . Local .
 #
+.DS_Store
 make
 smartass-build.log
 tmp/
+libs/
 
 #
 #       . Gradle .
 #
+.gradle/
 gradlew
 gradlew.bat
 gradle/
@@ -17,21 +20,23 @@ build/
 #       . Generated .
 #
 **/services/*
+question_output.tex
+solution_output.tex
+answer_output.tex
 
 #
 #       . Vim .
 #
 *.swp
 
+#
 #       . IntelliJ IDEA .
 #
+.idea/
 smartass-plugin.iml
 
-.gradle/
-.idea/
-src/main/java/au/edu/uq/smartass/engine/
-libs/
-.DS_Store
-question_output.tex
-solution_output.tex
-answer_output.tex
+#
+#       . API interface file for PlugIns .
+#
+src/main/java/au/edu/uq/smartass/engine/QuestionModule.java
+

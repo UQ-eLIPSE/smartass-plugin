@@ -1,9 +1,6 @@
 package au.edu.uq.smartass.question;
 
-import au.edu.uq.smartass.engine.QuestionModule;
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
+import au.edu.uq.smartass.engine.SimpleQuestionModule;
 import java.util.Random;
 
 /**
@@ -14,13 +11,7 @@ import java.util.Random;
  *      \\usepackage{enumerate}
  *      \\usepackage{siunitx}
  */
-public class PSeriesModule implements QuestionModule {
-
-    /** Define supported TeX Sections. */
-    public enum Section { QUESTION, SOLUTION, ANSWER }
-
-    /** Lookup TeX string. */
-    private Map<Section,String> sectionTeX = new EnumMap<>(Section.class);
+public class PSeriesModule extends SimpleQuestionModule {
 
     private String pValue;
     private boolean doesConverge;
@@ -65,36 +56,25 @@ public class PSeriesModule implements QuestionModule {
     private void createQuestionTeX() {
         StringBuilder sb = new StringBuilder();
         sb.append("Does ");
-        sb.append("$\\sum_{n=1}^{\\infty} \\frac{1}{n^{" + pValue + "}}$");
-        sb.append(" converge? Explain.\\\\");
-        sectionTeX.put(Section.QUESTION, sb.toString());
+        sb.append("$\\sum\\limits_{n=1}^{\\infty} \\frac{1}{n^{" + pValue + "}}$");
+        sb.append(" converge? Explain.");
+        setQuestion(sb.toString());
     }
 
     private void createSolutionTeX() {
         StringBuilder sb = new StringBuilder();
         
         if (doesConverge) {
-            sb.append("Yes, it does, by the p-series test. Since p $>$ 1, the series will converge");
+            sb.append("Yes, it does, by the $p$-series test. Since $p>1$, the series will converge.");
         } else {
-            sb.append("No, it doesn't, by the p-series test. Since p $<$ 1, the series will diverge");
+            sb.append("No, it doesn't, by the $p$-series test. Since $p<1$, the series will diverge.");
         }
-
-        sectionTeX.put(Section.SOLUTION, sb.toString());
-        sectionTeX.put(Section.ANSWER, sb.toString());
+        setSolution(sb.toString());
+        setAnswer(sb.toString());
     }
 
     private void createAnswerTeX() {
+        // do nothing;
+        // set in createSolutionTex()
     }
-
-    /**
-     * Accessor for LaTeX associated with a section name.
-     *
-     * @param name The section name for which the LaTeX is required.
-     * @return The LaTeX associated with the given section name, or NULL.
-     * @throws IllegalArgumentException if the given name does not translate to a valid section.
-     */
-    @Override public String getSection(final String name) throws IllegalArgumentException {
-        return sectionTeX.get(Enum.valueOf(Section.class, name.toUpperCase()));
-    }
-
 }
