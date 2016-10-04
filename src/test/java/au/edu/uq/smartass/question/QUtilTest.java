@@ -51,7 +51,7 @@ public class QUtilTest {
         int upper = 10;
         for (int i = 0; i < 100; ++i) {
             int val = QUtil.generateNegToPosInt(lower, upper);
-            assertTrue(String.format("Generated Value [%d]",val), lower <= val && val <= upper);
+            assertTrue(String.format("Generated Value [%d]",val), lower <= val && val <= upper && Math.abs(val) > 1);
         }
     }
 
