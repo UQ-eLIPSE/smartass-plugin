@@ -47,25 +47,31 @@ public class AvagadroGlucoseModuleTest {
     public void getQuestionTest() {
         String expected =
                 "Calculate the number of molecules in 5.00g of glucose powder $(C_6H_{12}O_6)$.";
+        System.out.println(expected);
         assertEquals(expected, qsn.getSection("question"));
     }
 
     @Test
     public void getSolutionTest() {
         String expected =
-				"The molar mass of glucose is $180.2$g mol$^{-1}$.\\\\\n" +
+				"\\newcommand{\\scientific}[1]{\\num[round-precision=4,round-mode=figures,scientific-notation=true]{#1}}\n" +
+				"The molar mass of glucose is $180.16$g mol$^{-1}$.\\\\\n" +
 				"The number of moles $=$ mass $\\div$ molar mass $=\\dfrac{5.00}{180.2}=0.0278$ moles.\\\\\n" +
-				"Therefore the number of molecules $=$ moles $\\times$ Avogadro’s number " +
-                "$=0.0278\\times(" +
-                "\\num[round-precision=4,round-mode=figures,scientific-notation=true]{6.022000e+23}" +
-                ")=\\num[round-precision=4,round-mode=figures,scientific-notation=true]{1.671292e+22}$ molecules.";
+				"Therefore the number of molecules $=$ moles $\\times$ Avogadro’s number \n" +
+                "$=0.0278\\times(\\scientific{6.0220e+23})\n" +
+                "=\\scientific{1.6713e+22}$ molecules."
+           ;
         System.out.println(expected);
         assertEquals(expected, qsn.getSection("solution"));
     }
 
     @Test
     public void getAnswerTest() {
-        String expected = "\\num[round-precision=4,round-mode=figures,scientific-notation=true]{1.671292e+22}";
+        String expected =
+				"\\newcommand{\\scientific}[1]" +
+                "{\\num[round-precision=4,round-mode=figures,scientific-notation=true]{#1}}\n" +
+				"\\scientific{1.6713e+22}";
+        System.out.println(expected);
         assertEquals(expected, qsn.getSection("answer"));
     }
 
