@@ -26,7 +26,7 @@ public abstract class AvagadroSimpleQuestionModule extends SimpleQuestionModule 
                 String.format("The molar mass of %1$s is $%2$.2f$g mol$^{-1}$.\\\\\n", substance, molar) +
                 "The number of moles $=$ mass $\\div$ molar mass " +
                 String.format("$=\\dfrac{%1$.2f}{%2$.1f}=%3$.4f$ moles.\\\\\n", grm, molar, mol) +
-                "Therefore the number of molecules $=$ moles $\\times$ Avogadro’s number \n" +
+                "Therefore the number of molecules $=$ moles $\\times$ Avogadro's number \n" +
                 String.format("$=%1$.4f\\times(\\scientific{%2$.4e})\n", mol, AVAGADRO_NUM ) +
                 String.format("=\\scientific{%.4e}$ molecules.", ans)
                 ;

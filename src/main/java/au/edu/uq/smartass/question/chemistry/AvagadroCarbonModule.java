@@ -49,7 +49,7 @@ public class AvagadroCarbonModule extends AvagadroSimpleQuestionModule {
                 String.format("The atomic mass of carbon is $%1$.2f$g mol$^{-1}$.\\\\\n", ATOMIC_MASS_CARBON) +
                 "The number of moles $=$ mass $\\div$ molar mass " +
                 String.format("$=\\dfrac{%1$.2f}{%2$.1f}=%3$.4f$ moles.\\\\\n", grm, ATOMIC_MASS_CARBON, mol) +
-                "Therefore the number of molecules $=$ moles $\\times$ Avogadro’s number " +
+                "Therefore the number of molecules $=$ moles $\\times$ Avogadro's number " +
                 String.format("$=%1$.4f\\times(", mol ) +
                 String.format("%s{%e}", SI_NOTA, AVAGADRO_NUM) +
                 String.format(")=%s{%e}$ molecules.", SI_NOTA, ans)

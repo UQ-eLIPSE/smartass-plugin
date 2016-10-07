@@ -51,7 +51,7 @@ public class AvagadroCarbonModuleTest {
                 "{\\num[round-precision=4,round-mode=figures,scientific-notation=true]{#1}}\n" +
 				"The molar mass of carbon is $12.01$g mol$^{-1}$.\\\\\n" +
 				"The number of moles $=$ mass $\\div$ molar mass $=\\dfrac{0.40}{12.0}=0.0333$ moles.\\\\\n" +
-				"Therefore the number of molecules $=$ moles $\\times$ Avogadro’s number \n" +
+				"Therefore the number of molecules $=$ moles $\\times$ Avogadro's number \n" +
 				"$=0.0333\\times(\\scientific{6.0220e+23})\n" +
 				"=\\scientific{2.0057e+22}$ molecules.";
         System.out.println(expected);
