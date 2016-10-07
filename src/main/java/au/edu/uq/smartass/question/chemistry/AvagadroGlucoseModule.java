@@ -1,27 +1,23 @@
 package au.edu.uq.smartass.question.chemistry;
 
-import au.edu.uq.smartass.engine.SimpleQuestionModule;
-
 import java.util.Date;
 import java.util.Random;
 
+
 /**
  */
-public class AvagadroGlucoseModule extends SimpleQuestionModule {
+public class AvagadroGlucoseModule extends AvagadroSimpleQuestionModule {
 
-    private static final double AVAGADRO_NUM = 6.022e23;    // [ mol^-1 ]
+    private static final String GLUCOSE = "glucose";
+    private static final double M_GLUCOSE = 180.16;     // Molar Mass [g/mol]
 
     private static final double MIN_GRM = 0.5;
     private static final double MAX_GRM = 50.0;
 
-    private static final double M_GLUCOSE = 180.16;     // Molar Mass [g/mol]
-
-    private static final String SI_NOTA =
-            "\\num[round-precision=4,round-mode=figures,scientific-notation=true]";
 
     public AvagadroGlucoseModule() {
         this(
-                new Random(new Date().getTime()).nextInt((int)(MAX_GRM-MIN_GRM)*0xa) / 0xa
+                generateRandomInt( (int)(MAX_GRM-MIN_GRM)*0xa ) / 0xa + MIN_GRM
         );
     }
 
@@ -32,7 +28,7 @@ public class AvagadroGlucoseModule extends SimpleQuestionModule {
         double ans = mol * AVAGADRO_NUM;
 
         setQuestion(createQuestionTex(grm));
-        setSolution(createSolutionTex(grm, mol, ans));
+        setSolution(createSolutionTex(GLUCOSE, M_GLUCOSE, grm, mol, ans));
         setAnswer(createAnswerTex(ans));
     }
 
@@ -43,21 +39,4 @@ public class AvagadroGlucoseModule extends SimpleQuestionModule {
         return tex;
     }
 
-    private String createSolutionTex(double grm, double mol, double ans) {
-        String tex =
-                String.format("The molar mass of glucose is $%1$.1f$g mol$^{-1}$.\\\\\n", M_GLUCOSE) +
-                "The number of moles $=$ mass $\\div$ molar mass " +
-                String.format("$=\\dfrac{%1$.2f}{%2$.1f}=%3$.4f$ moles.\\\\\n", grm, M_GLUCOSE, mol) +
-                "Therefore the number of molecules $=$ moles $\\times$ Avogadro’s number " +
-                String.format("$=%1$.4f\\times(", mol ) +
-                String.format("%s{%e}", SI_NOTA, AVAGADRO_NUM) +
-                String.format(")=%s{%e}$ molecules.", SI_NOTA, ans)
-            ;
-        return tex;
-    }
-
-    private String createAnswerTex(double ans) {
-        String tex = String.format("%s{%e}", SI_NOTA, ans);
-        return tex;
-    }
 }
