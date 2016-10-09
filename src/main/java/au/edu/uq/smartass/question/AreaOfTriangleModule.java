@@ -1,6 +1,6 @@
 package au.edu.uq.smartass.question;
 
-import au.edu.uq.smartass.engine.QuestionModule;
+import au.edu.uq.smartass.engine.SimpleQuestionModule;
 
 import java.util.ArrayList;
 import java.util.EnumMap;
@@ -20,13 +20,7 @@ import java.lang.String;
  *      \\usepackage{enumerate}
  *      \\usepackage{siunitx}
  */
-public class AreaOfTriangleModule implements QuestionModule {
-
-    /** Define supported TeX Sections. */
-    public enum Section { QUESTION, SOLUTION, ANSWER }
-
-    /** Lookup TeX string. */
-    private Map<Section,String> sectionTeX = new EnumMap<>(Section.class);
+public class AreaOfTriangleModule extends SimpleQuestionModule {
 
     /** */
     interface IntegerGenerator { int next(int lower, int uppper); }
@@ -60,8 +54,8 @@ public class AreaOfTriangleModule implements QuestionModule {
             this.y = y;
             this.z = z;
 
-            formatString = name + "(" + x + ", " + y + ", " + z + ")";
-            formatVectorString = "(" + x + ", " + y + ", " + z + ")";
+            formatString = String.format("%s(%d,%d,%d)", name, x, y, z);
+            formatVectorString = String.format("(%d,%d,%d)", x, y, z);
         }
 
         public int getX() {
@@ -129,13 +123,18 @@ public class AreaOfTriangleModule implements QuestionModule {
             generateFormatString();
         }
 
-        private void generateFormatString() { 
-            formatString = "";
-            formatString += "Area & = \\frac{1}{2}\\|" + vertexA.getName() + " \\times " + vertexB.getName() + "|\\\\";
-            formatString += vertexA.getName() + " & = " + vertexA.formatVector() + "\\\\";
-            formatString += vertexB.getName() + " & = " + vertexB.formatVector() + "\\\\";
+        private void generateFormatString() {
+            formatString =
+                    "\\begin{align*}\n" +
+                    String.format(
+                            "\\text{Area}&=\\frac{1}{2}|%s\\times%s|\\\\\n",
+                            vertexA.getName(), vertexB.getName()) +
+                    String.format("%s&=%s\\\\\n", vertexA.getName(), vertexA.formatVector()) +
+                    String.format("%s&=%s\\\\\\\\\n", vertexB.getName(), vertexB.formatVector()) +
 
-            formatString += crossProduct.getWorking();
+                    crossProduct.getWorking() +
+
+                    "\\end{align*}";
         }
 
         /**
@@ -187,75 +186,67 @@ public class AreaOfTriangleModule implements QuestionModule {
             return answer;
         }
 
-	private void generateWorking() {
-            working = new String();
-	    working += "\\\\" + vertA.getName() + "\\times" + vertB.getName() + "& = \\left|";
-	    working += " \\begin{array}{crc}\n" +
-		    "\\textbf{i} & \\textbf{j} & \\textbf{k} \\\\\n" +
-		    vertA.getX() + "&" + vertA.getY() + "&" + vertA.getZ() + " \\\\\n" +
-		    vertB.getX() + "&" + vertB.getY() + "&" + vertB.getZ() + "\\end{array} \\right|";
+        private void generateWorking() {
+            working =
+                    String.format("%s\\times%s", vertA.getName(), vertB.getName()) +
+                    "&=\\left|\\begin{array}{crc}\\textbf{i}&\\textbf{j}&\\textbf{k}\\\\" +
+                    String.format("%d&%d&%d\\\\", vertA.getX(), vertA.getY(), vertA.getZ()) +
+                    String.format("%d&%d&%d", vertB.getX(), vertB.getY(), vertB.getZ()) +
+                    "\\end{array}\\right|\\\\\n" +
 
-	    working += "=";
-	    working += "\\textbf{i} \\left| \\begin{array}{rc}\n" +
-		    vertA.getY() + "&" + vertA.getZ()+ " \\\\\n" +
-		    vertB.getY() + "&" + vertB.getZ() + " \\end{array} \\right|\n" +
-		    "-";
-	    working += "\\textbf{j} \\left| \\begin{array}{cc}\n" +
-		    vertA.getX() + "&" + vertA.getZ() + " \\\\\n" +
-		    vertB.getX() + "&" + vertB.getZ() + " \\end{array} \\right|\n" +
-		    "+";
+                    "&=\\textbf{i}\\left|\\begin{array}{rc}" +
+                    String.format("%d&%d\\\\%d&%d", vertA.getY(), vertA.getZ(), vertB.getY(), vertB.getZ()) +
+                    "\\end{array}\\right|-\\textbf{j}\\left|\\begin{array}{cc}" +
+                    String.format("%d&%d\\\\%d&%d", vertA.getX(), vertA.getZ(), vertB.getX(), vertB.getZ()) +
+                    "\\end{array}\\right|+\\textbf{k}\\left|\\begin{array}{cr}" +
+                    String.format("%d&%d\\\\%d&%d", vertA.getX(), vertA.getY(), vertB.getX(), vertB.getY()) +
+                    "\\end{array} \\right|\\\\\n" +
 
-	    working += "\\textbf{k} \\left| \\begin{array}{cr}\n" +
-		    vertA.getX() + "&" + vertA.getY() + " \\\\\n" +
-		    vertB.getX() + "&" + vertB.getY() + " \\end{array} \\right|\n" +
-		    "=";
+                    "&=" + result + "\\\\\\\\\n" +
 
+                    String.format("|%s\\times%s|", vertA.getName(), vertB.getName()) +
+                    String.format("&=\\sqrt{%d^2+%d^2+%d^2}\\\\\n", i, j, k) +
+                    String.format("&=\\sqrt{%.1f}\\\\\\\\\n", squaredAnswer) +
 
-	    working += result;
-	    working += "\\\\";
+                    String.format("\\text{Therefore area }&=\\frac{1}{2}\\times\\sqrt{%.1f}\\\\\n", squaredAnswer) +
+                    String.format("&=\\frac{\\sqrt{%.1f}}{2}\\text{ units}^2\\\\\n", squaredAnswer);
 
-            working += "|" + vertA.getName() + " \\times " + vertB.getName() + "| & = \\sqrt{" + i + "^2 + " + j + "^2 + " + k + "^2}\\\\";
-            working += "&= \\sqrt{" + String.valueOf(squaredAnswer) + "}\\\\";
-            working += "Therefore\\ area & = \\frac{1}{2} \\times \\sqrt{" + String.valueOf(squaredAnswer) + "}\\\\";
-            working += " & = \\frac{\\sqrt{" + String.valueOf(squaredAnswer) + "}}{2} units^2\\\\";
-            answer = "$\\frac{\\sqrt{" + String.valueOf(squaredAnswer) + "}}{2} units^2$";
+            answer = "$\\frac{\\sqrt{" + String.valueOf(squaredAnswer) + "}}{2}$ units$^2$";
+        }
 
-	}
 
         private void generateResult() {
-	    result = new String();
-
-	    String[] vecNames = {"i", "j", "k"};
+	        result = new String();
+            String[] vecNames = {"i", "j", "k"};
             int dimension = 3;
 
-	    Map<String, Integer> vectors = new HashMap<String, Integer>();
+            Map<String, Integer> vectors = new HashMap<String, Integer>();
 
-
-	    vectors.put("i", (vertA.getY() * vertB.getZ()) - (vertA.getZ() * vertB.getY()));
-	    vectors.put("j", ((vertA.getX() * vertB.getZ()) - (vertA.getZ() * vertB.getX())) * -1);
-	    vectors.put("k", ((vertA.getX() * vertB.getY()) - vertA.getY() * vertB.getX()));
+            vectors.put("i", (vertA.getY() * vertB.getZ()) - (vertA.getZ() * vertB.getY()));
+            vectors.put("j", ((vertA.getX() * vertB.getZ()) - (vertA.getZ() * vertB.getX())) * -1);
+            vectors.put("k", ((vertA.getX() * vertB.getY()) - vertA.getY() * vertB.getX()));
 
             i = Math.abs(vectors.get("i"));
             j = Math.abs(vectors.get("j"));
             k = Math.abs(vectors.get("k"));
             squaredAnswer = Math.pow(i, 2) + Math.pow(j, 2) + Math.pow(k, 2);
 
-	    // Add the first element
-	    result += String.valueOf(vectors.get(vecNames[0]));
-	    result += "\\textbf{" + vecNames[0] + "}";
+            // Add the first element
+            result += String.valueOf(vectors.get(vecNames[0]));
+            result += "\\textbf{" + vecNames[0] + "}";
 
-	    for (int i = 1; i < dimension; i++) {
-		String key = vecNames[i];
-		if (vectors.get(key) < 0) {
-		    result += " - ";
-		    // Make it positive
-		    result += String.valueOf(vectors.get(key) * -1);
-		} else {
-		    result += " + ";
-		    result += String.valueOf(vectors.get(key));
-		}
-		result += "\\textbf{" + key + "}";
-	    } 
+            for (int i = 1; i < dimension; i++) {
+                String key = vecNames[i];
+                if (vectors.get(key) < 0) {
+                    result += "-";
+                    // Make it positive
+                    result += String.valueOf(vectors.get(key) * -1);
+                } else {
+                    result += "+";
+                    result += String.valueOf(vectors.get(key));
+                }
+                result += "\\textbf{" + key + "}";
+            }
 
         }
     }
@@ -308,38 +299,18 @@ public class AreaOfTriangleModule implements QuestionModule {
     }
 
     private void createQuestionTeX() {
-        StringBuilder sb = new StringBuilder();
-        
-        sb.append("Let " + vertA.formatString() + ", " + vertB.formatString() + " and " + vertC.formatString() + " be the three vertices of a triangle. Determine the area of the triangle ABC.\\\\");
-
-        sectionTeX.put(Section.QUESTION, sb.toString());
+        setQuestion( String.format(
+                "Let $%s$, $%s$ and $%s$ be the three vertices of a triangle. " +
+                "Determine the area of $\\triangle ABC$.",
+                 vertA.formatString(), vertB.formatString(), vertC.formatString()
+            ));
     }
 
     private void createSolutionTeX() {
-        StringBuilder sb = new StringBuilder();
-
-        sb.append("\\begin{align*}");
-        sb.append(areaCalc.formatString());
-        sb.append("\\end{align*}");
-        
-        sectionTeX.put(Section.SOLUTION, sb.toString());
+        setSolution(areaCalc.formatString());
     }
 
     private void createAnswerTeX() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(areaCalc.getAnswer());
-        sectionTeX.put(Section.ANSWER, sb.toString());
+        setAnswer(areaCalc.getAnswer());
     }
-
-    /**
-     * Accessor for LaTeX associated with a section name.
-     *
-     * @param name The section name for which the LaTeX is required.
-     * @return The LaTeX associated with the given section name, or NULL.
-     * @throws IllegalArgumentException if the given name does not translate to a valid section.
-     */
-    @Override public String getSection(final String name) throws IllegalArgumentException {
-        return sectionTeX.get(Enum.valueOf(Section.class, name.toUpperCase()));
-    }
-
 }
