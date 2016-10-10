@@ -4,6 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.lang.reflect.Constructor;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -32,6 +33,23 @@ public class CrossProductModuleTest {
     @After
     public void tearDown() throws Exception {
 
+    }
+
+    /**
+     * Check for 'public' default constructor.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testCrossProductModuleDefault() throws Exception {
+        try {
+            Constructor<CrossProductModule> constructor
+                    = CrossProductModule.class.getConstructor();
+            assertTrue(true);
+
+        } catch (NoSuchMethodException ex) {
+            fail();
+        }
     }
 
     @Test
