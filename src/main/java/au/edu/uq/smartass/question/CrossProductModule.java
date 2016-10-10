@@ -121,7 +121,10 @@ public class CrossProductModule implements QuestionModule{
         initialise(generator);
     }
 
-    CrossProductModule() {
+    /**
+     * A public default constructor is required by the ServiceLoader.
+     */
+    public CrossProductModule() {
         initialise(new RandomNumberGenerator());
     }
 
