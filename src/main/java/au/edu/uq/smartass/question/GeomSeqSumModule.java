@@ -1,8 +1,8 @@
 package au.edu.uq.smartass.question;
 
-import au.edu.uq.smartass.engine.QuestionModule;
+import au.edu.uq.smartass.engine.SimpleQuestionModule;
+
 import java.util.EnumMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.math.BigDecimal;
@@ -16,13 +16,7 @@ import java.math.RoundingMode;
  *      \\usepackage{enumerate}
  *      \\usepackage{siunitx}
  */
-public class GeomSeqSumModule implements QuestionModule {
-
-    /** Define supported TeX Sections. */
-    public enum Section { QUESTION, SOLUTION, ANSWER }
-
-    /** Lookup TeX string. */
-    private Map<Section,String> sectionTeX = new EnumMap<>(Section.class);
+public class GeomSeqSumModule extends SimpleQuestionModule {
 
     private int n;
     private int a;
@@ -71,42 +65,28 @@ public class GeomSeqSumModule implements QuestionModule {
     }
 
     private void createQuestionTeX() {
-        String sb = "";
-        sb += "Let $" + this.seq[0] + ", " + this.seq[1] + ", " + this.seq[2] + "$ be a geometric sequence. What is the sum of the first " + this.n + " terms?\\\\";
-
-        sectionTeX.put(Section.QUESTION, sb);
+        String tex =
+                String.format("Let $%1$d, %2$d, %3$d$ ", seq[0],seq[1],seq[2]) +
+                "be the first three terms of a geometric sequence. " +
+                String.format("What is the sum of the first %d terms?", n);
+        setQuestion(tex);
     }
 
     private void createSolutionTeX() {
-        String sb = "";
-        
-        sb += "$S_n=\\dfrac{a(r^n-1)}{r-1}$, where $r=" + this.seq[1] + 
-            "\\div" + this.seq[0] + "=" + this.r + "$ and $a=" + this.a + "$.\\\\" +
-            "$S_{" + this.n + "}=\\dfrac{" + this.a + "(" + this.r + "^{" + this.n + "-1})}{" + this.n + "-1}$\\\\" +
-            "$=\\dfrac{" + this.a + "\\cdot" + this.r + "^{" + (this.n-1) + "}}{" + (this.n-1) + "}$\\\\" +
-            "$\\approx " + formatDouble(this.a * Math.pow(this.r, this.n-1) / (this.n-1)) + "$\\\\";
-
-
-        sectionTeX.put(Section.SOLUTION, sb);
+        String tex =
+                "\\begin{align*}\n" +
+                "S_n&=\\dfrac{a(r^n-1)}{r-1}\\text{, where }" +
+                String.format("r=%2$d\\div%1$d=%3$d\\text{ and }a=%4$d.\\\\\n", seq[0], seq[1], r, a) +
+                String.format("S_{%3$d}&=\\dfrac{%1$d(%2$d^{%3$d-1})}{%3$d-1}\\\\\n", a, r, n) +
+                String.format("&=\\dfrac{%1$d\\cdot%2$d^{%3$d}}{%3$d}\\\\\n", a, r, n-1) +
+                String.format("&\\approx%1$s\n", formatDouble(this.a * Math.pow(this.r, this.n-1) / (this.n-1))) +
+                "\\end{align*}";
+        setSolution(tex);
     }
 
     private void createAnswerTeX() {
-        String sb = "";
-
-        sb += "$\\approx " + formatDouble(this.a * Math.pow(this.r, this.n-1) / (this.n-1)) + "$";
-
-        sectionTeX.put(Section.ANSWER, sb);
+        String tex =
+                String.format("$%1$s$", formatDouble(this.a * Math.pow(this.r, this.n-1) / (this.n-1)));
+        setAnswer(tex);
     }
-
-    /**
-     * Accessor for LaTeX associated with a section name.
-     *
-     * @param name The section name for which the LaTeX is required.
-     * @return The LaTeX associated with the given section name, or NULL.
-     * @throws IllegalArgumentException if the given name does not translate to a valid section.
-     */
-    @Override public String getSection(final String name) throws IllegalArgumentException {
-        return sectionTeX.get(Enum.valueOf(Section.class, name.toUpperCase()));
-    }
-
 }

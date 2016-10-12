@@ -29,10 +29,10 @@ public class GeomSeqSumTest {
      * @throws Exception
      */
     @Test
-    public void testPSeriesModule() throws Exception {
+    public void testGeomSeqSumModuleDefault() throws Exception {
         try {
-            Constructor<PSeriesModule> constructor
-                    = PSeriesModule.class.getConstructor();
+            Constructor<GeomSeqSumModule> constructor
+                    = GeomSeqSumModule.class.getConstructor();
             assertTrue(true);
 
         } catch (NoSuchMethodException ex) {
@@ -44,25 +44,24 @@ public class GeomSeqSumTest {
     public void testGetSection() throws Exception {
         GeomSeqSumModule geom = new GeomSeqSumModule(2, 3, 20);
 
-        String expectedQuestion = "Let $2, 6, 18$ be a geometric sequence. What is the sum of the first 20 terms?\\\\";
-        assertEquals(geom.getSection("question"), expectedQuestion);
+        String expectedQuestion =
+                "Let $2, 6, 18$ be the first three terms of a geometric sequence. " +
+                "What is the sum of the first 20 terms?";
+        System.out.println(expectedQuestion);
+        assertEquals(expectedQuestion, geom.getSection("question"));
 
-        String expectedSolution = "$S_n=\\dfrac{a(r^n-1)}{r-1}$, where $r=6\\div2=3$ and $a=2$.\\\\$S_{20}=\\dfrac{2(3^{20-1})}{20-1}$\\\\$=\\dfrac{2\\cdot3^{19}}{19}$\\\\$\\approx 122343312.32$\\\\";
-        assertEquals(geom.getSection("solution"), expectedSolution);
+        String expectedSolution =
+			"\\begin{align*}\n" +
+			"S_n&=\\dfrac{a(r^n-1)}{r-1}\\text{, where }r=6\\div2=3\\text{ and }a=2.\\\\\n" +
+			"S_{20}&=\\dfrac{2(3^{20-1})}{20-1}\\\\\n" +
+			"&=\\dfrac{2\\cdot3^{19}}{19}\\\\\n" +
+			"&\\approx122343312.32\n" +
+			"\\end{align*}";
+        System.out.println(expectedSolution);
+        assertEquals(expectedSolution, geom.getSection("solution"));
 
-
-        String expectedAnswer = "$\\approx 122343312.32$";
-        assertEquals(geom.getSection("answer"), expectedAnswer);
-    }
-
-    @Test
-    public void testGetSectionFail() throws Exception {
-        ScalarProductModule dot = new ScalarProductModule();
-        try {
-            dot.getSection("NonExistantSectionName");
-            fail();
-        } catch (IllegalArgumentException ex) {
-            assertTrue(true);
-        }
+        String expectedAnswer = String.format("$%.2f$", 122343312.32);
+        System.out.println(expectedAnswer);
+        assertEquals(expectedAnswer, geom.getSection("answer"));
     }
 }
