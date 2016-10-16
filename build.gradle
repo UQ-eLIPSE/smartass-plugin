@@ -66,9 +66,16 @@ allprojects {
 }
 
 task createService << {
-        def clsDir = "${buildDir}/classes/main"
+        
+        // Convert the build directory to a string
+        def buildDirStr = buildDir.toString();
+
+        // Fix the slashes for windows
+        def dir = buildDirStr.replaceAll("\\\\", "/");
+        
+        def clsDir = "${dir}/classes/main"
         def questionPack = "au/edu/uq/smartass/question"
-        def serviceDir = "${buildDir}/resources/main/META_INF/services"
+        def serviceDir = "${dir}/resources/main/META_INF/services"
 
         new File("$serviceDir").mkdirs()
         def fos = new FileOutputStream(
@@ -81,7 +88,7 @@ task createService << {
                 if ( file.name =~ /\$/ ) return
 
                 fos <<
-                        file.path.replaceAll( /($clsDir)\/($questionPack)\/(.*)\.class/ ) {
+                        file.path.replaceAll( /($clsDir)\/($questionPack)\/(.*)\.class/) {
                             _0, _1, smartass, question ->
                                 return "${smartass}/${question}".replaceAll( ~/\//, ".")
                         }
