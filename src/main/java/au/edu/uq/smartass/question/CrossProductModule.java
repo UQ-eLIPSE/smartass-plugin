@@ -1,26 +1,15 @@
 package au.edu.uq.smartass.question;
 
-import au.edu.uq.smartass.engine.QuestionModule;
+import au.edu.uq.smartass.engine.SimpleQuestionModule;
 
 // @review Do not import whole package.
-import java.util.List;
-import java.util.Random;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.EnumMap;
-import java.util.HashMap;
+import java.util.*;
 
 /**
  * Cross Product Module
  * Generates random cross product questions
  */
-public class CrossProductModule implements QuestionModule{
-    /**
-     * Define supported TeX sections
-     */
-    public enum Section {QUESTION, SOLUTION, ANSWER};
-
-    private Map<Section, String> sectionTex = new EnumMap<>(Section.class);
+public class CrossProductModule extends SimpleQuestionModule {
 
     // Store the math objects
     static private final int dimension = 3;
@@ -157,7 +146,7 @@ public class CrossProductModule implements QuestionModule{
         question += "Let $ \\mathbf{u}= \\left(\\begin{array}{c} " + u.get(0) + " \\\\ " +
                 u.get(1) + "\\\\" + u.get(2) + "\\end{array} \\right)$ and $ \\mathbf{ v} =\\left(\\begin{array}{c} " + v.get(0) +
                 "\\\\ " + v.get(1) + "\\\\" + v.get(2) + "\\end{array} \\right) $. Determine ${\\bf u} \\times {\\bf v}$.";
-        sectionTex.put(Section.QUESTION, question);
+        setQuestion(question);
     }
 
     private void createSolutionTex() {
@@ -186,16 +175,11 @@ public class CrossProductModule implements QuestionModule{
 
         working += crossProduct.generateResult();
         working += "$";
-        sectionTex.put(Section.SOLUTION, working);
+        setSolution(working);
     }
 
     private void createAnswerTex() {
-        sectionTex.put(Section.ANSWER, crossProduct.generateResult());
-    }
-
-    @Override
-    public String getSection(final String name) throws IllegalArgumentException {
-        return sectionTex.get(Enum.valueOf(Section.class, name.toUpperCase()));
+        setAnswer(crossProduct.generateResult());
     }
 
 }

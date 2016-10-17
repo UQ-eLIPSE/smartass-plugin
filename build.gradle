@@ -5,6 +5,9 @@
 
 //------------------------------------------------------------------------------
 
+import java.util.regex.Matcher
+import java.util.regex.Pattern
+
 apply plugin: 'java'
 
 
@@ -92,16 +95,38 @@ task createService << {
                             _0, _1, smartass, question ->
                                 return "${smartass}/${question}".replaceAll( ~/\//, ".")
                         }
-                fos << "\n"
+                }
+
+                // Add additional classes where classes identified as inheriting QuestionModule.
+                subClzzOf = subClzzOf.each{
+                        if (qmSubs.contains(it.key)) {
+                                it.value.each{ questionModules.add(it); }
+                                it.value = null
+                        }
+                }.findAll{ it.value != null }
+
+                return questionModules
         }
-        fos.close()
+
+        doLast {
+                //def srvConfPath = "${buildDir}/resources/META-INF/services/"
+                def srvConfPath = "${projectDir}/src/main/resources/META-INF/services/"
+                new File( srvConfPath ).mkdirs()
+                def srvConfName = 'au.edu.uq.smartass.engine.QuestionModule'
+                def qms = questionModuleSet()
+                def fos = new FileOutputStream( "${srvConfPath}${srvConfName}")
+                qms.each {
+                        fos << it
+                        fos << "\n"
+                }
+                fos.close()
+
+                //qms.each{ println it }
+                println "[${qms.size()}]"
+        }
+
 }
 
-/** Debug utility task. */
-task printClassPath << {
-        configurations.runtime.each { println it }
-}
-
-defaultTasks 'clean', 'check', 'createService', /*'javadoc',*/ 'build'
+defaultTasks 'clean', 'createServiceConf', 'check', /*'javadoc',*/ 'build'
 
 
