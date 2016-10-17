@@ -9,7 +9,7 @@ import java.util.Map;
  *
  * *note: The class is marked as abstract despite not having abstract methods.
  */
-abstract public class SimpleQuestionModule implements QuestionModule {
+public abstract class SimpleQuestionModule implements QuestionModule {
 
     /** Define supported TeX Sections. */
     private enum Section { QUESTION, SOLUTION, ANSWER }

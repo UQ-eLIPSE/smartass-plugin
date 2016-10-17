@@ -88,13 +88,4 @@ public class CrossProductModuleTest {
         assertEquals(crossProduct.getSection("solution"), expected);
     }
 
-    @Test
-    public void testGetSectionFail() throws Exception {
-        try {
-            crossProduct.getSection("NonExistantSectionName");
-            fail();
-        } catch (IllegalArgumentException ex) {
-            assertTrue(true);
-        }
-    }
 }
