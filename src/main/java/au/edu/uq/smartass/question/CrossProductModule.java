@@ -45,8 +45,6 @@ public class CrossProductModule extends SimpleQuestionModule {
         private Vector v;
 
         private String formatName;
-        private String formatExpanded;
-        private String formatGrouped;
         private String formatResult;
 
         CrossProduct(final Vector u, final Vector v) {
@@ -56,25 +54,18 @@ public class CrossProductModule extends SimpleQuestionModule {
             assert (u.dimension() == v.dimension());
 
             formatName = u.formatName() + "\\times" + v.formatName();
-
-            List<String> expandTokens = new ArrayList<>();
-            List<String> groupedTokens = new ArrayList<>();
-
             formatResult = generateResult();
         }
+
+        String getFormatedResult() { return formatResult; }
 
         /**
          * Generates the numerical result of the cross product
          * The result is in the form '3i - 2j + 4k'
          */
-        public String generateResult() {
+        private String generateResult() {
             String result = new String();
 
-            // @review Use Map?
-            // @review Use of 'Magic' Numbers!
-
-            // The array is needed, cause we need to maintain the order within the map
-            // As far as I can tell, there is no ordered maps
             String[] vecNames = {"i", "j", "k"};
 
             Map<String, Integer> vectors = new HashMap<String, Integer>();
@@ -88,15 +79,14 @@ public class CrossProductModule extends SimpleQuestionModule {
             result += String.valueOf(vectors.get(vecNames[0]));
             result += "\\textbf{" + vecNames[0] + "}";
 
-            // @review for loop with coditional test based on index?
             for (int i = 1; i < dimension; i++) {
                 String key = vecNames[i];
                 if (vectors.get(key) < 0) {
-                    result += " - ";
+                    result += "-";
                     // Make it positive
                     result += String.valueOf(vectors.get(key) * -1);
                 } else {
-                    result += " + ";
+                    result += "+";
                     result += String.valueOf(vectors.get(key));
                 }
                 result += "\\textbf{" + key + "}";
@@ -142,44 +132,48 @@ public class CrossProductModule extends SimpleQuestionModule {
     }
 
     private void createQuestionTex() {
-        String question = new String();
-        question += "Let $ \\mathbf{u}= \\left(\\begin{array}{c} " + u.get(0) + " \\\\ " +
-                u.get(1) + "\\\\" + u.get(2) + "\\end{array} \\right)$ and $ \\mathbf{ v} =\\left(\\begin{array}{c} " + v.get(0) +
-                "\\\\ " + v.get(1) + "\\\\" + v.get(2) + "\\end{array} \\right) $. Determine ${\\bf u} \\times {\\bf v}$.";
-        setQuestion(question);
+        String tex =
+                String.format(
+                        "Let $\\mathbf{u}=\\left(\\begin{array}{c}%d\\\\%d\\\\%d\\end{array}\\right)$ \n",
+                        u.get(0), u.get(1), u.get(2)
+                    ) +
+                String.format(
+                        "and $\\mathbf{v}=\\left(\\begin{array}{c}%d\\\\%d\\\\%d\\end{array}\\right)$. \n",
+                        v.get(0), v.get(1), v.get(2)
+                    ) +
+                "Determine $\\bf{u}\\times\\bf{v}$.";
+        setQuestion(tex);
     }
 
     private void createSolutionTex() {
-        String working = new String();
-
-        working += "$\\textbf{u}\\times\\textbf{v} = \\left|";
-        working += " \\begin{array}{crc}\n" +
-                "\\textbf{i} & \\textbf{j} & \\textbf{k} \\\\\n" +
-                u.get(0) + "&" + u.get(1) + "&" + u.get(2) + " \\\\\n" +
-                v.get(0) + "&" + v.get(1) + "&" + v.get(2) + "\\end{array} \\right|";
-
-        working += "=";
-        working += "\\textbf{i} \\left| \\begin{array}{rc}\n" +
-                u.get(1) + "&" + u.get(2)+ " \\\\\n" +
-                v.get(1) + "&" + v.get(2) + " \\end{array} \\right|\n" +
-                "-";
-        working += "\\textbf{j} \\left| \\begin{array}{cc}\n" +
-                u.get(0) + "&" + u.get(2) + " \\\\\n" +
-                v.get(0) + "&" + v.get(2) + " \\end{array} \\right|\n" +
-                "+";
-
-        working += "\\textbf{k} \\left| \\begin{array}{cr}\n" +
-                u.get(0) + "&" + u.get(1) + " \\\\\n" +
-                v.get(0) + "&" + v.get(1) + " \\end{array} \\right|\n" +
-                "=";
-
-        working += crossProduct.generateResult();
-        working += "$";
-        setSolution(working);
+        String tex =
+                "\\begin{align*}\n" +
+                "\\textbf{u}\\times\\textbf{v}&=\\left|\\begin{array}{crc}\n" +
+                String.format(
+                        "\\textbf{i}&\\textbf{j}&\\textbf{k}\\\\%d&%d&%d\\\\%d&%d&%d\n",
+                        u.get(0), u.get(1), u.get(2), v.get(0), v.get(1), v.get(2)
+                    ) +
+                "\\end{array}\\right|\\\\\n" +
+                String.format(
+                        "&=\\textbf{i}\\left|\\begin{array}{rc}2&7\\\\5&-9\\end{array}\\right|\n",
+                        u.get(1), u.get(2), v.get(1), v.get(2)
+                    ) +
+                String.format(
+                        "-\\textbf{j}\\left|\\begin{array}{cc}5&7\\\\-2&-9\\end{array}\\right|\n",
+                        u.get(0), u.get(2), v.get(0), v.get(2)
+                    ) +
+                String.format(
+                        "+\\textbf{k}\\left|\\begin{array}{cr}5&2\\\\-2&5\\end{array}\\right|\\\\\n",
+                        u.get(0), u.get(1), v.get(0), v.get(1)
+                    ) +
+                String.format(
+                        "&=%s\n", crossProduct.getFormatedResult()) +
+                "\\end{align*}";
+        setSolution(tex);
     }
 
     private void createAnswerTex() {
-        setAnswer(crossProduct.generateResult());
+        setAnswer(String.format("$%s$", crossProduct.getFormatedResult()));
     }
 
 }

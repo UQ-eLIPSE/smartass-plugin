@@ -53,7 +53,7 @@ public class ArithmeticSequenceNthTermModuleTest {
     @Test
     public void testGetSectionQuestion() {
         String expected =
-                "Let $2,6,10$ be the first three terms of a finite sequence. " +
+                "Let $2,6,10$ be the first three terms of a finite arithmetic sequence. " +
                 "Determine the $40$th term in the sequence.";
         System.out.println(expected);
         assertEquals(expected, seq.getSection("question"));
@@ -65,11 +65,11 @@ public class ArithmeticSequenceNthTermModuleTest {
     @Test
     public void testGetSectionSolution() {
         String expected =
-                "\\begin{align*}" +
-                "a_n&=a+(n-1)d,\\text{ where }d=6-2=4\\text{ and }a=2\\\\" +
-                "\\text{Therefore }a_{40}&=2+(40-1)\\cdot4\\\\" +
-                "&=2+39\\cdot4\\\\" +
-                "&=158" +
+                "\\begin{align*}\n" +
+                "a_n&=a+(n-1)d,\\text{ where }d=6-2=4\\text{ and }a=2.\\\\\n" +
+                "\\text{Therefore }a_{40}&=2+(40-1)\\cdot4\\\\\n" +
+                "&=2+39\\cdot4\\\\\n" +
+                "&=158\n" +
                 "\\end{align*}";
         System.out.println(expected);
         assertEquals(expected, seq.getSection("solution"));

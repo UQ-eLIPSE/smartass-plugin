@@ -59,9 +59,9 @@ public class ArithmeticSequenceSumOfNTermsModuleTest {
     @Test
     public void testGetSectionQuestion() {
         String expected =
-                "Let $2,6,10$ be the first three terms of a finite sequence. " +
+                "Let $2,6,10$ be the first three terms of a finite arithmetic sequence. " +
                 "Determine the sum of the first $40$ terms in the sequence.";
-        //System.out.println(expected);
+        System.out.println(expected);
         assertEquals(expected, a.getSection("question"));
     }
 
@@ -71,13 +71,13 @@ public class ArithmeticSequenceSumOfNTermsModuleTest {
     @Test
     public void testGetSectionSolution() {
         String expected =
-				"\\begin{align*}" +
-				"S_n&=\\dfrac{n}{2}(2a+(n-1)d)\\text{, where }d=6-2=4\\text{ and }a=2.\\\\" +
-				"\\text{Therefore }S_{40}&=\\dfrac{40}{2}(2\\cdot 2 +(40-1)\\cdot 4)\\\\" +
-				"&=20(4+39\\cdot4)\\\\" +
-				"&=3200" +
+				"\\begin{align*}\n" +
+				"S_n&=\\dfrac{n}{2}(2a+(n-1)d)\\text{, where }d=6-2=4\\text{ and }a=2.\\\\\n" +
+				"\\text{Therefore }S_{40}&=\\dfrac{40}{2}(2\\cdot 2 +(40-1)\\cdot 4)\\\\\n" +
+				"&=20(4+39\\cdot4)\\\\\n" +
+				"&=3200\n" +
 				"\\end{align*}";
-        //System.out.println(expected);
+        System.out.println(expected);
         assertEquals(expected, a.getSection("solution"));
     }
 
@@ -87,7 +87,7 @@ public class ArithmeticSequenceSumOfNTermsModuleTest {
     @Test
     public void testGetSectionAnswer() {
         String expected = "$3200$";
-        //System.out.println(expected);
+        System.out.println(expected);
         assertEquals(expected, a.getSection("answer"));
     }
 }

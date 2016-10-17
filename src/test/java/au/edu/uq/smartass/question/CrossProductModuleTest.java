@@ -54,37 +54,34 @@ public class CrossProductModuleTest {
 
     @Test
     public void testCrossProductQuestion() {
-
-        String expected = "Let $ \\mathbf{u}= \\left(\\begin{array}{c} " +
-                "5 \\\\ 2\\\\7\\end{array} \\right)$ and $ \\mathbf{ v} " +
-                "=\\left(\\begin{array}{c} -2\\\\ 5\\\\-9\\end{array} " +
-                "\\right) $. Determine ${\\bf u} \\times {\\bf v}$.";
+        String expected =
+                "Let $\\mathbf{u}=\\left(\\begin{array}{c}5\\\\2\\\\7\\end{array}\\right)$ \n" +
+                "and $\\mathbf{v}=\\left(\\begin{array}{c}-2\\\\5\\\\-9\\end{array}\\right)$. \n" +
+                "Determine $\\bf{u}\\times\\bf{v}$.";
+        System.out.println(expected);
         assertEquals(crossProduct.getSection("question"), expected);
     }
 
     @Test
     public void testCrossProductAnswer() {
-
-        String expected = "-53\\textbf{i} + 31\\textbf{j} + 29\\textbf{k}";
+        String expected = "$-53\\textbf{i}+31\\textbf{j}+29\\textbf{k}$";
+        System.out.println(expected);
         assertEquals(crossProduct.getSection("answer"), expected);
     }
 
     @Test
     public void testCrossProductSolution() {
-
-        String expected = "$\\textbf{u}\\times\\textbf{v} = \\left| \\begin{array}{crc}\n" +
-                "\\textbf{i} & \\textbf{j} & \\textbf{k} \\\\\n" +
-                "5&2&7 \\\\\n" +
-                "-2&5&-9\\end{array} \\right|=\\textbf{i} \\left| \\begin{array}{rc}\n" +
-                "2&7 \\\\\n" +
-                "5&-9 \\end{array} \\right|\n" +
-                "-\\textbf{j} \\left| \\begin{array}{cc}\n" +
-                "5&7 \\\\\n" +
-                "-2&-9 \\end{array} \\right|\n" +
-                "+\\textbf{k} \\left| \\begin{array}{cr}\n" +
-                "5&2 \\\\\n" +
-                "-2&5 \\end{array} \\right|\n" +
-                "=-53\\textbf{i} + 31\\textbf{j} + 29\\textbf{k}$";
+        String expected =
+				"\\begin{align*}\n" +
+				"\\textbf{u}\\times\\textbf{v}&=\\left|\\begin{array}{crc}\n" +
+				"\\textbf{i}&\\textbf{j}&\\textbf{k}\\\\5&2&7\\\\-2&5&-9\n" +
+				"\\end{array}\\right|\\\\\n" +
+				"&=\\textbf{i}\\left|\\begin{array}{rc}2&7\\\\5&-9\\end{array}\\right|\n" +
+				"-\\textbf{j}\\left|\\begin{array}{cc}5&7\\\\-2&-9\\end{array}\\right|\n" +
+				"+\\textbf{k}\\left|\\begin{array}{cr}5&2\\\\-2&5\\end{array}\\right|\\\\\n" +
+				"&=-53\\textbf{i}+31\\textbf{j}+29\\textbf{k}\n" +
+				"\\end{align*}";
+        System.out.println(expected);
         assertEquals(crossProduct.getSection("solution"), expected);
     }
 

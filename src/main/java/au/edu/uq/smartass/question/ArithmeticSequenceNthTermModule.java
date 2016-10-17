@@ -53,12 +53,11 @@ public class ArithmeticSequenceNthTermModule extends SimpleQuestionModule {
      * @return LaTeX formatted string for Question.
      */
     private String createQuestionTeX(int numA, int numB, int numC, int term) {
-        String ord = QUtil.getOrdinal(term);
-        String sb = ("Let ");
-        sb += format("$%1$d,%2$d,%3$d$", numA, numB, numC);
-        sb += format(" be the first three terms of a finite sequence. Determine the $%d$", term);
-        sb += format("%s term in the sequence.", ord);
-        return sb;
+        String tex =
+                format("Let $%1$d,%2$d,%3$d$", numA, numB, numC) +
+                " be the first three terms of a finite arithmetic sequence. " +
+                format("Determine the $%1$d$%2$s term in the sequence.", term, QUtil.getOrdinal(term));
+        return tex;
     }
 
     /**
@@ -72,11 +71,11 @@ public class ArithmeticSequenceNthTermModule extends SimpleQuestionModule {
      */
     private String createSolutionTeX(int numA, int numB, int diff, int term, int result) {
         String tex =
-                "\\begin{align*}" +
-                format("a_n&=a+(n-1)d,\\text{ where }d=%2$d-%1$d=%3$d\\text{ and }a=%1$d\\\\", numA, numB, diff) +
-                format("\\text{Therefore }a_{%2$d}&=%1$d+(%2$d-1)\\cdot%3$d\\\\", numA, term, diff) +
-                format("&=%1$d+%2$d\\cdot%3$d\\\\", numA, term - 1, diff) +
-                format("&=%1$d", result) +
+                "\\begin{align*}\n" +
+                format("a_n&=a+(n-1)d,\\text{ where }d=%2$d-%1$d=%3$d\\text{ and }a=%1$d.\\\\\n", numA, numB, diff) +
+                format("\\text{Therefore }a_{%2$d}&=%1$d+(%2$d-1)\\cdot%3$d\\\\\n", numA, term, diff) +
+                format("&=%1$d+%2$d\\cdot%3$d\\\\\n", numA, term - 1, diff) +
+                format("&=%1$d\n", result) +
                 "\\end{align*}";
         return tex;
     }

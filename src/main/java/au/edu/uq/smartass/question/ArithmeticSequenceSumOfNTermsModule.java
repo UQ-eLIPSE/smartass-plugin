@@ -52,7 +52,7 @@ public class ArithmeticSequenceSumOfNTermsModule extends SimpleQuestionModule {
      */
     private String createQuestionTex(int numA, int numB, int numC, int term) {
         return format(
-                "Let $%1$d,%2$d,%3$d$ be the first three terms of a finite sequence. " +
+                "Let $%1$d,%2$d,%3$d$ be the first three terms of a finite arithmetic sequence. " +
                 "Determine the sum of the first $%4$d$ terms in the sequence.",
                 numA, numB, numC, term
             );
@@ -69,11 +69,15 @@ public class ArithmeticSequenceSumOfNTermsModule extends SimpleQuestionModule {
      */
     private String createSolutionTex(int numA, int numB, int diff, int term, int result) {
         String tex =
-                "\\begin{align*}" +
-                format("S_n&=\\dfrac{n}{2}(2a+(n-1)d)\\text{, where }d=%2$d-%1$d=%3$d\\text{ and }a=%1$d.\\\\", numA, numB, diff ) +
-                format("\\text{Therefore }S_{%2$d}&=\\dfrac{%2$d}{2}(2\\cdot %1$d +(%2$d-1)\\cdot %3$d)\\\\", numA, term, diff ) +
-                format("&=%2$d(%1$d+%3$d\\cdot%4$d)\\\\", 2 * numA, term / 2, term - 1, diff) +
-                format("&=%d", result) +
+                "\\begin{align*}\n" +
+                format(
+                        "S_n&=\\dfrac{n}{2}(2a+(n-1)d)\\text{, where }d=%2$d-%1$d=%3$d\\text{ and }a=%1$d.\\\\\n",
+                        numA, numB, diff ) +
+                format(
+                        "\\text{Therefore }S_{%2$d}&=\\dfrac{%2$d}{2}(2\\cdot %1$d +(%2$d-1)\\cdot %3$d)\\\\\n",
+                        numA, term, diff ) +
+                format("&=%2$d(%1$d+%3$d\\cdot%4$d)\\\\\n", 2 * numA, term / 2, term - 1, diff) +
+                format("&=%d\n", result) +
                 "\\end{align*}";
         return tex;
     }

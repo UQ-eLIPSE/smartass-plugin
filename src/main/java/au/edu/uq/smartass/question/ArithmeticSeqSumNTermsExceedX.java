@@ -42,7 +42,7 @@ public class ArithmeticSeqSumNTermsExceedX extends SimpleQuestionModule {
     private String createQuestionTex(int a, int b, int c, int x) {
         String tex =
                 String.format("Let $%d,%d,%d$ ", a, b, c) +
-                "be the first three terms of a finite sequence.\n" +
+                "be the first three terms of a finite arithmetic sequence.\n" +
                 "How many terms are needed for the sum to first exceed " +
                 String.format("$%d$?", x);
         return tex;
@@ -57,7 +57,7 @@ public class ArithmeticSeqSumNTermsExceedX extends SimpleQuestionModule {
                 "Let's solve this as an equation then round appropriately.\n" +
                 "\\begin{align*}\n" +
                 "S_n&=\\dfrac{n}{2}(2a+(n-1)d),\\text{ where }" +
-                String.format("d=%2$d-%1$d=%3$d\\text{ and }a=%1$d\\\\\n", a,b, d) +
+                String.format("d=%2$d-%1$d=%3$d\\text{ and }a=%1$d.\\\\\n", a,b, d) +
                 String.format(
                         "\\text{Therefore }%3$d&=\\dfrac{n}{2}(2\\cdot%1$d+(n-1)\\cdot%2$d)\\\\\n",
                         a, d, x
