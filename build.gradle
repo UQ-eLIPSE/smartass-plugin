@@ -68,32 +68,86 @@ allprojects {
 	}
 }
 
-task createService << {
-        
-        // Convert the build directory to a string
-        def buildDirStr = buildDir.toString();
+task createServiceConf {
 
-        // Fix the slashes for windows
-        def dir = buildDirStr.replaceAll("\\\\", "/");
-        
-        def clsDir = "${dir}/classes/main"
-        def questionPack = "au/edu/uq/smartass/question"
-        def serviceDir = "${dir}/resources/main/META_INF/services"
+        //
+        // Generate set of QuesionModule service providers.
+        //
+        ext.questionModuleSet = { 
 
-        new File("$serviceDir").mkdirs()
-        def fos = new FileOutputStream(
-                "${serviceDir}/au.edu.uq.smartass.engine.QuestionModule"
-            )
-        new File("${clsDir}/${questionPack}").eachFileRecurse(groovy.io.FileType.FILES) {
-            file ->
-                if ( ! file.name =~ /\.class$/ ) return
-                if ( file.name =~ /^Abstract/ ) return
-                if ( file.name =~ /\$/ ) return
 
-                fos <<
-                        file.path.replaceAll( /($clsDir)\/($questionPack)\/(.*)\.class/) {
-                            _0, _1, smartass, question ->
-                                return "${smartass}/${question}".replaceAll( ~/\//, ".")
+                // Set of all QuesitonModules
+                Set<File> questionModules = new TreeSet<>()
+
+                // Map class-names to super-class-names - used to build class hierarchy.
+                Map<String, String> superClzOf = new HashMap<>()
+                superClzOf['SimpleQuestionModule'] = 'QuestionModule'
+
+                // Map super-class-names to a set of all sub-class-files
+                Map<String, Set<File> > subClzzOf = new HashMap<>()
+
+                sourceSets.main.java.matching{ it.include('**/question/**') }.each{ File f ->
+
+                        String basename = f.name.replace('.java', '');
+
+                        // Match against file contents where class inherits a base-class:
+                        //      Group(1) : package name
+                        //      Group(2) : abstract or final stauts (null indicates NOT)
+                        //      Group(3) : captures inheritance; either 'implements QuestionModule' or 'extends <some-class>'
+                        //      Group(4) : extended (super) class-name
+                        //
+                        Pattern pattern = Pattern.compile(
+                                ".*\\bpackage\\s+([^; ]*);" +
+                                ".*\\bpublic\\s+(abstract|final)?\\s*class\\s+${basename}" + 
+                                "\\s+(implements\\s+QuestionModule|extends\\s+(\\S+))\\b\\s*\\{.*",
+                                Pattern.DOTALL)
+                        Matcher matcher = pattern.matcher(f.text)
+
+                        if (matcher.matches()) {
+                                String pkgQualifiedName = "${matcher.group(1)}.${basename}"
+                                // If class is 'abstract', map class to captured superclass
+                                if (matcher.group(2) != null && matcher.group(2).matches('abstract')) {
+                                        superClzOf[basename] = ((matcher.group(4) != null) ? matcher.group(4) : "QuestionModule")
+                                }
+                                // If class directly inherits QuestionModule or SimpleQuestionModule add it to list of QuestionModules.
+                                else if (
+                                                matcher.group(3).matches('implements\\s+QuestionModule') || 
+                                                matcher.group(4) == 'SimpleQuestionModule'
+                                ) {
+                                        questionModules.add(pkgQualifiedName)
+                                        //
+                                        //      . in case class is non-abstract super-classes .
+                                        //
+                                        superClzOf[basename] = 'QuestionModule'
+                                } 
+                                // Add class to set of classes with super-class. Requires further processing
+                                else {
+                                        String superClz = matcher.group(4);
+                                        if (!subClzzOf.containsKey(superClz)) subClzzOf[superClz] = new HashSet<File>()
+                                        subClzzOf[superClz].add(pkgQualifiedName)
+                                        //
+                                        //      . need to account for non-abstract super-classes .
+                                        //
+                                        superClzOf[basename] = superClz
+                                }
+                        // No Match!
+                        } else { 
+                                // IGNORE: 
+                                // @TODO: report files in wrong package?
+                        }
+                }
+
+                // Generate Set of QuestionModule sub-classes by following super-class-OF-class mapping.
+                Set<String> qmSubs = new HashSet<>()
+                superClzOf.each{ 
+                        String sClz = it.value
+                        while (true) {
+                                if (sClz == 'QuestionModule') { 
+                                        qmSubs.add(it.key) 
+                                        break
+                                }
+                                if (!superClzOf.containsKey(sClz)) break
+                                sClz = superClzOf[sClz]
                         }
                 }
 
