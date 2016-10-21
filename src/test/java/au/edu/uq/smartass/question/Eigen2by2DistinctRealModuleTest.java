@@ -52,7 +52,7 @@ public class Eigen2by2DistinctRealModuleTest {
             assertTrue(true);
         }
         try {
-            for (int i = 0; i < Eigen2by2DistinctRealModule.DATA.size() - 1; ++i) {
+            for (int i = 0; i < Eigen2by2DistinctRealModule.DATA.size(); ++i) {
                 new Eigen2by2DistinctRealModule(i);
             }
             assertTrue(true);
@@ -91,7 +91,7 @@ public class Eigen2by2DistinctRealModuleTest {
                 "&=\\lambda^2-\\lambda-20\\\\\n" +
                 "&=(\\lambda-5)(\\lambda+4)\n" +
                 "\\end{align*}\n" +
-                "Solving $p(\\lambda)=0$ yields the eigenbalues $\\lambda_1=5$ and $\\lambda_2=-4$.";
+                "Solving $p(\\lambda)=0$ yields the eigenvalues $\\lambda_1=5$ and $\\lambda_2=-4$.";
         String actual = eigen.getSection("solution");
         out.println(actual);
         assertEquals(expected, actual);
