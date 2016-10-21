@@ -124,8 +124,10 @@ public abstract class AbstractEigen2x2Module extends SimpleQuestionModule {
 
         String lambda1 = formatLambda(l_1);
         String lambda1_neg = formatLambda(new int[]{-l_1[0], -l_1[1]});
+        if (l_1[1]==0 && -l_1[0]>=0) lambda1_neg = "+" + lambda1_neg;
         String lambda2 = formatLambda(l_2);
         String lambda2_neg = formatLambda(new int[]{-l_2[0], -l_2[1]});
+        if (l_2[1]==0 && -l_2[0]>=0) lambda2_neg = "+" + lambda2_neg;
 
         setSolution(String.format(
                 "%1s\n\\begin{align*}\n%2s\n%3s\n%4s\n%5s\n%6s\n\\end{align*}\n%7s",

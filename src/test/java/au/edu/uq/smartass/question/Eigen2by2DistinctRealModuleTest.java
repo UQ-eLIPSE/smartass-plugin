@@ -40,19 +40,19 @@ public class Eigen2by2DistinctRealModuleTest {
     @Test
     public void Eigen2by2DistinctRealModuleIndex() throws Exception {
         try {
-            new Eigen2by2DistinctRealModule(Eigen2by2DistinctRealModule.DATA.size() - 1);
+            new Eigen2by2DistinctRealModule(Eigen2by2DistinctRealModule.getDataSize() - 1);
             assertTrue(true);
         } catch (Exception ex) {
             fail();
         }
         try {
-            new Eigen2by2DistinctRealModule(Eigen2by2DistinctRealModule.DATA.size());
+            new Eigen2by2DistinctRealModule(Eigen2by2DistinctRealModule.getDataSize());
             fail();
         } catch (Exception ex) {
             assertTrue(true);
         }
         try {
-            for (int i = 0; i < Eigen2by2DistinctRealModule.DATA.size(); ++i) {
+            for (int i = 0; i < Eigen2by2DistinctRealModule.getDataSize(); ++i) {
                 new Eigen2by2DistinctRealModule(i);
             }
             assertTrue(true);

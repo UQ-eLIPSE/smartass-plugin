@@ -32,10 +32,12 @@ public class Eigen2by2DistinctRealModule extends AbstractEigen2x2Module {
         return DATA.get(i);
     };
 
+    static int getDataSize() { return DATA.size(); }
+
     //
     //
     //
-    static final List<String> DATA = Arrays.asList(
+    private static final List<String> DATA = Arrays.asList(
     "A: [-7 -9];[4 8]|Characteristic polynomial: x^2 - x - 20|Eigenvalues & eigenvectors: 5 with eigenvector [-3, 4];-4 with eigenvector [-3, 1]",
     "A: [-4 9];[4 1]|Characteristic polynomial: x^2 + 3*x - 40|Eigenvalues & eigenvectors: 5 with eigenvector [1, 1];-8 with eigenvector [-9, 4]",
     "A: [-5 -2];[0 -7]|Characteristic polynomial: x^2 + 12*x + 35|Eigenvalues & eigenvectors: -5 with eigenvector [1, 0];-7 with eigenvector [1, 1]",
