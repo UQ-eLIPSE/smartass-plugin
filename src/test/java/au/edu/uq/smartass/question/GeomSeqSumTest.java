@@ -51,16 +51,16 @@ public class GeomSeqSumTest {
         assertEquals(expectedQuestion, geom.getSection("question"));
 
         String expectedSolution =
-			"\\begin{align*}\n" +
-			"S_n&=\\dfrac{a(r^n-1)}{r-1}\\text{, where }r=6\\div2=3\\text{ and }a=2.\\\\\n" +
-			"S_{20}&=\\dfrac{2(3^{20-1})}{20-1}\\\\\n" +
-			"&=\\dfrac{2\\cdot3^{19}}{19}\\\\\n" +
-			"&\\approx122343312.32\n" +
-			"\\end{align*}";
+				"\\begin{align*}\n" +
+				"S_n&=\\dfrac{a(r^n-1)}{r-1}\\text{, where }r=6\\div2=3\\text{ and }a=2.\\\\\n" +
+				"S_{20}&=\\dfrac{2\\cdot(3^{20}-1)}{3-1}\\\\\n" +
+				"&=\\dfrac{2\\cdot(3^{20}-1)}{2}\\\\\n" +
+				"&=3486784400\n" +
+				"\\end{align*}";
         System.out.println(expectedSolution);
         assertEquals(expectedSolution, geom.getSection("solution"));
 
-        String expectedAnswer = String.format("$%.2f$", 122343312.32);
+        String expectedAnswer = String.format("$%d$", 3486784400L);
         System.out.println(expectedAnswer);
         assertEquals(expectedAnswer, geom.getSection("answer"));
     }
