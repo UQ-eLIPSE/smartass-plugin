@@ -24,9 +24,9 @@ public class GenerateBulkQuesions {
         List<String> solutions = new ArrayList<>();
         List<String> answers = new ArrayList<>();
 
-        questions.add(String.format(HEADER_TEX, "eigen-2x2-distinct.questions"));
-        solutions.add(String.format(HEADER_TEX, "eigen-2x2-distinct.solutions"));
-        answers.add(String.format(HEADER_TEX, "eigen-2x2-distinct.answers"));
+        questions.add(String.format(HEADER_TEX, "infinite-geometric-sequence-sum.questions"));
+        solutions.add(String.format(HEADER_TEX, "infinite-geometric-sequence-sum.solutions"));
+        answers.add(String.format(HEADER_TEX, "infinite-geometric-sequence-sum.answers"));
 
         for (int i = 2; i <= 10; ++i) {
             InfiniteGeometricSequenceSumModule seq;
