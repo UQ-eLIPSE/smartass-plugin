@@ -20,9 +20,7 @@ build/
 #       . Generated .
 #
 **/services/*
-question_output.tex
-solution_output.tex
-answer_output.tex
+*.tex
 
 #
 #       . Vim .

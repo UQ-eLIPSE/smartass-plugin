@@ -62,15 +62,10 @@ public class GeomSeqSumModule extends SimpleQuestionModule {
      */
     public GeomSeqSumModule() {
         this(
-                2,                                     // a = 2
+                2,
                 getRandomInt(4, 2) * new Double(Math.pow(-1, getRandomInt(2, 0))).intValue(),
                 getRandomInt(11, 10)
         );
-    }
-
-    private static final Random NUM_GEN = new Random(new Date().getTime());
-    private static int getRandomInt(int count, int shift) {
-        return NUM_GEN.nextInt(count) + shift;
     }
 
 

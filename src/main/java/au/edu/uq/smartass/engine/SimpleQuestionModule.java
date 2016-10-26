@@ -1,7 +1,9 @@
 package au.edu.uq.smartass.engine;
 
+import java.util.Date;
 import java.util.EnumMap;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * Provides base functionality for simple question types. The simple question type is characterised by generating
@@ -20,6 +22,11 @@ public abstract class SimpleQuestionModule implements QuestionModule {
     protected void setQuestion(String questionTex) { sectionTeX.put(Section.QUESTION, questionTex); }
     protected void setSolution(String solutionTex) { sectionTeX.put(Section.SOLUTION, solutionTex); }
     protected void setAnswer(String answerTex) { sectionTeX.put(Section.ANSWER, answerTex); }
+
+    protected static final Random NUM_GEN = new Random(new Date().getTime());
+    protected static int getRandomInt(int count, int shift) {
+        return NUM_GEN.nextInt(count) + shift;
+    }
 
     /**
      * Accessor for LaTeX associated with a section name.
