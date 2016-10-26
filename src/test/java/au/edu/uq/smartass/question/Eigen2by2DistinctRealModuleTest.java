@@ -85,7 +85,8 @@ public class Eigen2by2DistinctRealModuleTest {
                 "A-\\lambda{I}=\\begin{bmatrix}-7-\\lambda&-9\\\\4&8-\\lambda\\end{bmatrix}.\n" +
                 "\\end{gather*}\n" +
                 "\\begin{align*}\n" +
-                "p(\\lambda)&=|A-\\lambda{I}|=\\begin{vmatrix}-7-\\lambda&-9\\\\4&8-\\lambda\\end{vmatrix}.\\\\\n" +
+                "p(\\lambda)&=|A-\\lambda{I}|\\\\\n" +
+                "&=\\begin{vmatrix}-7-\\lambda&-9\\\\4&8-\\lambda\\end{vmatrix}.\\\\\n" +
                 "&=(-7-\\lambda)(8-\\lambda)-(4\\times-9)\\\\\n" +
                 "&=-56-\\lambda+\\lambda^2+36\\\\\n" +
                 "&=\\lambda^2-\\lambda-20\\\\\n" +
