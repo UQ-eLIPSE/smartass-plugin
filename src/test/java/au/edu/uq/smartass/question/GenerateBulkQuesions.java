@@ -10,15 +10,66 @@ import java.util.List;
 
 /**
  */
-public class GenerateAllEigenVectorQuestions {
+public class GenerateBulkQuesions {
 
     public static void main(String[] argv) {
-        runDistinct();
-        runRepeated();
-        runComplex();
+        //runEigen2x2distinct();
+        //runEigen2x2repeated();
+        //runEigen2x2complex();
+        runInfiniteGeometricSequenceSum();
     }
 
-    private static void runDistinct() {
+    private static void runInfiniteGeometricSequenceSum() {
+        List<String> questions = new ArrayList<>();
+        List<String> solutions = new ArrayList<>();
+        List<String> answers = new ArrayList<>();
+
+        questions.add(String.format(HEADER_TEX, "eigen-2x2-distinct.questions"));
+        solutions.add(String.format(HEADER_TEX, "eigen-2x2-distinct.solutions"));
+        answers.add(String.format(HEADER_TEX, "eigen-2x2-distinct.answers"));
+
+        for (int i = 2; i <= 10; ++i) {
+            InfiniteGeometricSequenceSumModule seq;
+
+            seq = new InfiniteGeometricSequenceSumModule(i);
+            questions.add(ITEM_TEX);
+            questions.add(seq.getSection("question"));
+            solutions.add(ITEM_TEX);
+            solutions.add(seq.getSection("solution"));
+            answers.add(ITEM_TEX);
+            answers.add(seq.getSection("answer"));
+
+            seq = new InfiniteGeometricSequenceSumModule(-i);
+            questions.add(ITEM_TEX);
+            questions.add(seq.getSection("question"));
+            solutions.add(ITEM_TEX);
+            solutions.add(seq.getSection("solution"));
+            answers.add(ITEM_TEX);
+            answers.add(seq.getSection("answer"));
+        }
+
+        questions.add(FOOTER_TEX);
+        solutions.add(FOOTER_TEX);
+        answers.add(FOOTER_TEX);
+
+        Path file;
+        try {
+            file = Paths.get("infinite-geometric-sequence-sum.questions.tex");
+            Files.write(file, questions, Charset.forName("UTF-8"));
+
+            file = Paths.get("infinite-geometric-sequence-sum.solutions.tex");
+            Files.write(file, solutions, Charset.forName("UTF-8"));
+
+            file = Paths.get("infinite-geometric-sequence-sum.answers.tex");
+            Files.write(file, answers, Charset.forName("UTF-8"));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private static void runEigen2x2distinct() {
         List<String> questions = new ArrayList<>();
         List<String> solutions = new ArrayList<>();
         List<String> answers = new ArrayList<>();
@@ -57,7 +108,7 @@ public class GenerateAllEigenVectorQuestions {
         }
     }
 
-    private static void runRepeated() {
+    private static void runEigen2x2repeated() {
         List<String> questions = new ArrayList<>();
         List<String> solutions = new ArrayList<>();
         List<String> answers = new ArrayList<>();
@@ -96,7 +147,7 @@ public class GenerateAllEigenVectorQuestions {
         }
     }
 
-    private static void runComplex() {
+    private static void runEigen2x2complex() {
         List<String> questions = new ArrayList<>();
         List<String> solutions = new ArrayList<>();
         List<String> answers = new ArrayList<>();
