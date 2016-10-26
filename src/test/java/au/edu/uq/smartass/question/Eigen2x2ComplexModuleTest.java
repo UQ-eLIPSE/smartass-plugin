@@ -85,7 +85,8 @@ public class Eigen2x2ComplexModuleTest {
                 "A-\\lambda{I}=\\begin{bmatrix}3-\\lambda&4\\\\-8&-5-\\lambda\\end{bmatrix}.\n" +
                 "\\end{gather*}\n" +
                 "\\begin{align*}\n" +
-                "p(\\lambda)&=|A-\\lambda{I}|=\\begin{vmatrix}3-\\lambda&4\\\\-8&-5-\\lambda\\end{vmatrix}.\\\\\n" +
+                "p(\\lambda)&=|A-\\lambda{I}|\\\\\n" +
+                "&=\\begin{vmatrix}3-\\lambda&4\\\\-8&-5-\\lambda\\end{vmatrix}.\\\\\n" +
                 "&=(3-\\lambda)(-5-\\lambda)-(-8\\times4)\\\\\n" +
                 "&=-15+2\\lambda+\\lambda^2+32\\\\\n" +
                 "&=\\lambda^2+2\\lambda+17\\\\\n" +
