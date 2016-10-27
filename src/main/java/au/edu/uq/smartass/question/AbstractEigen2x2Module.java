@@ -178,14 +178,14 @@ public abstract class AbstractEigen2x2Module extends SimpleQuestionModule {
                     .append("\\begin{gather*}\n")
                     .append("A-\\lambda{I}=\\begin{bmatrix}")
                     .append("%s")
-                    .append("\\end{bmatrix}.\n")
+                    .append("\\end{bmatrix}\n")
                     .append("\\end{gather*}")
                     .toString()
             ;
     private static final String SOLUTION_LINE02 =
             new StringBuilder()
                     .append("p(\\lambda)&=|A-\\lambda{I}|\\\\\n")
-                    .append("&=\\begin{vmatrix}%s\\end{vmatrix}.\\\\")
+                    .append("&=\\begin{vmatrix}%s\\end{vmatrix}\\\\")
                     .toString()
             ;
     private static final String SOLUTION_LINE03 =
