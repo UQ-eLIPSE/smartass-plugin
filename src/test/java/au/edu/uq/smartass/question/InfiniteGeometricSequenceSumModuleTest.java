@@ -7,6 +7,10 @@ import java.lang.reflect.Constructor;
 import static org.junit.Assert.*;
 
 /**
+ * @todo
+ *      . Additional full TeX tests for InfiniteGeometricSequenceSumModule(a, r)
+ *          for 2 <= \a\ <= 10
+ *          for 2 <= \r\ <= 10
  */
 public class InfiniteGeometricSequenceSumModuleTest {
 
@@ -27,12 +31,47 @@ public class InfiniteGeometricSequenceSumModuleTest {
     }
 
     @Test
-    public void testGetSection() throws Exception {
-        InfiniteGeometricSequenceSumModule seq = new InfiniteGeometricSequenceSumModule(4);
+    public void InfiniteGeometricSequenceSumModuleConstructor() throws Exception {
+        constructionPass(2, 2);
+        constructionPass(-2, -2);
+        constructionPass(10, 10);
+        constructionPass(-10, -10);
+
+        constructionFail(1, 2);
+        constructionFail(2, 1);
+        constructionFail(-1, 2);
+        constructionFail(2, -1);
+        constructionFail(11, 2);
+        constructionFail(2, 11);
+        constructionFail(-11, 2);
+        constructionFail(2, -11);
+    }
+
+    private void constructionPass(int a, int r) {
+        try {
+            new InfiniteGeometricSequenceSumModule(a, r);
+            assert(true);
+        } catch (Exception ex) {
+            fail();
+        }
+    }
+
+    private void constructionFail(int a, int r) {
+        try {
+            new InfiniteGeometricSequenceSumModule(a, r);
+            fail();
+        } catch (AssertionError er) {
+            assert(true);
+        }
+    }
+
+    @Test
+    public void testQuestionLaTeX_2_4() throws Exception {
+        InfiniteGeometricSequenceSumModule seq = new InfiniteGeometricSequenceSumModule(2, 4);
 
         String expectedQ =
                 "Let $2,\\dfrac{1}{2},\\dfrac{1}{8}$ be the first three terms of an infinite geometric sequence. \n" +
-                "What is the sum of the series?";
+                "What is the sum of the corresponding series?";
         String actualQ = seq.getSection("question");
         System.out.println(actualQ);
         assertEquals(expectedQ, actualQ);
@@ -55,4 +94,65 @@ public class InfiniteGeometricSequenceSumModuleTest {
         assertEquals(expectedA, actualA);
     }
 
+    @Test
+    public void testQuestionLaTeX_8_7() throws Exception {
+        InfiniteGeometricSequenceSumModule seq = new InfiniteGeometricSequenceSumModule(-8, -7);
+
+        String expectedQ =
+                "Let $-8,\\dfrac{8}{7},-\\dfrac{8}{49}$ be the first three terms " +
+                "of an infinite geometric sequence. \n" +
+                "What is the sum of the corresponding series?";
+        String actualQ = seq.getSection("question");
+        System.out.println(actualQ);
+        assertEquals(expectedQ, actualQ);
+
+        String expectedS =
+                "\\begin{align*}\n" +
+                "S_{\\infty}&=\\dfrac{a}{1-r}\\text{, where }\n" +
+                "r=\\dfrac{8}{7}\\div-8=-\\dfrac{1}{7}\\text{ and }a=-8.\\\\\n" +
+                "S_{\\infty}&=-\\dfrac{8}{1+\\tfrac{1}{7}}\\\\\n" +
+                "&=-\\dfrac{8}{\\tfrac{8}{7}}\\\\\n" +
+                "&=-7\n" +
+                "\\end{align*}";
+        System.out.println(expectedS);
+        String actualS = seq.getSection("solution");
+        System.out.println(actualS);
+        assertEquals(expectedS, actualS);
+
+        String expectedA = "$-7$";
+        String actualA = seq.getSection("answer");
+        System.out.println(actualA);
+        assertEquals(expectedA, actualA);
+    }
+
+    @Test
+    public void testQuestionLaTeX_7_3() throws Exception {
+        InfiniteGeometricSequenceSumModule seq = new InfiniteGeometricSequenceSumModule(-7, 3);
+
+        String expectedQ =
+                "Let $-7,-\\dfrac{7}{3},-\\dfrac{7}{9}$ be the first three terms " +
+                "of an infinite geometric sequence. \n" +
+                "What is the sum of the corresponding series?";
+        String actualQ = seq.getSection("question");
+        System.out.println(actualQ);
+        assertEquals(expectedQ, actualQ);
+
+        String expectedS =
+                "\\begin{align*}\n" +
+                "S_{\\infty}&=\\dfrac{a}{1-r}\\text{, where }\n" +
+                "r=-\\dfrac{7}{3}\\div-7=\\dfrac{1}{3}\\text{ and }a=-7.\\\\\n" +
+                "S_{\\infty}&=-\\dfrac{7}{1-\\tfrac{1}{3}}\\\\\n" +
+                "&=-\\dfrac{7}{\\tfrac{2}{3}}\\\\\n" +
+                "&=-\\dfrac{21}{2}\n" +
+                "\\end{align*}";
+        //System.out.println(expectedS);
+        String actualS = seq.getSection("solution");
+        System.out.println(actualS);
+        assertEquals(expectedS, actualS);
+
+        String expectedA = "$-\\dfrac{21}{2}$";
+        String actualA = seq.getSection("answer");
+        System.out.println(actualA);
+        assertEquals(expectedA, actualA);
+    }
 }
