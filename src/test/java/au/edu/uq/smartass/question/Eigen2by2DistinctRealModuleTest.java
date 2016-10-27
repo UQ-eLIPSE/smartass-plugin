@@ -82,11 +82,11 @@ public class Eigen2by2DistinctRealModuleTest {
         Eigen2by2DistinctRealModule eigen = new Eigen2by2DistinctRealModule(0);
         String expected =
                 "\\begin{gather*}\n" +
-                "A-\\lambda{I}=\\begin{bmatrix}-7-\\lambda&-9\\\\4&8-\\lambda\\end{bmatrix}.\n" +
+                "A-\\lambda{I}=\\begin{bmatrix}-7-\\lambda&-9\\\\4&8-\\lambda\\end{bmatrix}\n" +
                 "\\end{gather*}\n" +
                 "\\begin{align*}\n" +
                 "p(\\lambda)&=|A-\\lambda{I}|\\\\\n" +
-                "&=\\begin{vmatrix}-7-\\lambda&-9\\\\4&8-\\lambda\\end{vmatrix}.\\\\\n" +
+                "&=\\begin{vmatrix}-7-\\lambda&-9\\\\4&8-\\lambda\\end{vmatrix}\\\\\n" +
                 "&=(-7-\\lambda)(8-\\lambda)-(4\\times-9)\\\\\n" +
                 "&=-56-\\lambda+\\lambda^2+36\\\\\n" +
                 "&=\\lambda^2-\\lambda-20\\\\\n" +

@@ -80,11 +80,11 @@ public class Eigen2x2RepeatModuleTest {
         Eigen2x2RepeatModule eigen = new Eigen2x2RepeatModule(0);
         String expected =
                 "\\begin{gather*}\n" +
-                "A-\\lambda{I}=\\begin{bmatrix}6-\\lambda&9\\\\-4&-6-\\lambda\\end{bmatrix}.\n" +
+                "A-\\lambda{I}=\\begin{bmatrix}6-\\lambda&9\\\\-4&-6-\\lambda\\end{bmatrix}\n" +
                 "\\end{gather*}\n" +
                 "\\begin{align*}\n" +
                 "p(\\lambda)&=|A-\\lambda{I}|\\\\\n" +
-                "&=\\begin{vmatrix}6-\\lambda&9\\\\-4&-6-\\lambda\\end{vmatrix}.\\\\\n" +
+                "&=\\begin{vmatrix}6-\\lambda&9\\\\-4&-6-\\lambda\\end{vmatrix}\\\\\n" +
                 "&=(6-\\lambda)(-6-\\lambda)-(-4\\times9)\\\\\n" +
                 "&=-36+0\\lambda+\\lambda^2+36\\\\\n" +
                 "&=\\lambda^2+0\\lambda+0\\\\\n" +
