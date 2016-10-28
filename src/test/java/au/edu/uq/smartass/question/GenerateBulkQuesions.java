@@ -35,13 +35,13 @@ public class GenerateBulkQuesions {
                 addNewQuestionItem(
                         new InfiniteGeometricSequenceSumModule( a, r),
                         questions, solutions, answers
-                );
+                    );
                 addNewQuestionItem(
-                        new InfiniteGeometricSequenceSumModule(-a, r),
+                        new InfiniteGeometricSequenceSumModule( a,-r),
                         questions, solutions, answers
                 );
                 addNewQuestionItem(
-                        new InfiniteGeometricSequenceSumModule( a,-r),
+                        new InfiniteGeometricSequenceSumModule(-a, r),
                         questions, solutions, answers
                 );
                 addNewQuestionItem(
