@@ -2,9 +2,6 @@ package au.edu.uq.smartass.question;
 
 import au.edu.uq.smartass.engine.SimpleQuestionModule;
 
-import java.util.Date;
-import java.util.Random;
-
 /**
  */
 public class InfiniteGeometricSequenceSumModule extends SimpleQuestionModule {
@@ -24,12 +21,6 @@ public class InfiniteGeometricSequenceSumModule extends SimpleQuestionModule {
         int b_denom = r;
         int c_denom = r * r;
 
-        if (0 == r % 2) {
-            numer = 1;
-            b_denom /= 2;
-            c_denom /= 2;
-        }
-
         int ans_n = a * r;
         int ans_d = r - 1;
 
@@ -39,8 +30,8 @@ public class InfiniteGeometricSequenceSumModule extends SimpleQuestionModule {
     }
 
     private String createQuestionTex(int a, int n, int b1, int c1) {
-        String b_str = ansTexHelper(n, b1);
-        String c_str = ansTexHelper(n, c1);
+        String b_str = fmtDfracTex(n, b1);
+        String c_str = fmtDfracTex(n, c1);
         String tex =
                 String.format("Let $%1$d,%2$s,%3$s$ ", a, b_str, c_str) +
                 "be the first three terms of an infinite geometric sequence. \n" +
@@ -49,8 +40,8 @@ public class InfiniteGeometricSequenceSumModule extends SimpleQuestionModule {
     }
 
     private String createSolutionTex(int r, int a, int b_n, int b_d, int ans_n, int ans_d) {
-        String b_str = ansTexHelper(b_n, b_d);
-        String r_str = ansTexHelper(1, r);
+        String b_str = fmtDfracTex(b_n, b_d);
+        String r_str = fmtDfracTex(1, r);
         String r_sign = (r < 0) ? "-" : "";
         int r_abs = Math.abs(r);
         String a_sign = (a < 0) ? "-" : "";
@@ -66,20 +57,24 @@ public class InfiniteGeometricSequenceSumModule extends SimpleQuestionModule {
                         "S_{\\infty}&=%2$s\\dfrac{%1$d}{1%4$s\\tfrac{1}{%3$d}}\\\\\n",
                         a_abs, a_sign, r_abs, (r < 0) ? "+" : "-") +
                 String.format("&=%2$s\\dfrac{%1$d}{\\tfrac{%3$d}{%4$d}}\\\\\n", a_abs, a_sign, Math.abs(r-1), r_abs) +
-                String.format("&=%s\n", ansTexHelper(ans_n, ans_d)) +
+                String.format("&=%s\n", fmtDfracTex(ans_n, ans_d)) +
                 "\\end{align*}";
         return tex;
     }
 
     private String createAnswerTex(int numer, int denom) {
-        return String.format("$%s$", ansTexHelper(numer, denom));
+        return String.format("$%s$", fmtDfracTex(numer, denom));
     }
 
-    private String ansTexHelper(int numer, int denom) {
+    private String fmtDfracTex(int numer, int denom) {
         String sign = ( 0 > numer*denom ) ? "-" : "";
-        return (0 == numer%denom)
-                ? String.format("%1$s%2$d", sign, Math.abs(numer/denom))
-                : String.format("%1$s\\dfrac{%2$d}{%3$d}", sign, Math.abs(numer), Math.abs(denom));
+        return
+                (0 == numer%denom) ?    String.format("%1$s%2$d", sign, Math.abs(numer/denom)) :
+                (0 == denom%numer) ?    String.format("%1$s\\dfrac{1}{%2$d}", sign, Math.abs(denom/numer)) :
+                                        String.format(
+                                                "%1$s\\dfrac{%2$d}{%3$d}",
+                                                sign, Math.abs(numer), Math.abs(denom)
+                                            );
     }
 
 }

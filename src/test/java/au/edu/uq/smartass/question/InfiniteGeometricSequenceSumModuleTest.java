@@ -95,7 +95,7 @@ public class InfiniteGeometricSequenceSumModuleTest {
     }
 
     @Test
-    public void testQuestionLaTeX_8_7() throws Exception {
+    public void testQuestionLaTeX_8n_7n() throws Exception {
         InfiniteGeometricSequenceSumModule seq = new InfiniteGeometricSequenceSumModule(-8, -7);
 
         String expectedQ =
@@ -126,7 +126,7 @@ public class InfiniteGeometricSequenceSumModuleTest {
     }
 
     @Test
-    public void testQuestionLaTeX_7_3() throws Exception {
+    public void testQuestionLaTeX_7n_3() throws Exception {
         InfiniteGeometricSequenceSumModule seq = new InfiniteGeometricSequenceSumModule(-7, 3);
 
         String expectedQ =
@@ -151,6 +151,69 @@ public class InfiniteGeometricSequenceSumModuleTest {
         assertEquals(expectedS, actualS);
 
         String expectedA = "$-\\dfrac{21}{2}$";
+        String actualA = seq.getSection("answer");
+        System.out.println(actualA);
+        assertEquals(expectedA, actualA);
+    }
+
+    @Test
+    public void testQuestionLaTeX_8n_4() throws Exception {
+        InfiniteGeometricSequenceSumModule seq = new InfiniteGeometricSequenceSumModule(-8, 4);
+
+        String expectedQ =
+                "Let $-8,-2,-\\dfrac{1}{2}$ be the first three terms " +
+                "of an infinite geometric sequence. \n" +
+                "What is the sum of the corresponding series?";
+        String actualQ = seq.getSection("question");
+        System.out.println(actualQ);
+        assertEquals(expectedQ, actualQ);
+
+        String expectedS =
+                "\\begin{align*}\n" +
+                "S_{\\infty}&=\\dfrac{a}{1-r}\\text{, where }\n" +
+                "r=-2\\div-8=\\dfrac{1}{4}\\text{ and }a=-8.\\\\\n" +
+                "S_{\\infty}&=-\\dfrac{8}{1-\\tfrac{1}{4}}\\\\\n" +
+                "&=-\\dfrac{8}{\\tfrac{3}{4}}\\\\\n" +
+                "&=-\\dfrac{32}{3}\n" +
+                "\\end{align*}";
+        //System.out.println(expectedS);
+        String actualS = seq.getSection("solution");
+        System.out.println(actualS);
+        assertEquals(expectedS, actualS);
+
+        String expectedA = "$-\\dfrac{32}{3}$";
+        String actualA = seq.getSection("answer");
+        System.out.println(actualA);
+        assertEquals(expectedA, actualA);
+    }
+
+    @Test
+    public void testQuestionLaTeX_9_9() throws Exception {
+        InfiniteGeometricSequenceSumModule seq = new InfiniteGeometricSequenceSumModule(9, 9);
+
+        String expectedQ =
+                "Let $9,1,\\dfrac{1}{9}$ be the first three terms " +
+                "of an infinite geometric sequence. \n" +
+                "What is the sum of the corresponding series?";
+        String actualQ = seq.getSection("question");
+        System.out.println(actualQ);
+        assertEquals(expectedQ, actualQ);
+
+        String expectedS =
+                "\\begin{align*}\n" +
+                "S_{\\infty}&=\\dfrac{a}{1-r}\\text{, where }\n" +
+                "r=1\\div9=\\dfrac{1}{9}\\text{ and }a=9.\\\\\n" +
+                "S_{\\infty}&=\\dfrac{9}{1-\\tfrac{1}{9}}\\\\\n" +
+                "&=\\dfrac{9}{\\tfrac{8}{9}}\\\\\n" +
+                "&=\\dfrac{81}{8}\n" +
+                "\\end{align*}";
+        //System.out.println(expectedS);
+        String actualS = seq.getSection("solution");
+        System.out.println(actualS);
+        assertEquals(expectedS, actualS);
+
+        String expectedA =
+                "$\\dfrac{81}{8}$";
         String actualA = seq.getSection("answer");
         System.out.println(actualA);
         assertEquals(expectedA, actualA);
