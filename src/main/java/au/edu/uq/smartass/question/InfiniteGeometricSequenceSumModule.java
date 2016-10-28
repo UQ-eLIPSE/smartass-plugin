@@ -71,10 +71,23 @@ public class InfiniteGeometricSequenceSumModule extends SimpleQuestionModule {
         return
                 (0 == numer%denom) ?    String.format("%1$s%2$d", sign, Math.abs(numer/denom)) :
                 (0 == denom%numer) ?    String.format("%1$s\\dfrac{1}{%2$d}", sign, Math.abs(denom/numer)) :
-                                        String.format(
-                                                "%1$s\\dfrac{%2$d}{%3$d}",
-                                                sign, Math.abs(numer), Math.abs(denom)
-                                            );
+                                        fmtDfracTeXHelper(sign, Math.abs(numer), Math.abs(denom));
+    }
+
+    private String fmtDfracTeXHelper(String sign, int numerator, int denominator) {
+        assert(numerator > 0);
+        assert(denominator > 0);
+        int common = getCommonDivisor(numerator, denominator);
+        return String.format(
+                "%1$s\\dfrac{%2$d}{%3$d}", sign, numerator/common, denominator/common
+            );
+    }
+
+    private int getCommonDivisor(int a, int b) {
+        for (int d = 9; d >= 1; --d ) {
+            if (0 == a%d && 0 == b%d) return d;
+        }
+        throw new Error();
     }
 
 }
