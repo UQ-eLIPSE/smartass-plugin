@@ -5,47 +5,87 @@
 
 //------------------------------------------------------------------------------
 
-import java.util.regex.Matcher
-import java.util.regex.Pattern
+
+plugins {
+        id 'org.ajoberstar.grgit' version '1.5.1'
+}
 
 apply plugin: 'java'
-
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
+task wrapper(type: Wrapper) { gradleVersion = '3.1' }
 
-task wrapper(type: Wrapper) { gradleVersion = '2.9' }
+
+import org.ajoberstar.grgit.*
+import org.ajoberstar.grgit.auth.*
+task qmapi {
+        def destination = file('qmapi')
+        //def repository = 'source.eait.uq.edu.au:smartass'
+        def repository = 'repo:smartass'
+
+        if (destination.exists()) {
+                println ". . . ."
+                println ". . . .  Update Sparse Checkout for :  . . . ."
+                println " --> $destination"
+                println ". . . ."
+                def grgit = Grgit.open(dir: "$destination")
+                grgit.pull()
+        } else {
+                println ". . . ."
+                println ". . . .  Create Sparse Checkout for :  . . . ."
+                println " --> $destination"
+                println ". . . ."
+                println ". . . .  initialize git:"
+                def grgit = Grgit.init(dir: "$destination")
+                def jgit = grgit.repository.jgit
+                println ". . . .  config sparse-checkout:"
+                def config = jgit.repository.config
+                config.setBoolean('core', null, 'sparseCheckout', true)
+                println ". . . .  info sparse-checkout:"
+                def info_sc = new File("$destination/.git/info/sparse-checkout")
+                info_sc.parentFile.mkdirs()
+                info_sc.text = 'src/main/java/au/edu/uq/smartass/engine/QuestionModule.java'
+                println ". . . .  remote add:"
+                def remote = grgit.remote.add(name: 'origin', url: "$repository")
+                println ". . . .  git pull origin master:"
+                //
+                //      . PROBLEM: checks out whole repo (NOT sparse) .
+                //
+                //grgit.fetch()
+                //grgit.pull(remote: 'origin', branch: 'master')
+                //
+                //      . PROBLEM: Auth Fail - need to specifically set up ssh-agent auth??
+                //
+                //def pullcmd = jgit.pull()
+                //pullcmd.call()
+
+                def proc = 'git pull origin master'.execute(null, new File("$destination"))
+                proc.waitFor()
+                println ". . . ."
+        }
+}
+
+project(':qmapi') {
+        apply plugin: 'java'
+        group = 'au.edu.uq.smartass'
+        version = '0.0.1'
+        println "* * * * *  $project.name  * * * * *"
+}
 
 repositories { mavenCentral() }
 
 dependencies {
-
 	//
 	// 	. compile .
 	//
-        
-        // @TODO: make dependency on 'QuestionModule' Interface Library.
+        compile project(':qmapi')
 
 	//
 	// 	. testCompile . 
 	//
 	testCompile 'junit:junit:4.12'
-
-	testCompile 'org.json:json:20141113'
-	testCompile 'com.hp.hpl.jena:arq:2.8.3'
-
-	//
-	// 	. Updates .
-	//
-	compile 'ch.qos.logback:logback-core:1.1.3'
-	compile 'ch.qos.logback:logback-classic:1.1.3'
-	compile 'org.codehaus.groovy:groovy:2.4.4'
-
-        //
-        //      . local libs .
-        //
-	compile fileTree('libs')
 }
 
 test { 
@@ -59,7 +99,6 @@ jar {
 	version = '0.1.0'
 }
 
-
 allprojects {
 	gradle.projectsEvaluated {
 		tasks.withType(JavaCompile) {
@@ -68,14 +107,17 @@ allprojects {
 	}
 }
 
+//
+//      . Create au.edu.uq.smartass.engine.QuestionModule Services file .
+//
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 task createServiceConf {
 
         //
         // Generate set of QuesionModule service providers.
         //
         ext.questionModuleSet = { 
-
-
                 // Set of all QuesitonModules
                 Set<File> questionModules = new TreeSet<>()
 
@@ -87,7 +129,6 @@ task createServiceConf {
                 Map<String, Set<File> > subClzzOf = new HashMap<>()
 
                 sourceSets.main.java.matching{ it.include('**/question/**') }.each{ File f ->
-
                         String basename = f.name.replace('.java', '');
 
                         // Match against file contents where class inherits a base-class:
@@ -178,7 +219,6 @@ task createServiceConf {
                 //qms.each{ println it }
                 println "[${qms.size()}]"
         }
-
 }
 
 defaultTasks 'clean', 'createServiceConf', 'check', /*'javadoc',*/ 'build'

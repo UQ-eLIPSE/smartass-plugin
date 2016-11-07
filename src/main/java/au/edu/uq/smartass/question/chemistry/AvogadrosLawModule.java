@@ -23,10 +23,6 @@ import au.edu.uq.smartass.engine.QuestionModule;
 
 import java.math.BigDecimal;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-
 
 /**
  * Describes the question on Avogadro's law:
@@ -37,10 +33,6 @@ import org.slf4j.LoggerFactory;
  *
  */
 public final class AvogadrosLawModule implements QuestionModule {
-
-    /** Class logger. */
-    private static final Logger LOG = LoggerFactory.getLogger( AvogadrosLawModule.class );
-
 
     private static final String MIN_V="5.0";
     private static final String MAX_V="20.0";
@@ -79,7 +71,6 @@ public final class AvogadrosLawModule implements QuestionModule {
          */
         @Override
         public QuestionModule initialise(String[] params) {
-            LOG.info( "::intialize( {} )[]", params.toString() );
             try {
                 switch (params.length) {
                 case 5:
