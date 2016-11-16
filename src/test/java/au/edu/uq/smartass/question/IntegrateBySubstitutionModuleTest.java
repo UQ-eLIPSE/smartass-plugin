@@ -28,22 +28,27 @@ public class IntegrateBySubstitutionModuleTest {
 
     @Test
     public void IntegrateBySubstitutionModuleConstructor() throws Exception {
-        //constructionPass(1);
-        //constructionFail( 0);
+        constructionPass(1,1,1,0,1);
+        constructionPass(100,100,100,99,100);
+
+        constructionFail(0,1,1,1,1);
+        constructionFail(1,1,1,1,1);
+        constructionFail(100,100,100,100,100);
+        constructionFail(100,100,100,99,101);
     }
 
-    private void constructionPass(int a) {
+    private void constructionPass(final int a, final int m, final int b, final int n, final int S) {
         try {
-            //new IntegrateBySubstitutionModule(a);
+            new IntegrateBySubstitutionModule(a,m,b,n,S);
             assert(true);
         } catch (Exception ex) {
             fail();
         }
     }
 
-    private void constructionFail(int a) {
+    private void constructionFail(final int a, final int m, final int b, final int n, final int S) {
         try {
-            //new IntegrateBySubstitutionModule(a);
+            new IntegrateBySubstitutionModule(a,m,b,n,S);
             fail();
         } catch (AssertionError er) {
             assert(true);
