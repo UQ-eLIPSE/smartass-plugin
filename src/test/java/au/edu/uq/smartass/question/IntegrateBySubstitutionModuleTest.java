@@ -60,7 +60,7 @@ public class IntegrateBySubstitutionModuleTest {
         IntegrateBySubstitutionModule integral = new IntegrateBySubstitutionModule(1, 2, 1, 1, 1);
 
         String expectedQ =
-                "Determine $\\displaystyle\\int\\dfrac{2x+1}{x^{2}+x}\\,\\mathrm{d}x$.";
+                "Determine $\\displaystyle\\int\\dfrac{2x+1}{x^{2}+x}\\,dx$.";
         String actualQ = integral.getSection("Question");
         System.out.println(actualQ);
         assertEquals(expectedQ, actualQ);
@@ -68,12 +68,12 @@ public class IntegrateBySubstitutionModuleTest {
         String expectedS =
                 "\\begin{align*}\n" +
                 "\\text{Let }u&=x^{2}+x.\\\\\n" +
-                "\\text{Then }\\dfrac{\\mathrm{d}u}{\\mathrm{d}x}&=2x+1.\\\\\n" +
-                "\\text{So }\\mathrm{d}u&=2x+1\\,\\mathrm{d}x.\n" +
+                "\\text{Then }\\dfrac{du}{dx}&=2x+1.\\\\\n" +
+                "\\text{So }du&=2x+1\\,dx.\n" +
                 "\\end{align*}\n" +
                 "\\begin{align*}\n" +
-                "\\displaystyle\\int\\dfrac{2x+1}{x^{2}+x}\\,\\mathrm{d}x\n" +
-                "&=\\displaystyle\\int\\dfrac{1}{u}\\,\\mathrm{d}u\\\\\n" +
+                "\\displaystyle\\int\\dfrac{2x+1}{x^{2}+x}\\,dx\n" +
+                "&=\\displaystyle\\int\\dfrac{1}{u}\\,du\\\\\n" +
                 "&=\\ln|u|+C\\\\\n" +
                 "&=\\ln|x^{2}+x|+C\n" +
                 "\\end{align*}";
@@ -94,7 +94,7 @@ public class IntegrateBySubstitutionModuleTest {
         IntegrateBySubstitutionModule integral = new IntegrateBySubstitutionModule(1, 1, 1, 0, 1);
 
         String expectedQ =
-                "Determine $\\displaystyle\\int\\dfrac{1}{x+1}\\,\\mathrm{d}x$.";
+                "Determine $\\displaystyle\\int\\dfrac{1}{x+1}\\,dx$.";
         String actualQ = integral.getSection("Question");
         System.out.println(actualQ);
         assertEquals(expectedQ, actualQ);
@@ -102,12 +102,12 @@ public class IntegrateBySubstitutionModuleTest {
         String expectedS =
                 "\\begin{align*}\n" +
                 "\\text{Let }u&=x+1.\\\\\n" +
-                "\\text{Then }\\dfrac{\\mathrm{d}u}{\\mathrm{d}x}&=1.\\\\\n" +
-                "\\text{So }\\mathrm{d}u&=1\\,\\mathrm{d}x.\n" +
+                "\\text{Then }\\dfrac{du}{dx}&=1.\\\\\n" +
+                "\\text{So }du&=1\\,dx.\n" +
                 "\\end{align*}\n" +
                 "\\begin{align*}\n" +
-                "\\displaystyle\\int\\dfrac{1}{x+1}\\,\\mathrm{d}x\n" +
-                "&=\\displaystyle\\int\\dfrac{1}{u}\\,\\mathrm{d}u\\\\\n" +
+                "\\displaystyle\\int\\dfrac{1}{x+1}\\,dx\n" +
+                "&=\\displaystyle\\int\\dfrac{1}{u}\\,du\\\\\n" +
                 "&=\\ln|u|+C\\\\\n" +
                 "&=\\ln|x+1|+C\n" +
                 "\\end{align*}";
@@ -128,7 +128,7 @@ public class IntegrateBySubstitutionModuleTest {
                 new IntegrateBySubstitutionModule(10, 10, 10, 9, 10);
 
         String expectedQ =
-                "Determine $\\displaystyle\\int\\dfrac{1000x^{9}+900x^{8}}{10x^{10}+10x^{9}}\\,\\mathrm{d}x$.";
+                "Determine $\\displaystyle\\int\\dfrac{1000x^{9}+900x^{8}}{10x^{10}+10x^{9}}\\,dx$.";
         String actualQ = integral.getSection("Question");
         System.out.println(actualQ);
         assertEquals(expectedQ, actualQ);
@@ -136,12 +136,12 @@ public class IntegrateBySubstitutionModuleTest {
         String expectedS =
                 "\\begin{align*}\n" +
                 "\\text{Let }u&=10x^{10}+10x^{9}.\\\\\n" +
-                "\\text{Then }\\dfrac{\\mathrm{d}u}{\\mathrm{d}x}&=100x^{9}+90x^{8}.\\\\\n" +
-                "\\text{So }\\mathrm{d}u&=100x^{9}+90x^{8}\\,\\mathrm{d}x.\n" +
+                "\\text{Then }\\dfrac{du}{dx}&=100x^{9}+90x^{8}.\\\\\n" +
+                "\\text{So }du&=100x^{9}+90x^{8}\\,dx.\n" +
                 "\\end{align*}\n" +
                 "\\begin{align*}\n" +
-                "\\displaystyle\\int\\dfrac{1000x^{9}+900x^{8}}{10x^{10}+10x^{9}}\\,\\mathrm{d}x\n" +
-                "&=\\displaystyle\\int\\dfrac{10}{u}\\,\\mathrm{d}u\\\\\n" +
+                "\\displaystyle\\int\\dfrac{1000x^{9}+900x^{8}}{10x^{10}+10x^{9}}\\,dx\n" +
+                "&=\\displaystyle\\int\\dfrac{10}{u}\\,du\\\\\n" +
                 "&=10\\ln|u|+C\\\\\n" +
                 "&=10\\ln|10x^{10}+10x^{9}|+C\n" +
                 "\\end{align*}";

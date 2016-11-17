@@ -31,7 +31,7 @@ public class IntegrateBySubstitutionModule extends SimpleQuestionModule {
         String poly = formatPolynomial(a, m, b, n);
         String derv = formatPolynomial(a*m, m-1, b*n, n-1);
         String numr = formatPolynomial(S*a*m, m-1, S*b*n, n-1);
-        String ques = String.format("\\displaystyle\\int\\dfrac{%1$s}{%2$s}\\,\\mathrm{d}x", numr, poly);
+        String ques = String.format("\\displaystyle\\int\\dfrac{%1$s}{%2$s}\\,dx", numr, poly);
         String ans = String.format( "%2$s\\ln|%1$s|+C", poly, 1 == S ? "" : Integer.toString(S) );
 
         setQuestion(createQuestionTex(ques));
@@ -52,12 +52,12 @@ public class IntegrateBySubstitutionModule extends SimpleQuestionModule {
         String tex =
                 "\\begin{align*}\n" +
                 String.format("\\text{Let }u&=%s.\\\\\n", poly) +
-                String.format("\\text{Then }\\dfrac{\\mathrm{d}u}{\\mathrm{d}x}&=%s.\\\\\n", derv) +
-                String.format("\\text{So }\\mathrm{d}u&=%s\\,\\mathrm{d}x.\n", derv) +
+                String.format("\\text{Then }\\dfrac{du}{dx}&=%s.\\\\\n", derv) +
+                String.format("\\text{So }du&=%s\\,dx.\n", derv) +
                 "\\end{align*}\n" +
                 "\\begin{align*}\n" +
                 ques + "\n" +
-                String.format("&=\\displaystyle\\int\\dfrac{%d}{u}\\,\\mathrm{d}u\\\\\n", S) +
+                String.format("&=\\displaystyle\\int\\dfrac{%d}{u}\\,du\\\\\n", S) +
                 String.format("&=%s\\ln|u|+C\\\\\n", 1==S ? "" : Integer.toString(S)) +
                 String.format("&=%1$s\n", ans) +
                 "\\end{align*}";
