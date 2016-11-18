@@ -22,11 +22,11 @@ public class IntegrateBySubstitutionModule extends SimpleQuestionModule {
     }
 
     private void init(final int a, final int m, final int b, final int n, final int S) {
-        assert( 0 < a && a <= 100 );
-        assert( 0 < m && m <= 100 );
-        assert( 0 < b && b <= 100 );
+        assert( 0 < a && a <= 10 );
+        assert( 0 < m && m <= 10 );
+        assert( 0 < b && b <= 10 );
         assert( 0 <= n && n < m );
-        assert( 0 < S && S <= 100 );
+        assert( 0 < S && S <= 10 );
 
         String poly = formatPolynomial(a, m, b, n);
         String derv = formatPolynomial(a*m, m-1, b*n, n-1);
