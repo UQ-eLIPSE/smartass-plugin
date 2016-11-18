@@ -29,12 +29,12 @@ public class IntegrateBySubstitutionModuleTest {
     @Test
     public void IntegrateBySubstitutionModuleConstructor() throws Exception {
         constructionPass(1,1,1,0,1);
-        constructionPass(100,100,100,99,100);
+        constructionPass(10,10,10,9,10);
 
         constructionFail(0,1,1,1,1);
         constructionFail(1,1,1,1,1);
-        constructionFail(100,100,100,100,100);
-        constructionFail(100,100,100,99,101);
+        constructionFail(10,10,10,10,10);
+        constructionFail(10,10,10,9,11);
     }
 
     private void constructionPass(final int a, final int m, final int b, final int n, final int S) {
