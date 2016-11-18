@@ -67,6 +67,7 @@ public class VolumeSolidModuleTest {
                 "Find the volume of the solid obtained by rotating\n" +
                 "$f(x)=\\sqrt{x-5}$ about the $x$-axis over $[5,10]$.";
         String actualQ = vol.getSection("Question");
+        System.out.println(actualQ);
         assertEquals(expectedQ, actualQ);
 
         String expectedS =
@@ -82,11 +83,13 @@ public class VolumeSolidModuleTest {
                 "&=12.5\\pi\\text{ units}^3\n" +
                 "\\end{align*}";
         String actualS = vol.getSection("Solution");
+        System.out.println(actualS);
         assertEquals(expectedS, actualS);
 
         String expectedA =
                 "$12.5\\pi\\text{ units}^3$";
         String actualA = vol.getSection("Answer");
+        System.out.println(actualA);
         assertEquals(expectedA, actualA);
 
     }
