@@ -7,11 +7,12 @@ import java.lang.reflect.Constructor;
 import static org.junit.Assert.*;
 
 /**
+ * Tests for <code>IntegrateByPartsModule</code>
  */
 public class IntegrateByPartsModuleTest {
 
     /**
-     * Check for 'public' default constructor.
+     * Check for 'public' default constructor: required.
      *
      * @throws Exception
      */
@@ -26,6 +27,10 @@ public class IntegrateByPartsModuleTest {
         }
     }
 
+    /**
+     * Test various values for the main constructor.
+     * @throws Exception
+     */
     @Test
     public void IntegrateByPartsModuleConstructor() throws Exception {
         constructionPass(1);
@@ -40,6 +45,10 @@ public class IntegrateByPartsModuleTest {
         constructionFail(12);
     }
 
+    /**
+     * Utility function to assert construction successful with valid parameters.
+     * @param a valid construction/initialization parameter
+     */
     private void constructionPass(int a) {
         try {
             new IntegrateByPartsModule(a);
@@ -49,6 +58,10 @@ public class IntegrateByPartsModuleTest {
         }
     }
 
+    /**
+     * Utility function to assert construction fails with invalid parameters.
+     * @param a invalid construction/initialization parameter
+     */
     private void constructionFail(int a) {
         try {
             new IntegrateByPartsModule(a);
@@ -58,6 +71,12 @@ public class IntegrateByPartsModuleTest {
         }
     }
 
+    /**
+     * Test LaTeX generated question, solution and answer strings
+     * when initialised with a power = 1.
+     *
+     * @throws Exception
+     */
     @Test
     public void testQuestionLaTeX_1() throws Exception {
         IntegrateByPartsModule integral = new IntegrateByPartsModule(1);
@@ -100,6 +119,12 @@ public class IntegrateByPartsModuleTest {
         assertEquals(expectedA, actualA);
     }
 
+    /**
+     * Test LaTeX generated question, solution and answer strings
+     * when initialised with a power = 5.
+     *
+     * @throws Exception
+     */
     @Test
     public void testQuestionLaTeX_5() throws Exception {
         IntegrateByPartsModule integral = new IntegrateByPartsModule(5);
@@ -142,6 +167,12 @@ public class IntegrateByPartsModuleTest {
         assertEquals(expectedA, actualA);
     }
 
+    /**
+     * Test LaTeX generated question, solution and answer strings
+     * when initialised with a power = 10.
+     *
+     * @throws Exception
+     */
     @Test
     public void testQuestionLaTeX_10() throws Exception {
         IntegrateByPartsModule integral = new IntegrateByPartsModule(10);
