@@ -8,11 +8,11 @@ public class IntegrateBySubstitutionModule extends SimpleQuestionModule {
 
 
     public IntegrateBySubstitutionModule() {
-        int a = getRandomInt(100, 1);
-        int m = getRandomInt(100, 1);
-        int b = getRandomInt(100, 1);
+        int a = getRandomInt(10, 1);
+        int m = getRandomInt(10, 1);
+        int b = getRandomInt(10, 1);
         int n = getRandomInt(m, 0);
-        int S = getRandomInt(100, 1);
+        int S = getRandomInt(10, 1);
 
         init(a, m, b, n, S);
     }
