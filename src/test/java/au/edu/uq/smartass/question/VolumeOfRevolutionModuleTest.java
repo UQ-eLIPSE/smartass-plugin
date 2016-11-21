@@ -51,7 +51,7 @@ public class VolumeOfRevolutionModuleTest {
         assertEquals(actual, expected);
 
         actual = vr.getSection("answer");
-        expected = "&\\approx 1106560.628\n\n";
+        expected = "$\\approx 1106560.628$\n";
         
         assertEquals(expected, actual);
 
