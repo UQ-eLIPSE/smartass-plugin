@@ -30,6 +30,7 @@ public class VolumeOfRevolutionModuleTest {
      */
     @Test
     public void testVolumeOfRevolutionModule() throws Exception {
+
         try {
             Constructor<VolumeOfRevolutionModule> constructor
                     = VolumeOfRevolutionModule.class.getConstructor();

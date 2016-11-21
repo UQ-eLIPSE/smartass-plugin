@@ -18,7 +18,7 @@ import java.util.Locale;
 public class VolumeOfRevolutionModule extends SimpleQuestionModule {
 
     /** The lower bound for the a, b, c variables **/
-    private final int LOWER_BOUND = 1;
+    private final int LOWER_BOUND = 2;
 
     /** The upper bound for the a, b, c variables **/
     private final int UPPER_BOUND = 10;
@@ -76,15 +76,41 @@ public class VolumeOfRevolutionModule extends SimpleQuestionModule {
     }
 
     /**
+     * Gets a random number in the range of start to end
+     * @param start The start range
+     * @param end The end range
+     * @param rand The random instance
+     * @returns The random number
+     */
+    private int randomNumberInRange(int start, int end, Random rand) {
+        return rand.nextInt(end - start) + start;
+    }
+
+    /**
      * Default public constructor.
      * Used by plugin architecture <code>ServiceLoader</code>.
      * Creates object with random parameter in range 0 < a <= 10.
      */
     public VolumeOfRevolutionModule() {
         Random rand = new Random();
-        int selection = rand.nextInt(7);
 
-        //createQuestion(selection);
+        int a = randomNumberInRange(LOWER_BOUND, UPPER_BOUND, rand);
+        int b = randomNumberInRange(LOWER_BOUND, UPPER_BOUND, rand);
+        int c = randomNumberInRange(LOWER_BOUND, UPPER_BOUND, rand);
+
+        // Ensure that c != b
+        while (c == b) {
+            b = randomNumberInRange(LOWER_BOUND, UPPER_BOUND, rand);
+        }
+
+        // Ensure c is greater than b
+        if (b > c) {
+            int temp = b;
+            b = c;
+            c = temp;
+        }
+
+        createQuestion(a, b, c);
     }
 
     private void createQuestionTeX(int a, int b, int c) {
