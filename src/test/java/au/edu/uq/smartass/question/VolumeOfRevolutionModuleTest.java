@@ -92,5 +92,12 @@ public class VolumeOfRevolutionModuleTest {
 
         // Specify delta of 1 for rounding errors and value of PI
         assertEquals(expected, actual, 1);
+
+        vr = new VolumeOfRevolutionModule(3, 2, 4);
+
+        expected = 222.897;
+        actual = vr.getAnswer();
+
+        assertEquals(expected, actual, 1);
     }
 }
