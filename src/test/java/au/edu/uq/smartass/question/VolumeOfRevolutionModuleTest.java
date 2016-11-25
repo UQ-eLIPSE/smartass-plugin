@@ -42,44 +42,61 @@ public class VolumeOfRevolutionModuleTest {
     }
 
     @Test
-    public void testGetSection() throws Exception {
+    public void testGetSection_5_5_10() throws Exception {
         VolumeOfRevolutionModule vr = new VolumeOfRevolutionModule(5, 5, 10);
-        
-        String actual = vr.getSection("question");
-        String expected = "Find the volume of the solid obtained by rotating $f(x)=\\sqrt{x^{5}\\ln{x}}$ about the $x$-axis over $[5, 10]$.\n\n";
 
+        String actual = vr.getSection("question");
+        String expected =
+                "Find the volume of the solid obtained by rotating $f(x)=\\sqrt{x^{5}\\ln{x}}$ " +
+                "about the $x$-axis over $[5, 10]$.";
+        System.out.println(actual);
         assertEquals(actual, expected);
 
         actual = vr.getSection("answer");
         expected = "$\\approx 1106560.628$\n";
         
+        String actual = vr.getSection("question");
+        String expected =
+                "Find the volume of the solid obtained by rotating $f(x)=\\sqrt{x^{10}\\ln{x}}$ " +
+                "about the $x$-axis over $[3, 10]$.";
+        System.out.println(actual);
+        assertEquals(expected, actual);
+
+        actual = vr.getSection("answer");
+        expected = "$\\approx63165267928.761$";
+        System.out.println(actual);
         assertEquals(expected, actual);
 
         actual = vr.getSection("solution");
-        expected = "\\begin{align*}\n" + 
+        expected =
+                "\\begin{align*}\n" +
                 "\\text{Volume }&=\\pi\\int_a^b(f(x))^2\\,dx\\\\\n" + 
-                "&=\\pi\\int_5^{10}\\left(\\sqrt{x^{5}\\ln{x}}\\,\\right)^2\\,dx\\\\\n" + 
-                "&=\\pi\\int_5^{10}{x^{5}\\ln{x}}\\,dx\\\\\n" + 
+                "&=\\pi\\int_{3}^{10}\\left(\\sqrt{x^{10}\\ln{x}}\\,\\right)^2\\,dx\\\\\n" +
+                "&=\\pi\\int_{3}^{10}{x^{10}\\ln{x}}\\,dx\\\\\n" +
                 "\\end{align*}\n" + 
                 "Let's use integration by parts as the two functions are not \n" + 
                 "related to each other in terms of derivatives.\n" + 
                 "\\begin{align*}\n" + 
                 "&\\text{Let }u=\\ln{x}\\text{, then }u'=\\dfrac{1}{x}.\\\\\n" + 
-                "&\\text{Let }v'=x^{5}\\text{, then }v=\\dfrac{1}{5+1}x^{5+1}=\\dfrac{1}{6}\\cdot{x^6}.\\\\\n" + 
+                "&\\text{Let }v'=x^{10}\\text{, then }v=\\dfrac{1}{10+1}x^{10+1}=\\dfrac{1}{11}\\cdot{x}^{11}.\\\\\n" +
                 "\\end{align*}\n" + 
                 "\\begin{align*}\n" + 
                 "\\int{uv'}\\,dx&=uv-\\int{u'v}\\,dx\\\\\n" + 
-                "\\text{So }\\pi\\int_5^{10}{x}^{5}\\ln{x}\\,dx&=\\left[\\dfrac{\\pi}{6}\\cdot{x^6}\\ln{x}\\right]_5^{10}-\\pi\\int_5^{10}\\dfrac{1}{x}\\cdot\\dfrac{1}{6}\\cdot{x^6}\\,dx\\\\\n" + 
-                "&=\\left[\\dfrac{\\pi}{6}\\cdot{x}^{6}\\ln{x}\\right]_5^{10}-\\dfrac{\\pi}{6}\\int_5^{10}{x}^{5}\\,dx\\\\\n" + 
-                "&=\\left[\\dfrac{\\pi}{6}\\cdot{x}^{6}\\ln{x}-\\dfrac{\\pi}{6}\\cdot\\dfrac{1}{6}\\cdot{x}^{6}\\right]_5^{10}\\\\\n" + 
-                "&=\\left[\\dfrac{\\pi}{6}\\cdot{x}^{6}\\ln{x}-\\dfrac{\\pi}{36}\\cdot{x}^{6}\\right]_5^{10}\\\\\n" + 
-                "&=\\dfrac{\\pi}{6}\\cdot{10}^{6}\\ln{10}-\\dfrac{\\pi}{6}\\cdot{5}^{6}\\ln{5}-\\dfrac{\\pi}{36}\\cdot{10}^{6}+\\dfrac{\\pi}{36}\\cdot{5}^{6}\\\\\n" + 
-                "&=\\dfrac{\\pi}{6}\\cdot{5}^{6}\\left(2^6\\ln{10}-\\ln{5}-\\dfrac{2^6}{6}+\\dfrac{1}{6}\\right)\\\\\n" + 
-                "&\\approx 1106560.628\n" + 
-                "\\end{align*}\n";
-
+                "\\text{So }\\pi\\int_{3}^{10}{x}^{10}\\ln{x}\\,dx" +
+                "&=\\left[\\dfrac{\\pi}{11}\\cdot{x}^{11}\\ln{x}\\right]_{3}^{10}" +
+                "-\\pi\\int_{3}^{10}\\dfrac{1}{x}\\cdot\\dfrac{1}{11}\\cdot{x}^{11}\\,dx\\\\\n" +
+                "&=\\left[\\dfrac{\\pi}{11}\\cdot{x}^{11}\\ln{x}\\right]_{3}^{10}" +
+                "-\\dfrac{\\pi}{11}\\int_{3}^{10}{x}^{10}\\,dx\\\\\n" +
+                "&=\\left[\\dfrac{\\pi}{11}\\cdot{x}^{11}\\ln{x}" +
+                "-\\dfrac{\\pi}{11}\\cdot\\dfrac{1}{11}\\cdot{x}^{11}\\right]_{3}^{10}\\\\\n" +
+                "&=\\left[\\dfrac{\\pi}{11}\\cdot{x}^{11}\\ln{x}" +
+                "-\\dfrac{\\pi}{121}\\cdot{x}^{11}\\right]_{3}^{10}\\\\\n" +
+                "&=\\dfrac{\\pi}{11}\\cdot{10}^{11}\\ln{10}-\\dfrac{\\pi}{11}\\cdot{3}^{11}\\ln{3}" +
+                "-\\dfrac{\\pi}{121}\\cdot{10}^{11}+\\dfrac{\\pi}{121}\\cdot{3}^{11}\\\\\n" +
+                "&\\approx63165267928.761\n" +
+                "\\end{align*}";
+        System.out.println(actual);
         assertEquals(expected, actual);
-
     }
 
     @Test
