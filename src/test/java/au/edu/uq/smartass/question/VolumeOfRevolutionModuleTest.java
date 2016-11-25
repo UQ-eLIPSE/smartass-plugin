@@ -53,7 +53,44 @@ public class VolumeOfRevolutionModuleTest {
         assertEquals(actual, expected);
 
         actual = vr.getSection("answer");
-        expected = "$\\approx 1106560.628$\n";
+        expected = "$\\approx1106560.628$";
+        System.out.println(actual);
+        assertEquals(expected, actual);
+
+        actual = vr.getSection("solution");
+        expected =
+                "\\begin{align*}\n" +
+                "\\text{Volume }&=\\pi\\int_a^b(f(x))^2\\,dx\\\\\n" +
+                "&=\\pi\\int_{5}^{10}\\left(\\sqrt{x^{5}\\ln{x}}\\,\\right)^2\\,dx\\\\\n" +
+                "&=\\pi\\int_{5}^{10}{x^{5}\\ln{x}}\\,dx\\\\\n" +
+                "\\end{align*}\n" +
+                "Let's use integration by parts as the two functions are not \n" +
+                "related to each other in terms of derivatives.\n" +
+                "\\begin{align*}\n" +
+                "&\\text{Let }u=\\ln{x}\\text{, then }u'=\\dfrac{1}{x}.\\\\\n" +
+                "&\\text{Let }v'=x^{5}\\text{, then }v=\\dfrac{1}{5+1}x^{5+1}=\\dfrac{1}{6}\\cdot{x}^{6}.\\\\\n" +
+                "\\end{align*}\n" +
+                "\\begin{align*}\n" +
+                "\\int{uv'}\\,dx&=uv-\\int{u'v}\\,dx\\\\\n" +
+                "\\text{So }\\pi\\int_{5}^{10}{x}^{5}\\ln{x}\\,dx" +
+                "&=\\left[\\dfrac{\\pi}{6}\\cdot{x}^{6}\\ln{x}\\right]_{5}^{10}" +
+                "-\\pi\\int_{5}^{10}\\dfrac{1}{x}\\cdot\\dfrac{1}{6}\\cdot{x}^{6}\\,dx\\\\\n" +
+                "&=\\left[\\dfrac{\\pi}{6}\\cdot{x}^{6}\\ln{x}\\right]_{5}^{10}" +
+                "-\\dfrac{\\pi}{6}\\int_{5}^{10}{x}^{5}\\,dx\\\\\n" +
+                "&=\\left[\\dfrac{\\pi}{6}\\cdot{x}^{6}\\ln{x}" +
+                "-\\dfrac{\\pi}{6}\\cdot\\dfrac{1}{6}\\cdot{x}^{6}\\right]_{5}^{10}\\\\\n" +
+                "&=\\left[\\dfrac{\\pi}{6}\\cdot{x}^{6}\\ln{x}-\\dfrac{\\pi}{36}\\cdot{x}^{6}\\right]_{5}^{10}\\\\\n" +
+                "&=\\dfrac{\\pi}{6}\\cdot{10}^{6}\\ln{10}-\\dfrac{\\pi}{6}\\cdot{5}^{6}\\ln{5}" +
+                "-\\dfrac{\\pi}{36}\\cdot{10}^{6}+\\dfrac{\\pi}{36}\\cdot{5}^{6}\\\\\n" +
+                "&\\approx1106560.628\n" +
+                "\\end{align*}";
+        System.out.println(actual);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testGetSection_10_3_10() throws Exception {
+        VolumeOfRevolutionModule vr = new VolumeOfRevolutionModule(10, 3, 10);
         
         String actual = vr.getSection("question");
         String expected =
@@ -108,13 +145,6 @@ public class VolumeOfRevolutionModuleTest {
         double actual = vr.getAnswer();
 
         // Specify delta of 1 for rounding errors and value of PI
-        assertEquals(expected, actual, 1);
-
-        vr = new VolumeOfRevolutionModule(3, 2, 4);
-
-        expected = 222.897;
-        actual = vr.getAnswer();
-
         assertEquals(expected, actual, 1);
     }
 }

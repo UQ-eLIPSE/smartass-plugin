@@ -141,9 +141,7 @@ public class VolumeOfRevolutionModule extends SimpleQuestionModule {
 
     private void createAnswerTeX(double answer) {
         StringBuilder sb = new StringBuilder();
-
-        sb.append(String.format("$\\approx %1$,.3f$\n", answer).replaceAll(",", "")); 
-
+        sb.append(String.format("$\\approx%1$.3f$", answer));
         setAnswer(sb.toString());
     }
 }
