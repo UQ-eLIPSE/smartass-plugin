@@ -73,23 +73,31 @@ public class IntegrateByParts2ModuleTest {
 
         IntegrateByParts2Module q = new IntegrateByParts2Module(a);
 
-        String expectedQuestion = "Determine $\\int " + a + " \\ln x \\,dx$. \\\\";
+        String expectedQuestion = "Determine $\\int " + a + " \\ln x \\,dx$.\\\\";
         String actualQuestion = q.getSection("question");
         assertEquals(expectedQuestion, actualQuestion);
 
-        String expectedAnswer = "$=" + a + "x  \\ln x - " + a + "x +C$\\\\";
+        String expectedAnswer = "$= " + a + "x \\ln x - " + a + "x + C$";
         String actualAnswer = q.getSection("answer");
         assertEquals(expectedAnswer, actualAnswer);
 
         String expectedSolution = "Let's use integration by parts." +
-            "Let $u= \\ln x$, then $u'=\\dfrac1x$.\\\\ Let $v'=" + a + "$, then $v=" + a + "x$.\\\\" +
-            "$\\int uv' \\,dx = uv - \\int u'v \\,dx$" +
-            "So $\\int " + a + "\\ln x \\,dx = " + a + "x \\cdot \\ln x - \\int \\dfrac1x \\cdot " + a + "x\\,dx$\\\\" +
-            "$=" + a + "x \\ln x - \\int " + a + " \\,dx$\\\\" +
-            "$=" + a + "x  \\ln x - " + a + "x +C$\\\\";
+            "\\begin{align*}" +
+            "\\text{Let }u &= \\ln x, \\text{then }u'=\\dfrac 1x.\\\\" +
+            "\\text{Let }v' &= " + a + "\\text{, then }v=" + a + "x.\\\\" +
+            "\\int uv' \\,dx &= uv - \\int u'v \\,dx\\\\" +
+            "\\\\" +
+            "\\text{So }\\int " + a + "\\ln x \\,dx &= " + a + "x \\cdot \\ln x - \\int \\dfrac1x \\cdot " + a + "x\\,dx\\\\" +
+            "&= " + a + "x \\ln x - \\int " + a + " \\,dx\\\\" +
+            "&= " + a + "x \\ln x - " + a + "x + C" +
+            "\\end{align*}";
 
         String actualSolution = q.getSection("solution");
         assertEquals(expectedSolution, actualSolution);
+
+        System.out.println(actualQuestion);
+        System.out.println(actualAnswer);
+        System.out.println(actualSolution);
     }
 
     @Test
@@ -98,50 +106,65 @@ public class IntegrateByParts2ModuleTest {
 
         IntegrateByParts2Module q = new IntegrateByParts2Module(a);
 
-        String expectedQuestion = "Determine $\\int " + a + " \\ln x \\,dx$. \\\\";
+        String expectedQuestion = "Determine $\\int " + a + " \\ln x \\,dx$.\\\\";
         String actualQuestion = q.getSection("question");
         assertEquals(expectedQuestion, actualQuestion);
 
-        String expectedAnswer = "$=" + a + "x  \\ln x - " + a + "x +C$\\\\";
+        String expectedAnswer = "$= " + a + "x \\ln x - " + a + "x + C$";
         String actualAnswer = q.getSection("answer");
         assertEquals(expectedAnswer, actualAnswer);
 
         String expectedSolution = "Let's use integration by parts." +
-            "Let $u= \\ln x$, then $u'=\\dfrac1x$.\\\\ Let $v'=" + a + "$, then $v=" + a + "x$.\\\\" +
-            "$\\int uv' \\,dx = uv - \\int u'v \\,dx$" +
-            "So $\\int " + a + "\\ln x \\,dx = " + a + "x \\cdot \\ln x - \\int \\dfrac1x \\cdot " + a + "x\\,dx$\\\\" +
-            "$=" + a + "x \\ln x - \\int " + a + " \\,dx$\\\\" +
-            "$=" + a + "x  \\ln x - " + a + "x +C$\\\\";
+            "\\begin{align*}" +
+            "\\text{Let }u &= \\ln x, \\text{then }u'=\\dfrac 1x.\\\\" +
+            "\\text{Let }v' &= " + a + "\\text{, then }v=" + a + "x.\\\\" +
+            "\\int uv' \\,dx &= uv - \\int u'v \\,dx\\\\" +
+            "\\\\" +
+            "\\text{So }\\int " + a + "\\ln x \\,dx &= " + a + "x \\cdot \\ln x - \\int \\dfrac1x \\cdot " + a + "x\\,dx\\\\" +
+            "&= " + a + "x \\ln x - \\int " + a + " \\,dx\\\\" +
+            "&= " + a + "x \\ln x - " + a + "x + C" +
+            "\\end{align*}";
 
         String actualSolution = q.getSection("solution");
         assertEquals(expectedSolution, actualSolution);
+
+        System.out.println(actualQuestion);
+        System.out.println(actualAnswer);
+        System.out.println(actualSolution);
     }
 
     @Test
     public void testQuestionLaTeX_1() throws Exception {
-        int num = 1;
-
-        IntegrateByParts2Module q = new IntegrateByParts2Module(num);
-
-        // We don't display a number if the number is 1
+        // Test that a 1 is not displayed
+        int ans = 1;
         String a = "";
 
-        String expectedQuestion = "Determine $\\int " + a + " \\ln x \\,dx$. \\\\";
+        IntegrateByParts2Module q = new IntegrateByParts2Module(ans);
+
+        String expectedQuestion = "Determine $\\int " + a + " \\ln x \\,dx$.\\\\";
         String actualQuestion = q.getSection("question");
         assertEquals(expectedQuestion, actualQuestion);
 
-        String expectedAnswer = "$=" + a + "x  \\ln x - " + a + "x +C$\\\\";
+        String expectedAnswer = "$= " + a + "x \\ln x - " + a + "x + C$";
         String actualAnswer = q.getSection("answer");
         assertEquals(expectedAnswer, actualAnswer);
 
         String expectedSolution = "Let's use integration by parts." +
-            "Let $u= \\ln x$, then $u'=\\dfrac1x$.\\\\ Let $v'=" + a + "$, then $v=" + a + "x$.\\\\" +
-            "$\\int uv' \\,dx = uv - \\int u'v \\,dx$" +
-            "So $\\int " + a + "\\ln x \\,dx = " + a + "x \\cdot \\ln x - \\int \\dfrac1x \\cdot " + a + "x\\,dx$\\\\" +
-            "$=" + a + "x \\ln x - \\int " + a + " \\,dx$\\\\" +
-            "$=" + a + "x  \\ln x - " + a + "x +C$\\\\";
+            "\\begin{align*}" +
+            "\\text{Let }u &= \\ln x, \\text{then }u'=\\dfrac 1x.\\\\" +
+            "\\text{Let }v' &= " + a + "\\text{, then }v=" + a + "x.\\\\" +
+            "\\int uv' \\,dx &= uv - \\int u'v \\,dx\\\\" +
+            "\\\\" +
+            "\\text{So }\\int " + a + "\\ln x \\,dx &= " + a + "x \\cdot \\ln x - \\int \\dfrac1x \\cdot " + a + "x\\,dx\\\\" +
+            "&= " + a + "x \\ln x - \\int " + a + " \\,dx\\\\" +
+            "&= " + a + "x \\ln x - " + a + "x + C" +
+            "\\end{align*}";
 
         String actualSolution = q.getSection("solution");
         assertEquals(expectedSolution, actualSolution);
+
+        System.out.println(actualQuestion);
+        System.out.println(actualAnswer);
+        System.out.println(actualSolution);
     }
 }
