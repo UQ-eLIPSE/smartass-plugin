@@ -49,6 +49,17 @@ public class IntegrateByParts2Module extends SimpleQuestionModule {
         setAnswer(createAnswerTex(a));
     }
 
+
+    /**
+     * Returns the latex answer to the problem
+     * For use is both the answer and solution section
+     * @param a The coefficient of the equation
+     * @returns The answer tex
+     */
+    String getAnswerTex(final String a) {
+        return a + "x \\ln x - " + a + "x + C";
+    }
+
     /**
      * Create LaTeX string containing question.
      *
@@ -75,7 +86,7 @@ public class IntegrateByParts2Module extends SimpleQuestionModule {
             "\\\\" +
             "\\text{So }\\int " + a + "\\ln x \\,dx &= " + a + "x \\cdot \\ln x - \\int \\dfrac1x \\cdot " + a + "x\\,dx\\\\" +
             "&= " + a + "x \\ln x - \\int " + a + " \\,dx\\\\" +
-            "&= " + a + "x \\ln x - " + a + "x + C" +
+            "&= " + getAnswerTex(a) +
             "\\end{align*}";
         return solution;
     }
@@ -87,7 +98,7 @@ public class IntegrateByParts2Module extends SimpleQuestionModule {
      * @return LaTeX string solution.
      */
     private String createAnswerTex(final String a) {
-        String tex = "$= " + a + "x \\ln x - " + a + "x + C$";
+        String tex = "$= " + getAnswerTex(a) + "$";
         return tex;
     }
 

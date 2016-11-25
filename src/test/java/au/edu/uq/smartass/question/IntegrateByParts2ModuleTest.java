@@ -9,7 +9,7 @@ import java.lang.reflect.Constructor;
 import static org.junit.Assert.*;
 
 /**
- *
+ * Tests for the IntegrateByParts2Module
  */
 public class IntegrateByParts2ModuleTest {
 
@@ -59,6 +59,17 @@ public class IntegrateByParts2ModuleTest {
     }
 
     @Test
+    public void testGetAnswer() throws Exception {
+        int a = 4;
+        String strA = Integer.toString(a);
+
+        IntegrateByParts2Module q = new IntegrateByParts2Module(a);
+        String expected = a + "x \\ln x - " + a + "x + C";
+
+        assertEquals(expected, q.getAnswerTex(strA));
+    }
+
+    @Test
     public void testConstructor() throws Exception {
         constructionFail(0);
         constructionPass(2);
@@ -67,6 +78,10 @@ public class IntegrateByParts2ModuleTest {
         constructionFail(11);
     }
 
+    /**
+     * Test question generation with an 'a' parameter of 10
+     *
+     */
     @Test
     public void testQuestionLaTeX_10() throws Exception {
         int a = 10;
@@ -100,6 +115,10 @@ public class IntegrateByParts2ModuleTest {
         System.out.println(actualSolution);
     }
 
+    /**
+     * Test question generation with an 'a' parameter of 4
+     *
+     */
     @Test
     public void testQuestionLaTeX_4() throws Exception {
         int a = 4;
@@ -133,6 +152,10 @@ public class IntegrateByParts2ModuleTest {
         System.out.println(actualSolution);
     }
 
+    /**
+     * Test question generation with an 'a' parameter of 1
+     *
+     */
     @Test
     public void testQuestionLaTeX_1() throws Exception {
         // Test that a 1 is not displayed
