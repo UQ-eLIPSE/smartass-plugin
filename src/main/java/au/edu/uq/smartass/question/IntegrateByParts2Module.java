@@ -1,7 +1,7 @@
 /**
  * Name: Integration by Parts 2
  * Description: Solve integration problem by solving each part.
- * Keywords: integration, intergrate
+ * Keywords: integration, integrate
  * Author: Roy Portas
  * Classification: [MATHEMATICS] Derivatives and integration
  */
