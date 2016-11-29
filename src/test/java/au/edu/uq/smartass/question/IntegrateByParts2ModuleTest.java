@@ -13,14 +13,33 @@ import static org.junit.Assert.*;
  */
 public class IntegrateByParts2ModuleTest {
 
+    private static final String QUESTION_TEMPLATE =
+            "Determine $\\displaystyle\\int%TERM_001_NOT=1%\\ln{x}\\,dx$.\n";
+
+    private static final String SOLUTION_TEMPLATE =
+            "Let's use integration by parts as the two functions are not\n" +
+            "related to each other in terms of derivatives.\n" +
+            "\\begin{align*}\n" +
+            "&\\text{Let }u=\\ln{x}\\text{, then }u'=\\dfrac{1}{x}.\\\\\n" +
+            "&\\text{Let }v'=%TERM_001%\\text{, then }v=%TERM_001_NOT=1%x.\\\\\n" +
+            "\\end{align*}\n" +
+            "\\begin{align*}\n" +
+            "\\int{uv'}\\,dx&=uv-\\int{u'v}\\,dx\\\\\n" +
+            "\\text{So }\\int{%TERM_001_NOT=1%}\\ln{x}\\,dx\n" +
+            "&=%TERM_001_NOT=1%x\\ln{x}-\\int\\dfrac{1}{x}\\cdot{%TERM_001_NOT=1%x}\\,dx\\\\\n" +
+            "&=%TERM_001_NOT=1%x\\ln{x}-\\int%TERM_001%\\,dx\\\\\n" +
+            "&=%TERM_001_NOT=1%x\\ln{x}-%TERM_001_NOT=1%x+C\n" +
+            "\\end{align*}\n";
+
+    private static final String ANSWER_TEMPLATE =
+            "$%TERM_001_NOT=1%x\\ln{x}-%TERM_001_NOT=1%x+C$\n";
+
     @Before
     public void setUp() throws Exception {
-
     }
 
     @After
     public void tearDown() throws Exception {
-
     }
 
     /**
@@ -34,7 +53,6 @@ public class IntegrateByParts2ModuleTest {
             Constructor<IntegrateByParts2Module> constructor
                     = IntegrateByParts2Module.class.getConstructor();
             assertTrue(true);
-
         } catch (NoSuchMethodException ex) {
             fail();
         }
@@ -59,19 +77,9 @@ public class IntegrateByParts2ModuleTest {
     }
 
     @Test
-    public void testGetAnswer() throws Exception {
-        int a = 4;
-        String strA = Integer.toString(a);
-
-        IntegrateByParts2Module q = new IntegrateByParts2Module(a);
-        String expected = a + "x \\ln x - " + a + "x + C";
-
-        assertEquals(expected, q.getAnswerTex(strA));
-    }
-
-    @Test
     public void testConstructor() throws Exception {
         constructionFail(0);
+        constructionPass(1);
         constructionPass(2);
         constructionPass(5);
         constructionPass(10);
@@ -79,115 +87,38 @@ public class IntegrateByParts2ModuleTest {
     }
 
     /**
-     * Test question generation with an 'a' parameter of 10
      *
      */
     @Test
-    public void testQuestionLaTeX_10() throws Exception {
-        int a = 10;
-
-        IntegrateByParts2Module q = new IntegrateByParts2Module(a);
-
-        String expectedQuestion = "Determine $\\int " + a + " \\ln x \\,dx$.\\\\";
-        String actualQuestion = q.getSection("question");
-        assertEquals(expectedQuestion, actualQuestion);
-
-        String expectedAnswer = "$= " + a + "x \\ln x - " + a + "x + C$";
-        String actualAnswer = q.getSection("answer");
-        assertEquals(expectedAnswer, actualAnswer);
-
-        String expectedSolution = "Let's use integration by parts." +
-            "\\begin{align*}" +
-            "\\text{Let }u &= \\ln x, \\text{then }u'=\\dfrac 1x.\\\\" +
-            "\\text{Let }v' &= " + a + "\\text{, then }v=" + a + "x.\\\\" +
-            "\\int uv' \\,dx &= uv - \\int u'v \\,dx\\\\" +
-            "\\\\" +
-            "\\text{So }\\int " + a + "\\ln x \\,dx &= " + a + "x \\cdot \\ln x - \\int \\dfrac1x \\cdot " + a + "x\\,dx\\\\" +
-            "&= " + a + "x \\ln x - \\int " + a + " \\,dx\\\\" +
-            "&= " + a + "x \\ln x - " + a + "x + C" +
-            "\\end{align*}";
-
-        String actualSolution = q.getSection("solution");
-        assertEquals(expectedSolution, actualSolution);
-
-        System.out.println(actualQuestion);
-        System.out.println(actualAnswer);
-        System.out.println(actualSolution);
+    public void testQuestionLaTeX_1_10() throws Exception {
+        for (int i = 1; i <= 10; ++i) {
+            testQuestionLaTeXHelper(i);
+        }
     }
 
-    /**
-     * Test question generation with an 'a' parameter of 4
-     *
-     */
-    @Test
-    public void testQuestionLaTeX_4() throws Exception {
-        int a = 4;
+    private void testQuestionLaTeXHelper(final int a) throws Exception {
+        String expected;
+        String actual;
 
-        IntegrateByParts2Module q = new IntegrateByParts2Module(a);
+        IntegrateByParts2Module mod = new IntegrateByParts2Module(a);
 
-        String expectedQuestion = "Determine $\\int " + a + " \\ln x \\,dx$.\\\\";
-        String actualQuestion = q.getSection("question");
-        assertEquals(expectedQuestion, actualQuestion);
+        String aterm = Integer.toString(a);
+        String term001 = (1 == a) ? "" : aterm;
 
-        String expectedAnswer = "$= " + a + "x \\ln x - " + a + "x + C$";
-        String actualAnswer = q.getSection("answer");
-        assertEquals(expectedAnswer, actualAnswer);
+        expected = QUESTION_TEMPLATE.replace("%TERM_001_NOT=1%", term001);
+        actual =  mod.getSection("question");
+        System.out.println(actual);
+        assertEquals(expected, actual);
 
-        String expectedSolution = "Let's use integration by parts." +
-            "\\begin{align*}" +
-            "\\text{Let }u &= \\ln x, \\text{then }u'=\\dfrac 1x.\\\\" +
-            "\\text{Let }v' &= " + a + "\\text{, then }v=" + a + "x.\\\\" +
-            "\\int uv' \\,dx &= uv - \\int u'v \\,dx\\\\" +
-            "\\\\" +
-            "\\text{So }\\int " + a + "\\ln x \\,dx &= " + a + "x \\cdot \\ln x - \\int \\dfrac1x \\cdot " + a + "x\\,dx\\\\" +
-            "&= " + a + "x \\ln x - \\int " + a + " \\,dx\\\\" +
-            "&= " + a + "x \\ln x - " + a + "x + C" +
-            "\\end{align*}";
+        expected = ANSWER_TEMPLATE.replace("%TERM_001_NOT=1%", term001);
+        actual =  mod.getSection("answer");
+        System.out.println(actual);
+        assertEquals(expected, actual);
 
-        String actualSolution = q.getSection("solution");
-        assertEquals(expectedSolution, actualSolution);
-
-        System.out.println(actualQuestion);
-        System.out.println(actualAnswer);
-        System.out.println(actualSolution);
-    }
-
-    /**
-     * Test question generation with an 'a' parameter of 1
-     *
-     */
-    @Test
-    public void testQuestionLaTeX_1() throws Exception {
-        // Test that a 1 is not displayed
-        int ans = 1;
-        String a = "";
-
-        IntegrateByParts2Module q = new IntegrateByParts2Module(ans);
-
-        String expectedQuestion = "Determine $\\int " + a + " \\ln x \\,dx$.\\\\";
-        String actualQuestion = q.getSection("question");
-        assertEquals(expectedQuestion, actualQuestion);
-
-        String expectedAnswer = "$= " + a + "x \\ln x - " + a + "x + C$";
-        String actualAnswer = q.getSection("answer");
-        assertEquals(expectedAnswer, actualAnswer);
-
-        String expectedSolution = "Let's use integration by parts." +
-            "\\begin{align*}" +
-            "\\text{Let }u &= \\ln x, \\text{then }u'=\\dfrac 1x.\\\\" +
-            "\\text{Let }v' &= " + a + "\\text{, then }v=" + a + "x.\\\\" +
-            "\\int uv' \\,dx &= uv - \\int u'v \\,dx\\\\" +
-            "\\\\" +
-            "\\text{So }\\int " + a + "\\ln x \\,dx &= " + a + "x \\cdot \\ln x - \\int \\dfrac1x \\cdot " + a + "x\\,dx\\\\" +
-            "&= " + a + "x \\ln x - \\int " + a + " \\,dx\\\\" +
-            "&= " + a + "x \\ln x - " + a + "x + C" +
-            "\\end{align*}";
-
-        String actualSolution = q.getSection("solution");
-        assertEquals(expectedSolution, actualSolution);
-
-        System.out.println(actualQuestion);
-        System.out.println(actualAnswer);
-        System.out.println(actualSolution);
+        expected = SOLUTION_TEMPLATE.replace("%TERM_001_NOT=1%", term001);
+        expected = expected.replace("%TERM_001%", aterm);
+        actual =  mod.getSection("solution");
+        System.out.println(actual);
+        assertEquals(expected, actual);
     }
 }
