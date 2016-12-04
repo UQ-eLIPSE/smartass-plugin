@@ -133,7 +133,7 @@ public class VolumeOfRevolutionModule extends SimpleQuestionModule {
         sb.append("&=\\left[\\dfrac{\\pi}{" + a1 + "}\\cdot{x}^{" + a1 + "}\\ln{x}");
         sb.append("-\\dfrac{\\pi}{" + (a1 * a1 ) + "}\\cdot{x}^{" + a1 + "}\\right]_{" + b + "}^{" + c + "}\\\\\n");
         sb.append("&=\\dfrac{\\pi}{" + a1 + "}\\cdot{" + c + "}^{" + a1 + "}\\ln{" + c + "}-\\dfrac{\\pi}{" + a1 + "}\\cdot{" + b + "}^{" + a1 + "}\\ln{" + b + "}-\\dfrac{\\pi}{" + (a1 * a1) + "}\\cdot{" + c + "}^{" + a1 + "}+\\dfrac{\\pi}{" + (a1 * a1) + "}\\cdot{" + b + "}^{" + a1 + "}\\\\\n");
-        sb.append(String.format("&\\approx%1$.3f\n", answer));
+        sb.append(String.format("&\\approx%1$.3f \\text{ units}^{2}\n", answer));
         sb.append("\\end{align*}");
 
         setSolution(sb.toString());
@@ -141,7 +141,7 @@ public class VolumeOfRevolutionModule extends SimpleQuestionModule {
 
     private void createAnswerTeX(double answer) {
         StringBuilder sb = new StringBuilder();
-        sb.append(String.format("$\\approx%1$.3f$", answer));
+        sb.append(String.format("$\\approx%1$.3f \\text{ units}^{2}$", answer));
         setAnswer(sb.toString());
     }
 }
