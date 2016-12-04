@@ -53,7 +53,7 @@ public class VolumeOfRevolutionModuleTest {
         assertEquals(actual, expected);
 
         actual = vr.getSection("answer");
-        expected = "$\\approx1106560.628 \\text{ units}^{2}$";
+        expected = "$\\approx1106560.628 \\text{ units}^{3}$";
         System.out.println(actual);
         assertEquals(expected, actual);
 
@@ -82,7 +82,7 @@ public class VolumeOfRevolutionModuleTest {
                 "&=\\left[\\dfrac{\\pi}{6}\\cdot{x}^{6}\\ln{x}-\\dfrac{\\pi}{36}\\cdot{x}^{6}\\right]_{5}^{10}\\\\\n" +
                 "&=\\dfrac{\\pi}{6}\\cdot{10}^{6}\\ln{10}-\\dfrac{\\pi}{6}\\cdot{5}^{6}\\ln{5}" +
                 "-\\dfrac{\\pi}{36}\\cdot{10}^{6}+\\dfrac{\\pi}{36}\\cdot{5}^{6}\\\\\n" +
-                "&\\approx1106560.628 \\text{ units}^{2}\n" +
+                "&\\approx1106560.628 \\text{ units}^{3}\n" +
                 "\\end{align*}";
         System.out.println(actual);
         assertEquals(expected, actual);
@@ -100,7 +100,7 @@ public class VolumeOfRevolutionModuleTest {
         assertEquals(expected, actual);
 
         actual = vr.getSection("answer");
-        expected = "$\\approx63165267928.761 \\text{ units}^{2}$";
+        expected = "$\\approx63165267928.761 \\text{ units}^{3}$";
         System.out.println(actual);
         assertEquals(expected, actual);
 
@@ -130,7 +130,7 @@ public class VolumeOfRevolutionModuleTest {
                 "-\\dfrac{\\pi}{121}\\cdot{x}^{11}\\right]_{3}^{10}\\\\\n" +
                 "&=\\dfrac{\\pi}{11}\\cdot{10}^{11}\\ln{10}-\\dfrac{\\pi}{11}\\cdot{3}^{11}\\ln{3}" +
                 "-\\dfrac{\\pi}{121}\\cdot{10}^{11}+\\dfrac{\\pi}{121}\\cdot{3}^{11}\\\\\n" +
-                "&\\approx63165267928.761 \\text{ units}^{2}\n" +
+                "&\\approx63165267928.761 \\text{ units}^{3}\n" +
                 "\\end{align*}";
         System.out.println(actual);
         assertEquals(expected, actual);
