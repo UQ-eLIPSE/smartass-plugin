@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="au.edu.uq.smartass.question.Eigen2x2RepeatModuleTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2016-10-24T04:54:27" hostname="ms402-1274.eait.uq.edu.au" time="0.017">
+  <properties/>
+  <testcase name="testSolution" classname="au.edu.uq.smartass.question.Eigen2x2RepeatModuleTest" time="0.002"/>
+  <testcase name="Eigen2x2RepeatModuleIndex" classname="au.edu.uq.smartass.question.Eigen2x2RepeatModuleTest" time="0.011"/>
+  <testcase name="testQuesiton" classname="au.edu.uq.smartass.question.Eigen2x2RepeatModuleTest" time="0.0"/>
+  <testcase name="testAnswer" classname="au.edu.uq.smartass.question.Eigen2x2RepeatModuleTest" time="0.001"/>
+  <testcase name="Eigen2x2RepeatlModuleDefault" classname="au.edu.uq.smartass.question.Eigen2x2RepeatModuleTest" time="0.001"/>
+  <system-out><![CDATA[\begin{gather*}
+A-\lambda{I}=\begin{bmatrix}6-\lambda&9\\-4&-6-\lambda\end{bmatrix}.
+\end{gather*}
+\begin{align*}
+p(\lambda)&=|A-\lambda{I}|=\begin{vmatrix}6-\lambda&9\\-4&-6-\lambda\end{vmatrix}.\\
+&=(6-\lambda)(-6-\lambda)-(-4\times9)\\
+&=-36+0\lambda+\lambda^2+36\\
+&=\lambda^2+0\lambda+0\\
+&=(\lambda+0)(\lambda+0)
+\end{align*}
+Solving $p(\lambda)=0$ yields the eigenvalues $\lambda_1=0$ and $\lambda_2=0$.
+Find the eigenvalues of \(\begin{bmatrix}6&9\\-4&-6\end{bmatrix}\).
+$\lambda_1=0,\lambda_2=0$
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

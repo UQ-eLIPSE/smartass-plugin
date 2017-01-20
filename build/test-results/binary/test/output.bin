@@ -1,0 +1,194 @@
+vLet $A(1,1,1)$, $B(4,5,6)$ and $C(2,1,3)$ be the three vertices of a triangle. Determine the area of $\triangle ABC$.
+"$\frac{\sqrt{81.0}}{2}$ units$^2$
+\begin{align*}
+3\text{Area}&=\frac{1}{2}|\vec{AB}\times\vec{AC}|\\
+\vec{AB}&=(3,4,5)\\
+\vec{AC}&=(1,0,2)\\\\
+s\vec{AB}\times\vec{AC}&=\left|\begin{array}{crc}\textbf{i}&\textbf{j}&\textbf{k}\\3&4&5\\1&0&2\end{array}\right|\\
+¹&=\textbf{i}\left|\begin{array}{rc}4&5\\0&2\end{array}\right|-\textbf{j}\left|\begin{array}{cc}3&5\\1&2\end{array}\right|+\textbf{k}\left|\begin{array}{cr}3&4\\1&0\end{array} \right|\\
+*&=8\textbf{i}-1\textbf{j}-4\textbf{k}\\\\
+/|\vec{AB}\times\vec{AC}|&=\sqrt{8^2+1^2+4^2}\\
+&=\sqrt{81.0}\\\\
+7\text{Therefore area }&=\frac{1}{2}\times\sqrt{81.0}\\
+)&=\frac{\sqrt{81.0}}{2}\text{ units}^2\\
+\end{align*}
+GLet $2,6,10$ be the first three terms of a finite arithmetic sequence.
+>How many terms are needed for the sum to first exceed $1000$?
+:Let's solve this as an equation then round appropriately.
+\begin{align*}
+ES_n&=\dfrac{n}{2}(2a+(n-1)d),\text{ where }d=6-2=4\text{ and }a=2.\\
+;\text{Therefore }1000&=\dfrac{n}{2}(2\cdot2+(n-1)\cdot4)\\
+1000&=\dfrac{n}{2}(4+4n-4)\\
+2000&=n(4n+0)\\
+0&=4n^2+0n-2000\\
+n&\approx22.36
+\end{align*}
+So $23$ terms are required.
+$23$
+\begin{align*}
+6a_n&=a+(n-1)d,\text{ where }d=6-2=4\text{ and }a=2.\\
+*\text{Therefore }a_{40}&=2+(40-1)\cdot4\\
+&=2+39\cdot4\\
+&=158
+\end{align*}
+$158$
+rLet $2,6,10$ be the first three terms of a finite arithmetic sequence. Determine the $40$th term in the sequence.
+ !\begin{align*}
+ !ES_n&=\dfrac{n}{2}(2a+(n-1)d)\text{, where }d=6-2=4\text{ and }a=2.\\
+ !B\text{Therefore }S_{40}&=\dfrac{40}{2}(2\cdot 2 +(40-1)\cdot 4)\\
+ !&=20(4+39\cdot4)\\
+ !&=3200
+ !\end{align*}
+ "$3200$
+ #‚Let $2,6,10$ be the first three terms of a finite arithmetic sequence. Determine the sum of the first $40$ terms in the sequence.
+%$^Calculate the number of carbon atoms that are in a $2.0$-carat diamond that weighs $0.4000$g.
+%$e\newcommand{\scientific}[1]{\num[round-precision=4,round-mode=figures,scientific-notation=true]{#1}}
+%$3The molar mass of carbon is $12.01$g mol$^{-1}$.\\
+%$UThe number of moles $=$ mass $\div$ molar mass $=\dfrac{0.40}{12.0}=0.0333$ moles.\\
+%$HTherefore the number of molecules $=$ moles $\times$ Avogadro's number 
+%$($=0.0333\times(\scientific{6.0220e+23})
+%$%=\scientific{2.0057e+22}$ molecules.
+%$e\newcommand{\scientific}[1]{\num[round-precision=4,round-mode=figures,scientific-notation=true]{#1}}
+%$\scientific{2.0057e+22}
+)(e\newcommand{\scientific}[1]{\num[round-precision=4,round-mode=figures,scientific-notation=true]{#1}}
+)(5The molar mass of glucose is $180.16$g mol$^{-1}$.\\
+)(VThe number of moles $=$ mass $\div$ molar mass $=\dfrac{5.00}{180.2}=0.0278$ moles.\\
+)(HTherefore the number of molecules $=$ moles $\times$ Avogadro's number 
+)(($=0.0278\times(\scientific{6.0220e+23})
+)(%=\scientific{1.6713e+22}$ molecules.
+)+e\newcommand{\scientific}[1]{\num[round-precision=4,round-mode=figures,scientific-notation=true]{#1}}
+)+\scientific{1.6713e+22}
+),OCalculate the number of molecules in 5.00g of glucose powder $(C_6H_{12}O_6)$.
+/.\begin{align*}
+/.5\textbf{u}\times\textbf{v}&=\left|\begin{array}{crc}
+/.1\textbf{i}&\textbf{j}&\textbf{k}\\5&2&7\\-2&5&-9
+/.\end{array}\right|\\
+/.?&=\textbf{i}\left|\begin{array}{rc}2&7\\5&-9\end{array}\right|
+/.?-\textbf{j}\left|\begin{array}{cc}5&7\\-2&-9\end{array}\right|
+/.@+\textbf{k}\left|\begin{array}{cr}5&2\\-2&5\end{array}\right|\\
+/.*&=-53\textbf{i}+31\textbf{j}+29\textbf{k}
+/.\end{align*}
+/0BLet $\mathbf{u}=\left(\begin{array}{c}5\\2\\7\end{array}\right)$ 
+/0Eand $\mathbf{v}=\left(\begin{array}{c}-2\\5\\-9\end{array}\right)$. 
+/0 Determine $\bf{u}\times\bf{v}$.
+/2*$-53\textbf{i}+31\textbf{j}+29\textbf{k}$
+43\begin{gather*}
+43EA-\lambda{I}=\begin{bmatrix}-7-\lambda&-9\\4&8-\lambda\end{bmatrix}.
+43\end{gather*}
+43\begin{align*}
+43Up(\lambda)&=|A-\lambda{I}|=\begin{vmatrix}-7-\lambda&-9\\4&8-\lambda\end{vmatrix}.\\
+43(&=(-7-\lambda)(8-\lambda)-(4\times-9)\\
+43&=-56-\lambda+\lambda^2+36\\
+43&=\lambda^2-\lambda-20\\
+43&=(\lambda-5)(\lambda+4)
+43\end{align*}
+43PSolving $p(\lambda)=0$ yields the eigenvalues $\lambda_1=5$ and $\lambda_2=-4$.
+46DFind the eigenvalues of \(\begin{bmatrix}-7&-9\\4&8\end{bmatrix}\).
+48$\lambda_1=5,\lambda_2=-4$
+:9\begin{gather*}
+:9EA-\lambda{I}=\begin{bmatrix}3-\lambda&4\\-8&-5-\lambda\end{bmatrix}.
+:9\end{gather*}
+:9\begin{align*}
+:9Up(\lambda)&=|A-\lambda{I}|=\begin{vmatrix}3-\lambda&4\\-8&-5-\lambda\end{vmatrix}.\\
+:9(&=(3-\lambda)(-5-\lambda)-(-8\times4)\\
+:9&=-15+2\lambda+\lambda^2+32\\
+:9&=\lambda^2+2\lambda+17\\
+:9&=(\lambda+1-4i)(\lambda+1+4i)
+:9\end{align*}
+:9WSolving $p(\lambda)=0$ yields the eigenvalues $\lambda_1=-1+4i$ and $\lambda_2=-1-4i$.
+:;DFind the eigenvalues of \(\begin{bmatrix}3&4\\-8&-5\end{bmatrix}\).
+:=----------  000  ----------
+:=----------  001  ----------
+:=----------  002  ----------
+:=----------  003  ----------
+:=----------  004  ----------
+:=----------  005  ----------
+:=----------  006  ----------
+:=----------  007  ----------
+:=----------  008  ----------
+:=----------  009  ----------
+:=----------  010  ----------
+:=----------  011  ----------
+:=----------  012  ----------
+:=----------  013  ----------
+:=----------  014  ----------
+:=----------  015  ----------
+:=----------  016  ----------
+:=----------  017  ----------
+:=----------  018  ----------
+:=----------  019  ----------
+:=----------  020  ----------
+:=----------  021  ----------
+:=----------  022  ----------
+:=----------  023  ----------
+:=----------  024  ----------
+:=----------  025  ----------
+:=----------  026  ----------
+:=----------  027  ----------
+:=----------  028  ----------
+:=----------  029  ----------
+:=----------  030  ----------
+:=----------  031  ----------
+:=----------  032  ----------
+:=----------  033  ----------
+:=----------  034  ----------
+:=----------  035  ----------
+:=----------  036  ----------
+:=----------  037  ----------
+:=----------  038  ----------
+:=----------  039  ----------
+:=----------  040  ----------
+:=----------  041  ----------
+:=----------  042  ----------
+:=----------  043  ----------
+:=----------  044  ----------
+:=----------  045  ----------
+:=----------  046  ----------
+:=----------  047  ----------
+:=----------  048  ----------
+:=----------  049  ----------
+:>"$\lambda_1=-1+4i,\lambda_2=-1-4i$
+@?\begin{gather*}
+@?EA-\lambda{I}=\begin{bmatrix}6-\lambda&9\\-4&-6-\lambda\end{bmatrix}.
+@?\end{gather*}
+@?\begin{align*}
+@?Up(\lambda)&=|A-\lambda{I}|=\begin{vmatrix}6-\lambda&9\\-4&-6-\lambda\end{vmatrix}.\\
+@?(&=(6-\lambda)(-6-\lambda)-(-4\times9)\\
+@?&=-36+0\lambda+\lambda^2+36\\
+@?&=\lambda^2+0\lambda+0\\
+@?&=(\lambda+0)(\lambda+0)
+@?\end{align*}
+@?OSolving $p(\lambda)=0$ yields the eigenvalues $\lambda_1=0$ and $\lambda_2=0$.
+@BDFind the eigenvalues of \(\begin{bmatrix}6&9\\-4&-6\end{bmatrix}\).
+@C$\lambda_1=0,\lambda_2=0$
+FG|\begin{align*}a_n&=ar^{n-1}\text{, where }r=6\div2=3\text{ and }a=2.\\\text{So }a_{15}&=2\cdot3^{14}\\&=9565938\end{align*}
+FH
+$9565938$
+FIjLet $2,6,18$ be the first three terms of a geometric sequence. Determine the $15$th term in the sequence.
+KJhLet $2, 6, 18$ be the first three terms of a geometric sequence. What is the sum of the first 20 terms?
+KJ\begin{align*}
+KJFS_n&=\dfrac{a(r^n-1)}{r-1}\text{, where }r=6\div2=3\text{ and }a=2.\\
+KJ$S_{20}&=\dfrac{2(3^{20-1})}{20-1}\\
+KJ&=\dfrac{2\cdot3^{19}}{19}\\
+KJ&\approx122343312.32
+KJ\end{align*}
+KJ$122343312.32$
+NO:Let's solve this as an equation then round appropriately.
+NO\begin{align*}
+NOHS_n&=\dfrac{a(r^{n-1})}{r-1}\text{, where }r=6\div2=3\text{ and }a=2.\\
+NO 1000&=\dfrac{2(3^{n-1})}{3-1}\\
+NO1000\times2&=2(3^{n-1})\\
+NO2000&=2(3^{n-1})\\
+NO1000&=3^{n-1}\\
+NO\ln1000&=\ln(3^{n-1})\\
+NO\ln1000&=(n-1)\ln3\\
+NOn-1&=\dfrac{\ln1000}{\ln3}\\
+NOn&=\dfrac{\ln1000}{\ln3}+1\\
+NO
+&=7.29...
+NO\end{align*}
+NO Therefore $8$ terms are needed.
+NQ8
+NT}Let $2,6,18$ be the first three terms of a geometric sequence. How many terms are needed for the sum to first exceed $1000$?
+WVODoes $\sum\limits_{n=1}^{\infty} \frac{1}{n^{\frac{1}{4}}}$ converge? Explain.
+WVNNo, it doesn't, by the $p$-series test. Since $p<1$, the series will diverge.

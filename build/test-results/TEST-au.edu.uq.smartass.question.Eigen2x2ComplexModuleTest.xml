@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="au.edu.uq.smartass.question.Eigen2x2ComplexModuleTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2016-10-24T04:54:27" hostname="ms402-1274.eait.uq.edu.au" time="0.053">
+  <properties/>
+  <testcase name="testSolution" classname="au.edu.uq.smartass.question.Eigen2x2ComplexModuleTest" time="0.003"/>
+  <testcase name="testQuesiton" classname="au.edu.uq.smartass.question.Eigen2x2ComplexModuleTest" time="0.001"/>
+  <testcase name="Eigen2x2ComplexModuleDefault" classname="au.edu.uq.smartass.question.Eigen2x2ComplexModuleTest" time="0.0"/>
+  <testcase name="Eigen2x2ComplexModuleIndex" classname="au.edu.uq.smartass.question.Eigen2x2ComplexModuleTest" time="0.044"/>
+  <testcase name="testAnswer" classname="au.edu.uq.smartass.question.Eigen2x2ComplexModuleTest" time="0.001"/>
+  <system-out><![CDATA[\begin{gather*}
+A-\lambda{I}=\begin{bmatrix}3-\lambda&4\\-8&-5-\lambda\end{bmatrix}.
+\end{gather*}
+\begin{align*}
+p(\lambda)&=|A-\lambda{I}|=\begin{vmatrix}3-\lambda&4\\-8&-5-\lambda\end{vmatrix}.\\
+&=(3-\lambda)(-5-\lambda)-(-8\times4)\\
+&=-15+2\lambda+\lambda^2+32\\
+&=\lambda^2+2\lambda+17\\
+&=(\lambda+1-4i)(\lambda+1+4i)
+\end{align*}
+Solving $p(\lambda)=0$ yields the eigenvalues $\lambda_1=-1+4i$ and $\lambda_2=-1-4i$.
+Find the eigenvalues of \(\begin{bmatrix}3&4\\-8&-5\end{bmatrix}\).
+----------  000  ----------
+----------  001  ----------
+----------  002  ----------
+----------  003  ----------
+----------  004  ----------
+----------  005  ----------
+----------  006  ----------
+----------  007  ----------
+----------  008  ----------
+----------  009  ----------
+----------  010  ----------
+----------  011  ----------
+----------  012  ----------
+----------  013  ----------
+----------  014  ----------
+----------  015  ----------
+----------  016  ----------
+----------  017  ----------
+----------  018  ----------
+----------  019  ----------
+----------  020  ----------
+----------  021  ----------
+----------  022  ----------
+----------  023  ----------
+----------  024  ----------
+----------  025  ----------
+----------  026  ----------
+----------  027  ----------
+----------  028  ----------
+----------  029  ----------
+----------  030  ----------
+----------  031  ----------
+----------  032  ----------
+----------  033  ----------
+----------  034  ----------
+----------  035  ----------
+----------  036  ----------
+----------  037  ----------
+----------  038  ----------
+----------  039  ----------
+----------  040  ----------
+----------  041  ----------
+----------  042  ----------
+----------  043  ----------
+----------  044  ----------
+----------  045  ----------
+----------  046  ----------
+----------  047  ----------
+----------  048  ----------
+----------  049  ----------
+$\lambda_1=-1+4i,\lambda_2=-1-4i$
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

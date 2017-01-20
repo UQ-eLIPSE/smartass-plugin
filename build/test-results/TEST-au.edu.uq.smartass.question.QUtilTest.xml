@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="au.edu.uq.smartass.question.QUtilTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2016-10-24T04:54:27" hostname="ms402-1274.eait.uq.edu.au" time="0.007">
+  <properties/>
+  <testcase name="generateNegToPosInt" classname="au.edu.uq.smartass.question.QUtilTest" time="0.002"/>
+  <testcase name="getOrdinal" classname="au.edu.uq.smartass.question.QUtilTest" time="0.0"/>
+  <testcase name="generatePosInt" classname="au.edu.uq.smartass.question.QUtilTest" time="0.004"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="au.edu.uq.smartass.question.ArithmeticSequenceSumOfNTermsModuleTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2016-10-24T04:54:27" hostname="ms402-1274.eait.uq.edu.au" time="0.007">
+  <properties/>
+  <testcase name="testArithmeticSequenceSumOfNTermsModule" classname="au.edu.uq.smartass.question.ArithmeticSequenceSumOfNTermsModuleTest" time="0.0"/>
+  <testcase name="testGetSectionSolution" classname="au.edu.uq.smartass.question.ArithmeticSequenceSumOfNTermsModuleTest" time="0.0"/>
+  <testcase name="testGetSectionAnswer" classname="au.edu.uq.smartass.question.ArithmeticSequenceSumOfNTermsModuleTest" time="0.001"/>
+  <testcase name="testGetSectionQuestion" classname="au.edu.uq.smartass.question.ArithmeticSequenceSumOfNTermsModuleTest" time="0.0"/>
+  <system-out><![CDATA[\begin{align*}
+S_n&=\dfrac{n}{2}(2a+(n-1)d)\text{, where }d=6-2=4\text{ and }a=2.\\
+\text{Therefore }S_{40}&=\dfrac{40}{2}(2\cdot 2 +(40-1)\cdot 4)\\
+&=20(4+39\cdot4)\\
+&=3200
+\end{align*}
+$3200$
+Let $2,6,10$ be the first three terms of a finite arithmetic sequence. Determine the sum of the first $40$ terms in the sequence.
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

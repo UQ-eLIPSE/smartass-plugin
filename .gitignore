@@ -10,10 +10,7 @@ libs/
 #
 #       . Gradle .
 #
-.gradle/
 gradlew.bat
-gradle/
-build/
 
 #
 #       . Generated .

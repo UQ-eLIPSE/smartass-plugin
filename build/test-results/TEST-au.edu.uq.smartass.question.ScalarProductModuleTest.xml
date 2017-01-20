@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="au.edu.uq.smartass.question.ScalarProductModuleTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2016-10-24T04:54:27" hostname="ms402-1274.eait.uq.edu.au" time="0.006">
+  <properties/>
+  <testcase name="testGetSection" classname="au.edu.uq.smartass.question.ScalarProductModuleTest" time="0.003"/>
+  <testcase name="testGetSectionPackage" classname="au.edu.uq.smartass.question.ScalarProductModuleTest" time="0.001"/>
+  <testcase name="testScalarProductModule" classname="au.edu.uq.smartass.question.ScalarProductModuleTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

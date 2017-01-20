@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="au.edu.uq.smartass.question.chemistry.AvagadroCarbonModuleTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2016-10-24T04:54:27" hostname="ms402-1274.eait.uq.edu.au" time="0.004">
+  <properties/>
+  <testcase name="getSection" classname="au.edu.uq.smartass.question.chemistry.AvagadroCarbonModuleTest" time="0.003"/>
+  <testcase name="AvagadroCarbonModuleParam" classname="au.edu.uq.smartass.question.chemistry.AvagadroCarbonModuleTest" time="0.0"/>
+  <testcase name="AvagadroCarbonModuleDefault" classname="au.edu.uq.smartass.question.chemistry.AvagadroCarbonModuleTest" time="0.0"/>
+  <system-out><![CDATA[Calculate the number of carbon atoms that are in a $2.0$-carat diamond that weighs $0.4000$g.
+\newcommand{\scientific}[1]{\num[round-precision=4,round-mode=figures,scientific-notation=true]{#1}}
+The molar mass of carbon is $12.01$g mol$^{-1}$.\\
+The number of moles $=$ mass $\div$ molar mass $=\dfrac{0.40}{12.0}=0.0333$ moles.\\
+Therefore the number of molecules $=$ moles $\times$ Avogadro's number 
+$=0.0333\times(\scientific{6.0220e+23})
+=\scientific{2.0057e+22}$ molecules.
+\newcommand{\scientific}[1]{\num[round-precision=4,round-mode=figures,scientific-notation=true]{#1}}
+\scientific{2.0057e+22}
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

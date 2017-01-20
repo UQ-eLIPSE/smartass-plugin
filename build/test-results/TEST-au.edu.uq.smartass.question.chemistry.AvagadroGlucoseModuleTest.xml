@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="au.edu.uq.smartass.question.chemistry.AvagadroGlucoseModuleTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2016-10-24T04:54:27" hostname="ms402-1274.eait.uq.edu.au" time="0.006">
+  <properties/>
+  <testcase name="getSolutionTest" classname="au.edu.uq.smartass.question.chemistry.AvagadroGlucoseModuleTest" time="0.001"/>
+  <testcase name="AvagadroGlucoseModuleDefaultTest" classname="au.edu.uq.smartass.question.chemistry.AvagadroGlucoseModuleTest" time="0.0"/>
+  <testcase name="getAnswerTest" classname="au.edu.uq.smartass.question.chemistry.AvagadroGlucoseModuleTest" time="0.0"/>
+  <testcase name="getQuestionTest" classname="au.edu.uq.smartass.question.chemistry.AvagadroGlucoseModuleTest" time="0.0"/>
+  <testcase name="AvagadroGlucoseModuleParamTest" classname="au.edu.uq.smartass.question.chemistry.AvagadroGlucoseModuleTest" time="0.001"/>
+  <system-out><![CDATA[\newcommand{\scientific}[1]{\num[round-precision=4,round-mode=figures,scientific-notation=true]{#1}}
+The molar mass of glucose is $180.16$g mol$^{-1}$.\\
+The number of moles $=$ mass $\div$ molar mass $=\dfrac{5.00}{180.2}=0.0278$ moles.\\
+Therefore the number of molecules $=$ moles $\times$ Avogadro's number 
+$=0.0278\times(\scientific{6.0220e+23})
+=\scientific{1.6713e+22}$ molecules.
+\newcommand{\scientific}[1]{\num[round-precision=4,round-mode=figures,scientific-notation=true]{#1}}
+\scientific{1.6713e+22}
+Calculate the number of molecules in 5.00g of glucose powder $(C_6H_{12}O_6)$.
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

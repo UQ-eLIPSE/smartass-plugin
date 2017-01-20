@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="au.edu.uq.smartass.question.ArithmeticSeqSumNTermsExceedXTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2016-10-24T04:54:27" hostname="ms402-1274.eait.uq.edu.au" time="0.004">
+  <properties/>
+  <testcase name="getSectionQuestion" classname="au.edu.uq.smartass.question.ArithmeticSeqSumNTermsExceedXTest" time="0.0"/>
+  <testcase name="arithmeticSeqSumNTermsExceedXDefault" classname="au.edu.uq.smartass.question.ArithmeticSeqSumNTermsExceedXTest" time="0.001"/>
+  <testcase name="getSectionSolution" classname="au.edu.uq.smartass.question.ArithmeticSeqSumNTermsExceedXTest" time="0.001"/>
+  <testcase name="getSectionAnswer" classname="au.edu.uq.smartass.question.ArithmeticSeqSumNTermsExceedXTest" time="0.0"/>
+  <system-out><![CDATA[Let $2,6,10$ be the first three terms of a finite arithmetic sequence.
+How many terms are needed for the sum to first exceed $1000$?
+Let's solve this as an equation then round appropriately.
+\begin{align*}
+S_n&=\dfrac{n}{2}(2a+(n-1)d),\text{ where }d=6-2=4\text{ and }a=2.\\
+\text{Therefore }1000&=\dfrac{n}{2}(2\cdot2+(n-1)\cdot4)\\
+1000&=\dfrac{n}{2}(4+4n-4)\\
+2000&=n(4n+0)\\
+0&=4n^2+0n-2000\\
+n&\approx22.36
+\end{align*}
+So $23$ terms are required.
+$23$
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

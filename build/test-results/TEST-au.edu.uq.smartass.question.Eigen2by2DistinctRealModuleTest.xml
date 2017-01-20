@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="au.edu.uq.smartass.question.Eigen2by2DistinctRealModuleTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2016-10-24T04:54:27" hostname="ms402-1274.eait.uq.edu.au" time="0.08">
+  <properties/>
+  <testcase name="testSolution" classname="au.edu.uq.smartass.question.Eigen2by2DistinctRealModuleTest" time="0.007"/>
+  <testcase name="testEigen2by2DistinctRealModule" classname="au.edu.uq.smartass.question.Eigen2by2DistinctRealModuleTest" time="0.0"/>
+  <testcase name="testQuestion" classname="au.edu.uq.smartass.question.Eigen2by2DistinctRealModuleTest" time="0.005"/>
+  <testcase name="Eigen2by2DistinctRealModuleIndex" classname="au.edu.uq.smartass.question.Eigen2by2DistinctRealModuleTest" time="0.067"/>
+  <testcase name="testAnswer" classname="au.edu.uq.smartass.question.Eigen2by2DistinctRealModuleTest" time="0.0"/>
+  <system-out><![CDATA[\begin{gather*}
+A-\lambda{I}=\begin{bmatrix}-7-\lambda&-9\\4&8-\lambda\end{bmatrix}.
+\end{gather*}
+\begin{align*}
+p(\lambda)&=|A-\lambda{I}|=\begin{vmatrix}-7-\lambda&-9\\4&8-\lambda\end{vmatrix}.\\
+&=(-7-\lambda)(8-\lambda)-(4\times-9)\\
+&=-56-\lambda+\lambda^2+36\\
+&=\lambda^2-\lambda-20\\
+&=(\lambda-5)(\lambda+4)
+\end{align*}
+Solving $p(\lambda)=0$ yields the eigenvalues $\lambda_1=5$ and $\lambda_2=-4$.
+Find the eigenvalues of \(\begin{bmatrix}-7&-9\\4&8\end{bmatrix}\).
+$\lambda_1=5,\lambda_2=-4$
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

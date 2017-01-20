@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="au.edu.uq.smartass.question.VectorTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2016-10-24T04:54:27" hostname="ms402-1274.eait.uq.edu.au" time="0.002">
+  <properties/>
+  <testcase name="testGet" classname="au.edu.uq.smartass.question.VectorTest" time="0.0"/>
+  <testcase name="testDimension" classname="au.edu.uq.smartass.question.VectorTest" time="0.001"/>
+  <testcase name="testFormatName" classname="au.edu.uq.smartass.question.VectorTest" time="0.0"/>
+  <testcase name="testFormatDefinition" classname="au.edu.uq.smartass.question.VectorTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

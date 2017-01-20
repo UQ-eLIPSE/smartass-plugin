@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="au.edu.uq.smartass.question.GeomSeqSumTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2016-10-24T04:54:27" hostname="ms402-1274.eait.uq.edu.au" time="0.021">
+  <properties/>
+  <testcase name="testGetSection" classname="au.edu.uq.smartass.question.GeomSeqSumTest" time="0.004"/>
+  <testcase name="testGeomSeqSumModuleDefault" classname="au.edu.uq.smartass.question.GeomSeqSumTest" time="0.0"/>
+  <system-out><![CDATA[Let $2, 6, 18$ be the first three terms of a geometric sequence. What is the sum of the first 20 terms?
+\begin{align*}
+S_n&=\dfrac{a(r^n-1)}{r-1}\text{, where }r=6\div2=3\text{ and }a=2.\\
+S_{20}&=\dfrac{2(3^{20-1})}{20-1}\\
+&=\dfrac{2\cdot3^{19}}{19}\\
+&\approx122343312.32
+\end{align*}
+$122343312.32$
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

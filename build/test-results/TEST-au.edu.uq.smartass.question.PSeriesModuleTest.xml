@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="au.edu.uq.smartass.question.PSeriesModuleTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2016-10-24T04:54:27" hostname="ms402-1274.eait.uq.edu.au" time="0.002">
+  <properties/>
+  <testcase name="testGetSection" classname="au.edu.uq.smartass.question.PSeriesModuleTest" time="0.001"/>
+  <testcase name="testPSeriesModule" classname="au.edu.uq.smartass.question.PSeriesModuleTest" time="0.0"/>
+  <system-out><![CDATA[Does $\sum\limits_{n=1}^{\infty} \frac{1}{n^{\frac{1}{4}}}$ converge? Explain.
+No, it doesn't, by the $p$-series test. Since $p<1$, the series will diverge.
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

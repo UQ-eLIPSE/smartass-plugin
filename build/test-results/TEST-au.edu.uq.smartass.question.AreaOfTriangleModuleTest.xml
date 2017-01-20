@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="au.edu.uq.smartass.question.AreaOfTriangleModuleTest" tests="6" skipped="1" failures="0" errors="0" timestamp="2016-10-24T04:54:27" hostname="ms402-1274.eait.uq.edu.au" time="0.023">
+  <properties/>
+  <testcase name="testGetSection" classname="au.edu.uq.smartass.question.AreaOfTriangleModuleTest" time="0.009"/>
+  <testcase name="testSubtract" classname="au.edu.uq.smartass.question.AreaOfTriangleModuleTest" time="0.004"/>
+  <testcase name="testGetSectionPackage" classname="au.edu.uq.smartass.question.AreaOfTriangleModuleTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="testTriangleVertex" classname="au.edu.uq.smartass.question.AreaOfTriangleModuleTest" time="0.003"/>
+  <testcase name="testAreaCalculation" classname="au.edu.uq.smartass.question.AreaOfTriangleModuleTest" time="0.003"/>
+  <testcase name="testAreaOfTriangleModule" classname="au.edu.uq.smartass.question.AreaOfTriangleModuleTest" time="0.001"/>
+  <system-out><![CDATA[Let $A(1,1,1)$, $B(4,5,6)$ and $C(2,1,3)$ be the three vertices of a triangle. Determine the area of $\triangle ABC$.
+$\frac{\sqrt{81.0}}{2}$ units$^2$
+\begin{align*}
+\text{Area}&=\frac{1}{2}|\vec{AB}\times\vec{AC}|\\
+\vec{AB}&=(3,4,5)\\
+\vec{AC}&=(1,0,2)\\\\
+\vec{AB}\times\vec{AC}&=\left|\begin{array}{crc}\textbf{i}&\textbf{j}&\textbf{k}\\3&4&5\\1&0&2\end{array}\right|\\
+&=\textbf{i}\left|\begin{array}{rc}4&5\\0&2\end{array}\right|-\textbf{j}\left|\begin{array}{cc}3&5\\1&2\end{array}\right|+\textbf{k}\left|\begin{array}{cr}3&4\\1&0\end{array} \right|\\
+&=8\textbf{i}-1\textbf{j}-4\textbf{k}\\\\
+|\vec{AB}\times\vec{AC}|&=\sqrt{8^2+1^2+4^2}\\
+&=\sqrt{81.0}\\\\
+\text{Therefore area }&=\frac{1}{2}\times\sqrt{81.0}\\
+&=\frac{\sqrt{81.0}}{2}\text{ units}^2\\
+\end{align*}
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
