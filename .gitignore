@@ -32,6 +32,5 @@ smartass-plugin.iml
 #
 #       . API interface file for PlugIns .
 #
-src/main/java/au/edu/uq/smartass/engine/QuestionModule.java
 
 *.tex
